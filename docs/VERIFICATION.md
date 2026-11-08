@@ -5,7 +5,7 @@
 | 項目                                 | 本機結果                                                                         |
 | ------------------------------------ | -------------------------------------------------------------------------------- |
 | Biome / strict TypeScript            | 通過                                                                             |
-| Vitest                               | 58 個 behavioral tests 通過                                                      |
+| Vitest                               | 59 個 behavioral tests 通過                                                      |
 | SDK type contracts                   | Supabase 2.118.0、Better Auth 1.7.18、Neon JS 0.10.2 通過                        |
 | ESM / declarations / client boundary | build 與 dist smoke 通過                                                         |
 | Code graph                           | 20 modules、204 nodes、443 edges；freshness 通過                                 |

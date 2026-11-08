@@ -163,7 +163,7 @@ export function createAuthController(input: AuthConfig) {
         if (sessionRefreshTimer !== null) clearTimeout(sessionRefreshTimer);
         sessionRefreshTimer = null;
         for (const cancel of pendingCancels) cancel();
-        set({ operation: idle });
+        set({ status: "checking", session: null, operation: idle });
       }
     };
   }

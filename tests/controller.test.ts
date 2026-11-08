@@ -100,6 +100,19 @@ describe("method boundaries and inputs", () => {
   });
 });
 describe("async session safety", () => {
+  it("does not retain a previous account after the final consumer unmounts", async () => {
+    const auth = createAuthController({
+      adapter: adapter(),
+      methods: passwordOnly,
+    });
+    const stop = auth.start();
+    await auth.refresh();
+    await auth.signIn({ email: "ray@example.com", password });
+    expect(auth.getSnapshot().session?.user.id).toBe(session.user.id);
+    stop();
+    expect(auth.getSnapshot().status).toBe("checking");
+    expect(auth.getSnapshot().session).toBeNull();
+  });
   it("defers identity rechecks past the SDK callback and coalesces events", async () => {
     vi.useFakeTimers();
     try {
