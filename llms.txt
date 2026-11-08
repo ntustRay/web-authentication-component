@@ -1,0 +1,18 @@
+# @ntustray/web-authentication-component
+
+Reusable authentication presentation/state library, not a hosted identity server or shared account database.
+
+- README.md: start, install status, setup examples
+- AGENTS.md: agent rules, commands, edit map, security boundaries
+- docs/API.md: public configuration, adapters, React customization
+- docs/ARCHITECTURE.md: state lifecycle, trust boundaries
+- docs/CODE_GRAPH.md: generated module graphs and exported symbols
+- docs/code-graph.json: machine-readable modules, declarations, static calls
+- docs/MIGRATION.md: audited project patterns, adoption steps and current migration status
+- SECURITY.md: server/identity-provider responsibilities and security helpers
+- docs/PUBLISHING.md: npm first publish, trusted publishing, versioning
+
+Entrypoints: root (framework independent), /react, /adapters/supabase, /adapters/better-auth, /adapters/neon, /adapters/hosted, /server, /styles.css.
+
+Change flow: inspect contract -> change one layer -> add behavioral coverage -> format -> regenerate graph -> verify.
+Never equate UI state with server authorization. Never put credentials/tokens in snapshots or analytics.

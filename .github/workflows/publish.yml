@@ -1,0 +1,31 @@
+name: Publish npm package
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bun install --frozen-lockfile
+      - run: bun run verify
+      - name: Check tag and npm CLI
+        run: |
+          test "$GITHUB_REF_NAME" = "v$(node -p 'JSON.parse(require("node:fs").readFileSync("package.json","utf8")).version')"
+          node --version
+          npm --version
+      - run: npm pack --ignore-scripts --dry-run
+      - run: npm publish --access public --provenance --ignore-scripts

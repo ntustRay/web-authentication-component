@@ -1,0 +1,288 @@
+@layer mr-auth {
+  .mra-root {
+    --auth-bg: #ffffff;
+    --auth-text: #172c3e;
+    --auth-muted: #536575;
+    --auth-border: #c8d1d9;
+    --auth-accent: #204d75;
+    --auth-accent-text: #ffffff;
+    --auth-error: #a52327;
+    --auth-success: #176445;
+    --auth-radius: 6px;
+    --auth-duration: 160ms;
+    color: var(--auth-text);
+    background: var(--auth-bg);
+    width: 100%;
+    max-width: 440px;
+    padding: 28px;
+    box-sizing: border-box;
+    border: 1px solid var(--auth-border);
+    border-radius: var(--auth-radius);
+    font: inherit;
+    line-height: 1.6;
+    color-scheme: light;
+  }
+  .mra-root[data-theme="dark"] {
+    --auth-bg: #152738;
+    --auth-text: #f3f6f9;
+    --auth-muted: #b2c2d0;
+    --auth-border: #4a6072;
+    --auth-accent: #afcff2;
+    --auth-accent-text: #152738;
+    --auth-error: #ffafb2;
+    --auth-success: #91ddbd;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    .mra-root[data-theme="auto"] {
+      --auth-bg: #152738;
+      --auth-text: #f3f6f9;
+      --auth-muted: #b2c2d0;
+      --auth-border: #4a6072;
+      --auth-accent: #afcff2;
+      --auth-accent-text: #152738;
+      --auth-error: #ffafb2;
+      --auth-success: #91ddbd;
+      color-scheme: dark;
+    }
+  }
+  .mra-root *,
+  .mra-root *::before,
+  .mra-root *::after {
+    box-sizing: border-box;
+  }
+  .mra-title {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin: 0 0 24px;
+    font-weight: 650;
+  }
+  .mra-form,
+  .mra-providers,
+  .mra-stack {
+    display: grid;
+    gap: 18px;
+  }
+  .mra-form {
+    animation: mra-enter var(--auth-duration) ease-out;
+  }
+  .mra-field {
+    display: grid;
+    gap: 7px;
+  }
+  .mra-field label {
+    font-size: 0.9rem;
+    font-weight: 550;
+  }
+  .mra-field input {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid var(--auth-border);
+    padding: 10px 12px;
+    border-radius: var(--auth-radius);
+    color: var(--auth-text);
+    background: var(--auth-bg);
+    font: inherit;
+    font-size: 1rem;
+    transition:
+      border-color var(--auth-duration),
+      box-shadow var(--auth-duration);
+  }
+  .mra-field input:focus-visible {
+    border-color: var(--auth-accent);
+    outline: 2px solid var(--auth-accent);
+    outline-offset: 2px;
+  }
+  .mra-field input[aria-invalid="true"] {
+    border-color: var(--auth-error);
+  }
+  .mra-password {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+  .mra-password input {
+    padding-inline-end: 50px;
+  }
+  .mra-reveal {
+    position: absolute;
+    inset-inline-end: 4px;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    color: var(--auth-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--auth-radius);
+    cursor: pointer;
+  }
+  .mra-reveal svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .mra-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 11px 16px;
+    font: inherit;
+    font-weight: 600;
+    border: 1px solid var(--auth-border);
+    border-radius: var(--auth-radius);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--auth-text);
+    background: var(--auth-bg);
+    transition:
+      opacity var(--auth-duration),
+      background-color var(--auth-duration),
+      transform var(--auth-duration);
+  }
+  .mra-primary {
+    background: var(--auth-accent);
+    color: var(--auth-accent-text);
+    border-color: var(--auth-accent);
+  }
+  .mra-button:hover:enabled {
+    opacity: 0.88;
+  }
+  .mra-button:active:enabled {
+    transform: translateY(1px);
+  }
+  .mra-button:disabled,
+  .mra-link:disabled,
+  .mra-reveal:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .mra-button:focus-visible,
+  .mra-link:focus-visible,
+  .mra-reveal:focus-visible {
+    outline: 2px solid var(--auth-accent);
+    outline-offset: 3px;
+  }
+  .mra-separator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--auth-muted);
+    font-size: 0.85rem;
+    margin: 24px 0;
+  }
+  .mra-separator::before,
+  .mra-separator::after {
+    content: "";
+    height: 1px;
+    background: var(--auth-border);
+    flex: 1;
+  }
+  .mra-links {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-top: 20px;
+  }
+  .mra-link {
+    padding: 2px 0;
+    color: var(--auth-accent);
+    font: inherit;
+    font-size: 0.875rem;
+    border: 0;
+    background: transparent;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    transition: opacity var(--auth-duration);
+  }
+  .mra-feedback {
+    border-inline-start: 3px solid var(--auth-border);
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    margin: 0 0 18px;
+    overflow-wrap: anywhere;
+    animation: mra-enter var(--auth-duration) ease-out;
+  }
+  .mra-feedback[data-tone="error"] {
+    border-color: var(--auth-error);
+    color: var(--auth-error);
+  }
+  .mra-feedback[data-tone="success"] {
+    border-color: var(--auth-success);
+    color: var(--auth-success);
+  }
+  .mra-hint,
+  .mra-policy {
+    color: var(--auth-muted);
+    font-size: 0.8rem;
+  }
+  .mra-hint,
+  .mra-field-error,
+  .mra-policy p {
+    margin: 0;
+  }
+  .mra-field-error {
+    font-size: 0.85rem;
+    color: var(--auth-error);
+  }
+  .mra-policy ul {
+    padding-inline-start: 20px;
+    margin: 5px 0 0;
+  }
+  .mra-policy li[data-met="true"] {
+    color: var(--auth-success);
+    list-style-type: "✓ ";
+  }
+  .mra-status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    overflow-wrap: anywhere;
+  }
+  .mra-spinner {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    flex-shrink: 0;
+    border: 2px solid currentColor;
+    border-inline-end-color: transparent;
+    border-radius: 50%;
+    animation: mra-spin 0.7s linear infinite;
+  }
+  @keyframes mra-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes mra-enter {
+    from {
+      opacity: 0.45;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (max-width: 480px) {
+    .mra-root {
+      padding: 22px 18px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mra-root *,
+    .mra-spinner {
+      animation: none;
+      transition: none;
+    }
+  }
+}

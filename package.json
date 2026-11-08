@@ -1,0 +1,117 @@
+{
+  "name": "@ntustray/web-authentication-component",
+  "version": "0.1.0",
+  "description": "Composable authentication flows, React UI and provider adapters for MingRay's web projects.",
+  "type": "module",
+  "license": "MIT",
+  "author": "MingRay Hsu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntustRay/web-authentication-component.git"
+  },
+  "homepage": "https://github.com/ntustRay/web-authentication-component#readme",
+  "bugs": {
+    "url": "https://github.com/ntustRay/web-authentication-component/issues"
+  },
+  "keywords": [
+    "authentication",
+    "react",
+    "supabase",
+    "better-auth",
+    "neon",
+    "headless",
+    "typescript"
+  ],
+  "packageManager": "bun@1.4.4",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md",
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "llms.txt",
+    "docs",
+    "examples/projects"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./adapters/supabase": {
+      "types": "./dist/adapters/supabase.d.ts",
+      "import": "./dist/adapters/supabase.js"
+    },
+    "./adapters/better-auth": {
+      "types": "./dist/adapters/better-auth.d.ts",
+      "import": "./dist/adapters/better-auth.js"
+    },
+    "./adapters/neon": {
+      "types": "./dist/adapters/neon.d.ts",
+      "import": "./dist/adapters/neon.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./adapters/hosted": {
+      "types": "./dist/adapters/hosted.d.ts",
+      "import": "./dist/adapters/hosted.js"
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.3.1 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "bun scripts/build.ts",
+    "demo:build": "vite build",
+    "check": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "graph": "bun scripts/code-graph.ts",
+    "graph:check": "bun scripts/code-graph.ts --check",
+    "verify": "bun run check && bun run typecheck && bun run test && bun run build && bun run graph:check && bun run smoke && bun run demo:build",
+    "prepack": "bun run build",
+    "smoke": "node scripts/verify-dist.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.6",
+    "@neon/neon-js": "0.10.2",
+    "@supabase/supabase-js": "2.118.0",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "24.10.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "better-auth": "1.7.18",
+    "jsdom": "27.4.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "5.9.3",
+    "vite": "7.3.1",
+    "vitest": "4.0.13"
+  }
+}
