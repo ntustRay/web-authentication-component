@@ -78,7 +78,8 @@ export function PasswordField({
   messages = zhTW,
   ...input
 }: AuthFieldProps & { messages?: AuthMessages }) {
-  const id = useId();
+  const generated = useId();
+  const id = input.id ?? generated;
   const [visible, setVisible] = useState(false);
   const [caps, setCaps] = useState(false);
   const described = [
@@ -150,15 +151,17 @@ export function AuthFeedback({
   tone,
   children,
   focus = false,
+  focusKey,
 }: {
   tone: "error" | "success" | "info";
   children: ReactNode;
   focus?: boolean;
+  focusKey?: string | number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (focus) ref.current?.focus();
-  }, [focus]);
+  }, [focus, focusKey]);
   return (
     <div
       ref={ref}
@@ -183,8 +186,9 @@ export function SignOutButton({
     <AuthButton
       {...props}
       pending={pending}
-      onClick={() => {
-        void auth.signOut();
+      onClick={(event) => {
+        props.onClick?.(event);
+        if (!event.defaultPrevented) void auth.signOut();
       }}
     >
       {children ?? zhTW.signOut}

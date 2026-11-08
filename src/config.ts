@@ -1,4 +1,5 @@
 import type { AuthConfig, AuthMethods } from "./types.js";
+export const MAX_TIMER_DELAY_MS = 2_147_483_647;
 export const githubOnly: AuthMethods = Object.freeze({
   password: false,
   registration: false,
@@ -53,12 +54,16 @@ export function validateConfig(config: AuthConfig): void {
     throw new Error("Enable at least one authentication method");
   if (
     config.timeoutMs !== undefined &&
-    (!Number.isFinite(config.timeoutMs) || config.timeoutMs < 100)
+    (!Number.isInteger(config.timeoutMs) ||
+      config.timeoutMs < 100 ||
+      config.timeoutMs > MAX_TIMER_DELAY_MS)
   )
-    throw new Error("timeoutMs must be >= 100");
+    throw new Error("timeoutMs must be an integer >= 100 and <= 2147483647");
   if (
     config.cooldownSeconds !== undefined &&
-    (!Number.isFinite(config.cooldownSeconds) || config.cooldownSeconds < 0)
+    (!Number.isInteger(config.cooldownSeconds) ||
+      config.cooldownSeconds < 0 ||
+      config.cooldownSeconds > Math.floor(MAX_TIMER_DELAY_MS / 1000))
   )
     throw new Error("Invalid cooldown");
 }

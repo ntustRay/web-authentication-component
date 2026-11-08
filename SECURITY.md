@@ -13,12 +13,22 @@
 | Account enumeration | generic recovery／signup UI；已知存在性錯誤轉相同 outcome         | backend status、內容與時間差也要一致                                                   |
 | Reset token         | CSPRNG 256-bit token、只存 SHA-256 digest、atomic consume port    | store transaction／唯一消耗／期限、實際 email、重設成功後撤銷 session                  |
 | CSRF / origin       | `assertTrustedOrigin` mutation guard                              | 實際在 handler 使用，保留 provider CSRF、OAuth state／PKCE                             |
-| Session             | server-session adapter reads、競態失效、登出即清 UI               | HttpOnly／Secure／SameSite cookies、server authorization、session rotation／revocation |
+| Session             | server-session reads、expiry 隱藏、SDK queue、失敗登出的背景保護  | HttpOnly／Secure／SameSite cookies、server authorization、session rotation／revocation |
 | 帳號驗證            | 預設拒絕 unverified session                                       | server 與資料存取也拒絕未驗證帳號                                                      |
 | Secret exposure     | snapshot／events 無密碼、OTP、access token；raw error 不公開      | log／APM request body／browser recorder 必須 redact；不用 secrets 的 NEXT_PUBLIC 變數  |
 | 私人資料            | UI 帳號切換先清除 session                                         | RLS／owner filtering、清空舊帳號 store、停止舊工作寫入新帳號                           |
 
 前端 cooldown 可以被重新載入繞過，它只降低誤觸。它不能代替 server rate limit。`requireVerifiedEmail: false` 只應用在不依賴 Email 驗證的既有 identity model。
+
+## Controller 與 adapter 的信任邊界
+
+Custom adapter 的 session、outcome、error 會經 runtime shape validation，重新建立允許欄位並移除額外 SDK data。公開 session／user／operation／error 與 method／policy 設定深層唯讀。這避免 structural typing 意外把 token 或 raw error 帶入 snapshot；無法替不可信任的 adapter 證明身份，也不能阻止它把秘密塞進允許的 name 等字串欄位。
+
+Timeout 不代表遠端取消。原 SDK mutation 完成前保留鎖；明確登出會排隊且不因 unmount 取消。失敗／timeout 登出的身份在背景 revalidation 後仍維持隱藏；明確 refresh() 是使用者接受重新檢查的重試。這不表示 cookie 或 JWT 已在 server 失效。
+
+Session 到期會先清 UI 再驗證；瀏覽器可節流／暫停 timer。Server expiry、authorization 與 revocation 仍是必要控制。
+
+Supabase adapter 使用 getUser() 向 Auth server 驗證當前身份，不信任 user_metadata 的 email verification。getUser() 只能證明有效的當前 session，不能單獨證明它來自 recovery callback。Reset 頁由 host 的有效 PKCE／recovery callback 導向；對敏感密碼變更有額外要求時，在 provider／server 啟用 reauthentication。不可把 query flag 或前端記號當成 recovery 授權。
 
 ## 新密碼政策
 

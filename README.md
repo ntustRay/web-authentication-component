@@ -2,7 +2,7 @@
 
 把各專案的登入 UI、狀態流程與 provider 接法集中到同一個 package。既有會員資料庫、user ID 與身分服務保留在原專案。
 
-Package：`@ntustray/web-authentication-component`。目前為 `0.1.0` 原始碼與可打包版本；**尚未發布到 npm**。首次發布設定見 [PUBLISHING.md](docs/PUBLISHING.md)。
+Package：`@ntustray/web-authentication-component`。目前為 `0.2.0` 原始碼與可打包版本；**尚未發布到 npm**。首次發布設定見 [PUBLISHING.md](docs/PUBLISHING.md)。
 
 | 登入組合                     | 設定                                   |
 | ---------------------------- | -------------------------------------- |
@@ -39,7 +39,7 @@ bun add @ntustray/web-authentication-component
 bun run build
 npm pack --ignore-scripts
 # 在使用端執行；請換成實際 tarball 路徑
-bun add ./ntustray-web-authentication-component-0.1.0.tgz
+bun add ./ntustray-web-authentication-component-0.2.0.tgz
 ```
 
 ESM package；Node >=22；React UI 支援 React 18.3 / 19。只使用 core 或 server helpers 不需要安裝 React。CSS 需明確 import，不會自動污染全站樣式。
@@ -137,7 +137,9 @@ const methods = {
 - 註冊／重設檢查確認密碼；舊會員登入不套用新的複雜度要求，也不 trim 密碼。
 - loading icon、重複送出防護、錯誤 focus、Caps Lock、寄信倒數、逾時與 OAuth popup 取消後恢復。
 - 登入成功同步共用會員狀態；登出與帳號變更會使舊的非同步結果失效。
-- snapshot 與事件不保存密碼、OTP、reset token 或 access token。
+- 逾時後保留 SDK 操作鎖；登出會排隊完成。登出失敗後，背景 refresh 不會重新顯示舊帳號。
+- controller／view／reset token 改變時清除表單秘密資料；重寄成功清空舊 OTP。
+- snapshot 深層唯讀；custom adapter 的額外欄位與 raw errors 會在邊界清除。事件不保存密碼、OTP、reset token 或 access token。
 
 前端檢查無法取代 server。Server helpers 提供 password policy、scrypt、origin／method guards、分散式 rate limiter port、單次使用 recovery token store port；它們必須被 app 的 server handler 實際接上。完整責任界線見 [SECURITY.md](SECURITY.md)。
 
@@ -161,6 +163,7 @@ const methods = {
 ## 文件與驗證
 
 - [專案接法與遷移狀態](docs/MIGRATION.md)
+- [多輪 review 與回歸修正](docs/REVIEW.md)
 - [Public API](docs/API.md)
 - [架構與 session 流程](docs/ARCHITECTURE.md)
 - [Code graph](docs/CODE_GRAPH.md)／[JSON graph](docs/code-graph.json)

@@ -16,6 +16,7 @@ export interface AuthMessages {
   hidePassword: string;
   capsLock: string;
   waiting: string;
+  settling: string;
   checking: string;
   signedIn: string;
   signedOut: string;
@@ -62,6 +63,7 @@ export const zhTW: AuthMessages = {
   hidePassword: "隱藏密碼",
   capsLock: "Caps Lock 已開啟。",
   waiting: "處理中…",
+  settling: "前次請求尚未結束，請等待完成。",
   checking: "正在確認登入狀態…",
   signedIn: "已登入",
   signedOut: "尚未登入",
@@ -130,6 +132,7 @@ export const en: AuthMessages = {
   hidePassword: "Hide password",
   capsLock: "Caps Lock is on.",
   waiting: "Working…",
+  settling: "Waiting for the previous request to finish…",
   checking: "Checking your session…",
   signedIn: "Signed in",
   signedOut: "Signed out",

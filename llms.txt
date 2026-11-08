@@ -10,9 +10,11 @@ Reusable authentication presentation/state library, not a hosted identity server
 - docs/code-graph.json: machine-readable modules, declarations, static calls
 - docs/MIGRATION.md: audited project patterns, adoption steps and current migration status
 - SECURITY.md: server/identity-provider responsibilities and security helpers
+- docs/REVIEW.md: reproduced multi-agent findings, fixes, regression coverage and 0.2 migration
 - docs/PUBLISHING.md: npm first publish, trusted publishing, versioning
 
 Entrypoints: root (framework independent), /react, /adapters/supabase, /adapters/better-auth, /adapters/neon, /adapters/hosted, /server, /styles.css.
 
 Change flow: inspect contract -> change one layer -> add behavioral coverage -> format -> regenerate graph -> verify.
+Operations expose id and pending/settling/redirecting phases. A timeout does not unlock the underlying SDK mutation. Background refresh must preserve failed sign-out privacy; explicit refresh() is a retry.
 Never equate UI state with server authorization. Never put credentials/tokens in snapshots or analytics.

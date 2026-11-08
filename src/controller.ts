@@ -1,5 +1,10 @@
-import { validateConfig } from "./config.js";
-import { capture, failure } from "./errors.js";
+import {
+  publicFailure,
+  publicOutcome,
+  publicSessionResult,
+} from "./boundary.js";
+import { MAX_TIMER_DELAY_MS, validateConfig } from "./config.js";
+import { capture, failure, success } from "./errors.js";
 import {
   assessPassword,
   isEmail,
@@ -10,7 +15,9 @@ import type {
   AuthAction,
   AuthConfig,
   AuthEvent,
+  AuthOperation,
   AuthOutcome,
+  AuthRefreshOptions,
   AuthResult,
   AuthSession,
   AuthSnapshot,
@@ -19,30 +26,61 @@ import type {
   Registration,
 } from "./types.js";
 
-const idle = {
+const idle: AuthOperation = Object.freeze({
+  id: 0,
   phase: "idle",
   action: null,
   outcome: null,
   error: null,
-} satisfies AuthSnapshot["operation"];
+});
 const initial: AuthSnapshot = Object.freeze({
   status: "checking",
   session: null,
   operation: idle,
   cooldownUntil: 0,
 });
+interface Mutation {
+  id: number;
+  action: AuthAction;
+  life: number;
+  eventVersion: number;
+  userId: string | null;
+  timedOut: boolean;
+  cancelled: boolean;
+  published: boolean;
+  timer: ReturnType<typeof setTimeout> | null;
+  result: Promise<AuthResult<AuthOutcome>>;
+  resolve: (result: AuthResult<AuthOutcome>) => void;
+}
 
 export function createAuthController(input: AuthConfig) {
   validateConfig(input);
+  const { adapter } = input;
   const config = {
-    ...input,
-    methods: {
-      ...input.methods,
-      providers: input.methods.providers.map((provider) => ({ ...provider })),
-    },
+    timeoutMs: input.timeoutMs ?? 30_000,
+    cooldownSeconds: input.cooldownSeconds ?? 60,
+    requireVerifiedEmail: input.requireVerifiedEmail ?? true,
+    onEvent: input.onEvent,
   };
-  const { adapter, methods } = config;
-  const policy = resolvePasswordPolicy(config.passwordPolicy);
+  const methods = Object.freeze({
+    password: input.methods.password,
+    registration: input.methods.registration,
+    recovery: input.methods.recovery,
+    verification: input.methods.verification,
+    providers: Object.freeze(
+      input.methods.providers.map((provider) =>
+        Object.freeze({ id: provider.id, label: provider.label }),
+      ),
+    ),
+  });
+  const capabilities = Object.freeze({
+    password: adapter.capabilities.password,
+    registration: adapter.capabilities.registration,
+    recovery: adapter.capabilities.recovery,
+    verification: adapter.capabilities.verification,
+    providers: Object.freeze([...adapter.capabilities.providers]),
+  });
+  const policy = resolvePasswordPolicy(input.passwordPolicy);
   const listeners = new Set<() => void>();
   let snapshot = initial;
   let operationVersion = 0;
@@ -52,227 +90,522 @@ export function createAuthController(input: AuthConfig) {
   let consumers = 0;
   let rateLimitUntil = 0;
   let unsubscribe: (() => void) | null = null;
-  let sessionRefreshTimer: ReturnType<typeof setTimeout> | null = null;
-  const pendingCancels = new Set<() => void>();
-  function set(patch: Partial<AuthSnapshot>) {
-    snapshot = Object.freeze({ ...snapshot, ...patch });
-    for (const listener of listeners) listener();
-  }
-  function emit(event: AuthEvent) {
-    // Observability must never change whether authentication succeeds.
-    try {
-      config.onEvent?.(event);
-    } catch {
-      /* Host telemetry is isolated. */
-    }
-  }
+  let refreshTimer: ReturnType<typeof setTimeout> | null = null;
+  let expiryTimer: ReturnType<typeof setTimeout> | null = null;
+  let refreshRequested = false;
+  let pendingMutations = 0;
+  let pendingReads = 0;
+  let mutationTail: Promise<void> = Promise.resolve();
+  let latest: Mutation | null = null;
+  let hiddenSignOut: { userId: string | null } | null = null;
+  const readCancels = new Set<() => void>();
+
   function accepted(session: AuthSession): boolean {
     return (
-      (!(config.requireVerifiedEmail ?? true) || session.user.emailVerified) &&
+      (!config.requireVerifiedEmail || session.user.emailVerified) &&
       (session.expiresAt === null || session.expiresAt > Date.now())
     );
   }
-  async function bounded<T>(
-    work: () => Promise<AuthResult<T>>,
-  ): Promise<AuthResult<T>> {
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    let cancel = () => {};
-    const timeout = new Promise<AuthResult<T>>((resolve) => {
-      cancel = () => resolve(failure("cancelled"));
-      pendingCancels.add(cancel);
-      timer = setTimeout(
-        () => resolve(failure("timeout")),
-        config.timeoutMs ?? 30_000,
-      );
+  function scheduleExpiry() {
+    if (expiryTimer !== null) clearTimeout(expiryTimer);
+    expiryTimer = null;
+    const deadline = snapshot.session?.expiresAt;
+    if (consumers === 0 || deadline === null || deadline === undefined) return;
+    const life = lifecycle;
+    expiryTimer = setTimeout(
+      () => {
+        expiryTimer = null;
+        if (life !== lifecycle || consumers === 0) return;
+        if (deadline > Date.now()) {
+          scheduleExpiry();
+          return;
+        }
+        set({ status: "checking", session: null });
+        void refresh({ background: true });
+      },
+      Math.min(MAX_TIMER_DELAY_MS, Math.max(0, deadline - Date.now())),
+    );
+  }
+  function set(patch: Partial<AuthSnapshot>) {
+    snapshot = Object.freeze({
+      ...snapshot,
+      ...patch,
+      operation: Object.freeze(patch.operation ?? snapshot.operation),
     });
-    try {
-      return await Promise.race([capture(work), timeout]);
-    } finally {
-      if (timer !== undefined) clearTimeout(timer);
-      pendingCancels.delete(cancel);
+    scheduleExpiry();
+    for (const listener of listeners) {
+      try {
+        listener();
+      } catch {
+        /* A consumer must not interrupt the authentication state machine. */
+      }
     }
   }
-  async function refresh(): Promise<void> {
+  function emit(event: AuthEvent) {
+    try {
+      config.onEvent?.(Object.freeze(event));
+    } catch {
+      /* Telemetry cannot change authentication results. */
+    }
+  }
+  function current(token: Mutation) {
+    return (
+      token.id === operationVersion &&
+      token.life === lifecycle &&
+      !token.cancelled
+    );
+  }
+  function operation(
+    token: Mutation,
+    phase: AuthOperation["phase"],
+    error: AuthOperation["error"] = null,
+    outcome: AuthOperation["outcome"] = null,
+  ): AuthOperation {
+    return { id: token.id, phase, action: token.action, error, outcome };
+  }
+  function applySession(session: AuthSession | null, showProblem = false) {
+    if (
+      session &&
+      hiddenSignOut &&
+      (hiddenSignOut.userId === null ||
+        session.user.id === hiddenSignOut.userId)
+    ) {
+      set({
+        status: pendingMutations > 0 ? "checking" : "unavailable",
+        session: null,
+      });
+      return;
+    }
+    if (session === null) hiddenSignOut = null;
+    const valid = session && accepted(session);
+    set({
+      status: valid ? "authenticated" : "anonymous",
+      session: valid ? session : null,
+    });
+    if (session && !valid && showProblem) {
+      const error = publicFailure({
+        code: session.user.emailVerified ? "expired" : "verification-required",
+        retryAfterSeconds: null,
+      });
+      if (!error.ok)
+        set({ operation: { ...idle, error: error.error, phase: "error" } });
+    }
+  }
+  async function readSession(): Promise<AuthResult<AuthSession | null>> {
+    pendingReads++;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let cancel = () => {};
+    const timeout = new Promise<AuthResult<AuthSession | null>>((resolve) => {
+      cancel = () => resolve(failure("cancelled"));
+      readCancels.add(cancel);
+      timer = setTimeout(() => resolve(failure("timeout")), config.timeoutMs);
+    });
+    try {
+      const result = await Promise.race([
+        capture(() => adapter.getSession()),
+        timeout,
+      ]);
+      return publicSessionResult(result);
+    } finally {
+      pendingReads--;
+      if (timer !== null) clearTimeout(timer);
+      readCancels.delete(cancel);
+    }
+  }
+  function scheduleRefresh() {
+    refreshRequested = true;
+    if (pendingMutations > 0 || consumers === 0) return;
+    if (refreshTimer !== null) clearTimeout(refreshTimer);
+    const life = lifecycle;
+    refreshTimer = setTimeout(() => {
+      refreshTimer = null;
+      if (life === lifecycle && consumers > 0)
+        void refresh({ background: true });
+    }, 0);
+  }
+  async function refresh(options: AuthRefreshOptions = {}): Promise<void> {
+    // Hidden tabs can throttle expiry timers. Hide expired UI before an awaited read.
+    if (
+      snapshot.session?.expiresAt !== null &&
+      snapshot.session?.expiresAt !== undefined &&
+      snapshot.session.expiresAt <= Date.now()
+    )
+      set({ status: "checking", session: null });
+    if (pendingMutations > 0) {
+      refreshRequested = true;
+      return;
+    }
+    if (!options.background) hiddenSignOut = null;
+    refreshRequested = false;
+    if (refreshTimer !== null) clearTimeout(refreshTimer);
+    refreshTimer = null;
     const request = ++refreshVersion;
     const identity = identityVersion;
     const life = lifecycle;
-    const result = await bounded(() => adapter.getSession());
+    if (snapshot.status === "unavailable")
+      set({ status: "checking", session: null });
+    const result = await readSession();
     if (
       request !== refreshVersion ||
       identity !== identityVersion ||
-      life !== lifecycle
+      life !== lifecycle ||
+      pendingMutations > 0
     )
       return;
     if (!result.ok) {
       set({ status: "unavailable", session: null });
       return;
     }
-    const session = result.value;
-    set({
-      status: session && accepted(session) ? "authenticated" : "anonymous",
-      session: session && accepted(session) ? session : null,
-    });
-    if (session && !accepted(session))
-      set({
-        operation: {
-          phase: "error",
-          action: null,
-          outcome: null,
-          error: {
-            code: session.user.emailVerified
-              ? "expired"
-              : "verification-required",
-            retryAfterSeconds: null,
-          },
-        },
-      });
+    applySession(result.value, true);
   }
   function sessionChanged() {
     ++identityVersion;
     ++refreshVersion;
     set({ status: "checking", session: null });
-    const life = lifecycle;
-    // Supabase callbacks must be synchronous; SDK requests happen after its lock is released.
-    if (sessionRefreshTimer !== null) clearTimeout(sessionRefreshTimer);
-    sessionRefreshTimer = setTimeout(() => {
-      sessionRefreshTimer = null;
-      if (life === lifecycle && consumers > 0) void refresh();
-    }, 0);
+    // Defer beyond SDK callbacks/locks. Never read an old session during a mutation.
+    scheduleRefresh();
+  }
+  function publish(token: Mutation, result: AuthResult<AuthOutcome>) {
+    if (token.timer !== null) clearTimeout(token.timer);
+    token.timer = null;
+    if (token.published) return;
+    token.published = true;
+    emit({
+      type: result.ok ? "succeeded" : "failed",
+      action: token.action,
+      errorCode: result.ok ? null : result.error.code,
+    });
+    token.resolve(result);
   }
   function start(): () => void {
     consumers++;
     if (consumers === 1) {
+      const life = lifecycle;
       try {
-        unsubscribe = adapter.subscribe?.(sessionChanged) ?? null;
+        unsubscribe =
+          adapter.subscribe?.(() => {
+            if (life === lifecycle && consumers > 0) sessionChanged();
+          }) ?? null;
       } catch {
         set({ status: "unavailable", session: null });
       }
-      void refresh();
+      scheduleExpiry();
+      void refresh({ background: true });
     }
     let stopped = false;
     return () => {
       if (stopped) return;
       stopped = true;
       consumers--;
-      if (consumers === 0) {
-        lifecycle++;
-        refreshVersion++;
-        operationVersion++;
+      if (consumers !== 0) return;
+      lifecycle++;
+      refreshVersion++;
+      operationVersion++;
+      try {
         unsubscribe?.();
-        unsubscribe = null;
-        if (sessionRefreshTimer !== null) clearTimeout(sessionRefreshTimer);
-        sessionRefreshTimer = null;
-        for (const cancel of pendingCancels) cancel();
-        set({ status: "checking", session: null, operation: idle });
+      } catch {
+        /* Always finish cleanup if provider unsubscribe fails. */
       }
+      unsubscribe = null;
+      if (refreshTimer !== null) clearTimeout(refreshTimer);
+      refreshTimer = null;
+      if (expiryTimer !== null) clearTimeout(expiryTimer);
+      expiryTimer = null;
+      for (const cancel of readCancels) cancel();
+      if (latest) {
+        latest.cancelled = true;
+        publish(latest, failure("cancelled"));
+      }
+      // Unmount cannot cancel an SDK request. Retain its barrier until it settles.
+      set({
+        status: "checking",
+        session: null,
+        operation:
+          pendingMutations > 0 && latest ? operation(latest, "settling") : idle,
+      });
     };
   }
-  async function operate(
-    action: AuthAction,
-    work: () => Promise<AuthResult<AuthOutcome>>,
+  async function reconcile(
+    token: Mutation,
+    result: AuthResult<AuthOutcome>,
   ): Promise<AuthResult<AuthOutcome>> {
-    if (
-      snapshot.operation.phase === "pending" ||
-      snapshot.operation.phase === "redirecting"
-    )
-      return failure("cancelled");
-    const remaining = Math.ceil((rateLimitUntil - Date.now()) / 1000);
-    if (remaining > 0 && action !== "sign-out")
-      return failure("rate-limited", remaining);
-    if (
-      (action === "forgot" || action === "resend") &&
-      snapshot.cooldownUntil > Date.now()
-    )
-      return failure(
-        "rate-limited",
-        Math.ceil((snapshot.cooldownUntil - Date.now()) / 1000),
-      );
-    const request = ++operationVersion;
-    const identity = identityVersion;
-    const life = lifecycle;
-    if (action === "sign-out") {
-      identityVersion++;
-      refreshVersion++;
-      set({ status: "checking", session: null });
+    if (!current(token) || token.timedOut)
+      return failure(token.timedOut ? "timeout" : "cancelled");
+    if (identityVersion !== token.eventVersion) {
+      let identity = identityVersion;
+      let verified = await readSession();
+      if (identity !== identityVersion && current(token)) {
+        identity = identityVersion;
+        verified = await readSession();
+      }
+      if (!current(token) || token.timedOut || identity !== identityVersion)
+        return failure(token.timedOut ? "timeout" : "cancelled");
+      if (!verified.ok) return verified;
+      const actual = verified.value;
+      applySession(actual);
+      refreshRequested = false;
+      if (token.action === "sign-out" && actual && accepted(actual))
+        return failure(
+          token.userId !== null && actual.user.id !== token.userId
+            ? "cancelled"
+            : "unavailable",
+        );
+      if (result.ok) {
+        if (result.value.kind === "authenticated") {
+          if (
+            !actual ||
+            !accepted(actual) ||
+            actual.user.id !== result.value.session.user.id
+          )
+            return failure("cancelled");
+          result = success({ kind: "authenticated", session: actual });
+        } else if (
+          actual &&
+          accepted(actual) &&
+          (token.action === "sign-out" ||
+            token.action === "reset" ||
+            actual.user.id !== token.userId)
+        )
+          return failure("cancelled");
+      }
     }
-    set({
-      operation: { phase: "pending", action, outcome: null, error: null },
-    });
-    emit({ type: "started", action, errorCode: null });
-    let result = await bounded(work);
-    if (request !== operationVersion || life !== lifecycle)
-      return failure("cancelled");
     if (
       result.ok &&
       result.value.kind === "authenticated" &&
       !accepted(result.value.session)
-    )
-      result = failure(
+    ) {
+      if (
+        token.action === "sign-up" &&
+        !result.value.session.user.emailVerified &&
+        capabilities.verification
+      )
+        return success({
+          kind: "verification-required",
+          delivery: capabilities.verification,
+        });
+      return failure(
         result.value.session.user.emailVerified
           ? "expired"
           : "verification-required",
       );
+    }
+    return publicOutcome(result);
+  }
+  function finishState(token: Mutation, result: AuthResult<AuthOutcome>) {
+    if (!current(token) || token.timedOut) return;
     if (!result.ok) {
+      if (
+        token.userId !== null &&
+        snapshot.session === null &&
+        token.action !== "sign-out"
+      )
+        refreshRequested = true;
       if (result.error.code === "rate-limited")
         rateLimitUntil =
           Date.now() + (result.error.retryAfterSeconds ?? 60) * 1000;
       set({
-        operation: {
-          phase: "error",
-          action,
-          outcome: null,
-          error: result.error,
-        },
+        operation: operation(token, "error", result.error),
         cooldownUntil: Math.max(snapshot.cooldownUntil, rateLimitUntil),
       });
-      if (action === "sign-out" || result.error.code === "timeout")
+      if (
+        result.error.code === "timeout" ||
+        (token.action === "sign-out" && result.error.code !== "cancelled")
+      )
         set({ status: "unavailable", session: null });
-      emit({ type: "failed", action, errorCode: result.error.code });
-      return result;
+      else if (snapshot.status === "checking")
+        set({ status: "anonymous", session: null });
+      return;
     }
     const outcome = result.value;
-    if (outcome.kind === "authenticated" && identity === identityVersion) {
-      refreshVersion++;
-      set({ status: "authenticated", session: outcome.session });
-    }
-    if (action === "sign-out") set({ status: "anonymous", session: null });
-    if (action === "reset" && outcome.kind === "complete") {
-      identityVersion++;
-      refreshVersion++;
-      set({ status: "anonymous", session: null });
-    }
     if (
-      action === "forgot" ||
-      action === "resend" ||
-      (action === "sign-up" && outcome.kind === "verification-required")
+      token.userId !== null &&
+      snapshot.session === null &&
+      token.action !== "sign-out" &&
+      token.action !== "reset" &&
+      outcome.kind !== "authenticated" &&
+      outcome.kind !== "redirecting"
     )
-      set({
-        cooldownUntil: Date.now() + (config.cooldownSeconds ?? 60) * 1000,
-      });
+      refreshRequested = true;
+    if (outcome.kind === "authenticated") {
+      hiddenSignOut = null;
+      applySession(outcome.session);
+    } else if (snapshot.status === "checking")
+      set({ status: "anonymous", session: null });
+    if (
+      token.action === "sign-out" ||
+      (token.action === "reset" && outcome.kind === "complete")
+    )
+      set({ status: "anonymous", session: null });
+    if (
+      token.action === "forgot" ||
+      token.action === "resend" ||
+      (token.action === "sign-up" && outcome.kind === "verification-required")
+    )
+      set({ cooldownUntil: Date.now() + config.cooldownSeconds * 1000 });
     set({
-      operation: {
-        phase: outcome.kind === "redirecting" ? "redirecting" : "success",
-        action,
-        outcome: outcome.kind,
-        error: null,
-      },
+      operation: operation(
+        token,
+        outcome.kind === "redirecting" ? "redirecting" : "success",
+        null,
+        outcome.kind,
+      ),
     });
-    emit({ type: "succeeded", action, errorCode: null });
+  }
+  function operate(
+    action: AuthAction,
+    work: () => Promise<AuthResult<AuthOutcome>>,
+  ): Promise<AuthResult<AuthOutcome>> {
+    if (
+      action === "sign-out" &&
+      latest?.action === "sign-out" &&
+      pendingMutations > 0
+    )
+      return latest.result;
+    if (
+      action !== "sign-out" &&
+      (pendingMutations > 0 || snapshot.operation.phase === "redirecting")
+    )
+      return Promise.resolve(failure("cancelled"));
+    const remaining = Math.ceil((rateLimitUntil - Date.now()) / 1000);
+    if (remaining > 0 && action !== "sign-out")
+      return invalid("rate-limited", action, remaining);
+    if (
+      (action === "forgot" || action === "resend") &&
+      snapshot.cooldownUntil > Date.now()
+    )
+      return invalid(
+        "rate-limited",
+        action,
+        Math.ceil((snapshot.cooldownUntil - Date.now()) / 1000),
+      );
+    let resolve = (_result: AuthResult<AuthOutcome>) => {};
+    const result = new Promise<AuthResult<AuthOutcome>>((done) => {
+      resolve = done;
+    });
+    const previous = latest;
+    const token: Mutation = {
+      id: ++operationVersion,
+      action,
+      life: lifecycle,
+      eventVersion: identityVersion,
+      userId: snapshot.session?.user.id ?? null,
+      cancelled: false,
+      timedOut: false,
+      published: false,
+      timer: null,
+      result,
+      resolve,
+    };
+    const queued = pendingMutations > 0;
+    const predecessor = mutationTail;
+    let release = () => {};
+    mutationTail = new Promise<void>((done) => {
+      release = done;
+    });
+    pendingMutations++;
+    latest = token;
+    if (action === "sign-out") hiddenSignOut = { userId: token.userId };
+    if (pendingReads > 0 && action !== "sign-out" && action !== "reset")
+      refreshRequested = true;
+    refreshVersion++;
+    if (
+      [
+        "sign-in",
+        "sign-up",
+        "provider",
+        "verify",
+        "reset",
+        "sign-out",
+      ].includes(action)
+    )
+      set({ status: "checking", session: null });
+    if (action === "sign-out" && previous && queued) {
+      previous.cancelled = true;
+      publish(previous, failure("cancelled"));
+    }
+    set({ operation: operation(token, "pending") });
+    emit({ type: "started", action, errorCode: null });
+    token.timer = setTimeout(() => {
+      if (!current(token) || token.published) return;
+      token.timedOut = true;
+      const timeout = publicFailure({
+        code: "timeout",
+        retryAfterSeconds: null,
+      });
+      if (!timeout.ok)
+        set({
+          status: "unavailable",
+          session: null,
+          operation: operation(token, "settling", timeout.error),
+        });
+      publish(token, timeout);
+    }, config.timeoutMs);
+    async function execute() {
+      let settled: AuthResult<AuthOutcome> = failure("cancelled");
+      try {
+        if (!token.cancelled || token.action === "sign-out") {
+          const completed = publicOutcome(await capture(work));
+          settled = publicOutcome(await reconcile(token, completed));
+          if (
+            token.action === "sign-out" &&
+            completed.ok &&
+            completed.value.kind === "complete" &&
+            (settled.ok || token.timedOut || token.life !== lifecycle)
+          )
+            hiddenSignOut = null;
+        }
+        if (
+          settled.ok &&
+          settled.value.kind === "authenticated" &&
+          !accepted(settled.value.session)
+        )
+          settled = publicFailure({ code: "expired", retryAfterSeconds: null });
+        finishState(token, settled);
+      } catch {
+        settled = publicFailure({
+          code: "unavailable",
+          retryAfterSeconds: null,
+        });
+        finishState(token, settled);
+      } finally {
+        pendingMutations--;
+        release();
+        if (latest === token) {
+          latest = null;
+          if (token.timedOut && token.life === lifecycle) {
+            const timeout = publicFailure({
+              code: "timeout",
+              retryAfterSeconds: null,
+            });
+            if (!timeout.ok)
+              set({ operation: operation(token, "error", timeout.error) });
+          } else if (token.life !== lifecycle && pendingMutations === 0)
+            set({ operation: idle });
+        }
+        publish(token, current(token) ? settled : failure("cancelled"));
+        if (
+          pendingMutations === 0 &&
+          (refreshRequested || token.timedOut || token.life !== lifecycle)
+        )
+          scheduleRefresh();
+      }
+    }
+    if (queued) void predecessor.then(execute);
+    else void execute();
     return result;
   }
   function invalid(
-    code: "invalid-input" | "weak-password" | "unsupported",
+    code: "invalid-input" | "weak-password" | "unsupported" | "rate-limited",
     action: AuthAction,
+    retryAfterSeconds: number | null = null,
   ): Promise<AuthResult<AuthOutcome>> {
-    if (
-      snapshot.operation.phase === "pending" ||
-      snapshot.operation.phase === "redirecting"
-    )
+    if (pendingMutations > 0 || snapshot.operation.phase === "redirecting")
       return Promise.resolve(failure("cancelled"));
-    const result = failure(code);
+    const result = publicFailure({ code, retryAfterSeconds });
     if (!result.ok)
       set({
         operation: {
+          id: ++operationVersion,
           phase: "error",
           action,
           outcome: null,
@@ -285,7 +618,6 @@ export function createAuthController(input: AuthConfig) {
     if (!methods.password || !adapter.signIn)
       return invalid("unsupported", "sign-in");
     const email = normalizeEmail(credentials.email);
-    // Never apply a NEW password policy to existing credentials, and never trim passwords.
     if (
       !isEmail(email) ||
       !credentials.password ||
@@ -311,7 +643,11 @@ export function createAuthController(input: AuthConfig) {
       return invalid("weak-password", "sign-up");
     const signUp = adapter.signUp.bind(adapter);
     return operate("sign-up", () =>
-      signUp({ ...registration, email, name: registration.name.trim() }),
+      signUp({
+        email,
+        name: registration.name.trim(),
+        password: registration.password,
+      }),
     );
   }
   function signInWithProvider(provider: string) {
@@ -336,7 +672,7 @@ export function createAuthController(input: AuthConfig) {
       return invalid("unsupported", "reset");
     if (
       value.password !== confirmation ||
-      (adapter.capabilities.recovery === "code" &&
+      (capabilities.recovery === "code" &&
         (!isEmail(normalizeEmail(value.email)) ||
           !/^\d{4,12}$/.test(value.code)))
     )
@@ -345,7 +681,12 @@ export function createAuthController(input: AuthConfig) {
       return invalid("weak-password", "reset");
     const reset = adapter.resetPassword.bind(adapter);
     return operate("reset", () =>
-      reset({ ...value, email: normalizeEmail(value.email) }),
+      reset({
+        email: normalizeEmail(value.email),
+        password: value.password,
+        code: value.code,
+        token: value.token,
+      }),
     );
   }
   function resendVerification(value: string) {
@@ -368,7 +709,7 @@ export function createAuthController(input: AuthConfig) {
   return {
     methods,
     policy,
-    capabilities: adapter.capabilities,
+    capabilities,
     getSnapshot: () => snapshot,
     getServerSnapshot: () => initial,
     subscribe(listener: () => void) {
@@ -388,17 +729,15 @@ export function createAuthController(input: AuthConfig) {
     verifyEmail,
     signOut: () => operate("sign-out", () => adapter.signOut()),
     clearFeedback() {
-      if (
-        snapshot.operation.phase !== "pending" &&
-        snapshot.operation.phase !== "redirecting"
-      )
+      if (pendingMutations === 0 && snapshot.operation.phase !== "redirecting")
         set({ operation: idle });
     },
-    /** Popup cancelled or browser navigation did not happen; recheck the actual session. */
     async cancelRedirect() {
+      if (pendingMutations > 0 || snapshot.operation.phase !== "redirecting")
+        return;
       operationVersion++;
       set({ operation: idle });
-      await refresh();
+      await refresh({ background: true });
     },
   };
 }

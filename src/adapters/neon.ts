@@ -5,7 +5,12 @@ import {
   type BetterAuthClientPort,
   createBetterAuthAdapter,
 } from "./better-auth.js";
-import { errorCode, type ServiceResponse, serviceError } from "./shared.js";
+import {
+  errorCode,
+  type ServiceResponse,
+  serviceError,
+  validateAdapterPort,
+} from "./shared.js";
 
 /** Pass the native Managed SDK, including $fetch; keep Neon's verifier/cookie handling. */
 export interface NeonOtpPort {
@@ -17,8 +22,16 @@ export interface NeonOtpPort {
 export function createNeonAdapter(
   client: BetterAuthClientPort,
   otp: NeonOtpPort,
-  options: BetterAuthAdapterOptions,
+  input: BetterAuthAdapterOptions,
 ): AuthAdapter {
+  const options = { ...input, providers: Object.freeze([...input.providers]) };
+  validateAdapterPort("Neon", [
+    [
+      !!options.recovery || !!options.verification,
+      typeof otp.$fetch === "function",
+      "$fetch for OTP",
+    ],
+  ]);
   const base = createBetterAuthAdapter(client, {
     ...options,
     recovery: false,

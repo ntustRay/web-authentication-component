@@ -19,11 +19,16 @@ export function AuthProvider({
   useEffect(() => {
     const stop = controller.start();
     const refresh = () => {
-      void controller.refresh();
+      void controller.refresh({ background: true });
     };
     window.addEventListener("focus", refresh);
+    const visible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    document.addEventListener("visibilitychange", visible);
     return () => {
       window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", visible);
       stop();
     };
   }, [controller]);

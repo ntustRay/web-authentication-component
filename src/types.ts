@@ -1,13 +1,13 @@
 /** Public presentation state never contains access tokens, passwords or reset codes. */
 export interface AuthUser {
-  id: string;
-  email: string | null;
-  name: string | null;
-  emailVerified: boolean;
+  readonly id: string;
+  readonly email: string | null;
+  readonly name: string | null;
+  readonly emailVerified: boolean;
 }
 export interface AuthSession {
-  user: AuthUser;
-  expiresAt: number | null;
+  readonly user: AuthUser;
+  readonly expiresAt: number | null;
 }
 export type Delivery = "link" | "code";
 export type AuthErrorCode =
@@ -23,8 +23,8 @@ export type AuthErrorCode =
   | "timeout"
   | "unknown";
 export interface AuthError {
-  code: AuthErrorCode;
-  retryAfterSeconds: number | null;
+  readonly code: AuthErrorCode;
+  readonly retryAfterSeconds: number | null;
 }
 export type AuthOutcome =
   | { kind: "authenticated"; session: AuthSession }
@@ -53,11 +53,11 @@ export interface EmailVerification {
   code: string;
 }
 export interface AuthCapabilities {
-  password: boolean;
-  registration: boolean;
-  recovery: Delivery | false;
-  verification: Delivery | false;
-  providers: readonly string[];
+  readonly password: boolean;
+  readonly registration: boolean;
+  readonly recovery: Delivery | false;
+  readonly verification: Delivery | false;
+  readonly providers: readonly string[];
 }
 /** Implement this port to use any identity service. Methods must verify with its server. */
 export interface AuthAdapter {
@@ -75,25 +75,25 @@ export interface AuthAdapter {
   verifyEmail?(input: EmailVerification): Promise<AuthResult<AuthOutcome>>;
 }
 export interface Provider {
-  id: string;
-  label: string;
+  readonly id: string;
+  readonly label: string;
 }
 export interface AuthMethods {
-  password: boolean;
-  registration: boolean;
-  recovery: boolean;
-  verification: boolean;
-  providers: readonly Provider[];
+  readonly password: boolean;
+  readonly registration: boolean;
+  readonly recovery: boolean;
+  readonly verification: boolean;
+  readonly providers: readonly Provider[];
 }
 export interface PasswordPolicy {
-  minLength: number;
-  maxLength: number;
-  maxUtf8Bytes: number | null;
-  requireUppercase: boolean;
-  requireLowercase: boolean;
-  requireNumber: boolean;
-  requireSymbol: boolean;
-  blocklist: readonly string[];
+  readonly minLength: number;
+  readonly maxLength: number;
+  readonly maxUtf8Bytes: number | null;
+  readonly requireUppercase: boolean;
+  readonly requireLowercase: boolean;
+  readonly requireNumber: boolean;
+  readonly requireSymbol: boolean;
+  readonly blocklist: readonly string[];
 }
 export type PasswordIssue =
   | "too-short"
@@ -118,16 +118,27 @@ export type AuthAction =
   | "verify"
   | "sign-out";
 export interface AuthOperation {
-  phase: "idle" | "pending" | "redirecting" | "success" | "error";
-  action: AuthAction | null;
-  outcome: AuthOutcome["kind"] | null;
-  error: AuthError | null;
+  readonly id: number;
+  readonly phase:
+    | "idle"
+    | "pending"
+    | "settling"
+    | "redirecting"
+    | "success"
+    | "error";
+  readonly action: AuthAction | null;
+  readonly outcome: AuthOutcome["kind"] | null;
+  readonly error: AuthError | null;
 }
 export interface AuthSnapshot {
-  status: "checking" | "anonymous" | "authenticated" | "unavailable";
-  session: AuthSession | null;
-  operation: AuthOperation;
-  cooldownUntil: number;
+  readonly status: "checking" | "anonymous" | "authenticated" | "unavailable";
+  readonly session: AuthSession | null;
+  readonly operation: AuthOperation;
+  readonly cooldownUntil: number;
+}
+export interface AuthRefreshOptions {
+  /** Automatic focus/visibility/SDK reads must not restore a failed sign-out identity. */
+  readonly background?: boolean;
 }
 /** Safe to send to analytics: intentionally excludes user IDs, email and request inputs. */
 export interface AuthEvent {

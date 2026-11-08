@@ -1,5 +1,6 @@
 import { failure, success } from "../errors.js";
 import type { AuthAdapter, AuthResult, AuthSession } from "../types.js";
+import { validateAdapterPort } from "./shared.js";
 export interface HostedAuthPort {
   /** Revalidate through the host's server, not localStorage or user-editable claims. */
   verifySession(): Promise<AuthResult<AuthSession | null>>;
@@ -9,8 +10,14 @@ export interface HostedAuthPort {
 }
 export function createHostedAdapter(
   port: HostedAuthPort,
-  providers: readonly string[],
+  inputProviders: readonly string[],
 ): AuthAdapter {
+  const providers = Object.freeze([...inputProviders]);
+  validateAdapterPort("Hosted", [
+    [true, typeof port.verifySession === "function", "verifySession"],
+    [true, typeof port.signOut === "function", "signOut"],
+    [providers.length > 0, typeof port.openSignIn === "function", "openSignIn"],
+  ]);
   return {
     id: "hosted",
     capabilities: {

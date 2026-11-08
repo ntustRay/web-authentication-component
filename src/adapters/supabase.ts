@@ -11,6 +11,7 @@ import {
   type ServiceResponse,
   serviceError,
   sessionFromUser,
+  validateAdapterPort,
 } from "./shared.js";
 
 /** Pass client.auth. Structural typing keeps Supabase out of unrelated consumer bundles. */
@@ -56,8 +57,31 @@ export interface SupabaseAdapterOptions<P extends string> {
 }
 export function createSupabaseAdapter<P extends string>(
   auth: SupabaseAuthPort<P>,
-  options: SupabaseAdapterOptions<P>,
+  input: SupabaseAdapterOptions<P>,
 ): AuthAdapter {
+  const options = { ...input, providers: Object.freeze([...input.providers]) };
+  validateAdapterPort("Supabase", [
+    [true, typeof auth.getUser === "function", "getUser"],
+    [true, typeof auth.signOut === "function", "signOut"],
+    [
+      !!options.password,
+      typeof auth.signInWithPassword === "function",
+      "signInWithPassword",
+    ],
+    [!!options.registration, typeof auth.signUp === "function", "signUp"],
+    [
+      options.providers.length > 0,
+      typeof auth.signInWithOAuth === "function",
+      "signInWithOAuth",
+    ],
+    [
+      !!options.recovery,
+      typeof auth.resetPasswordForEmail === "function" &&
+        typeof auth.updateUser === "function",
+      "password recovery methods",
+    ],
+    [!!options.verification, typeof auth.resend === "function", "resend"],
+  ]);
   const providers = new Map<string, P>(
     options.providers.map((provider) => [provider, provider]),
   );
@@ -69,13 +93,13 @@ export function createSupabaseAdapter<P extends string>(
       isRecord(response.error) &&
       response.error.name === "AuthSessionMissingError";
     if (
-      error &&
-      !missing &&
-      !["session_not_found", "auth_session_missing"].includes(
+      missing ||
+      ["session_not_found", "auth_session_missing"].includes(
         errorCode(response),
       )
     )
-      return error;
+      return success(null);
+    if (error) return error;
     const data = isRecord(response.data) ? response.data : null;
     return success(sessionFromUser(data?.user, "supabase"));
   }

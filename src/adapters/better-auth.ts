@@ -11,6 +11,7 @@ import {
   type ServiceResponse,
   serviceError,
   sessionFromUser,
+  validateAdapterPort,
 } from "./shared.js";
 
 export interface BetterAuthClientPort {
@@ -65,8 +66,44 @@ export interface BetterAuthAdapterOptions {
 }
 export function createBetterAuthAdapter(
   client: BetterAuthClientPort,
-  options: BetterAuthAdapterOptions,
+  input: BetterAuthAdapterOptions,
 ): AuthAdapter {
+  const options = { ...input, providers: Object.freeze([...input.providers]) };
+  validateAdapterPort("Better Auth", [
+    [
+      true,
+      typeof options.readSession === "function" ||
+        typeof client.getSession === "function",
+      "getSession",
+    ],
+    [true, typeof client.signOut === "function", "signOut"],
+    [
+      !!options.password,
+      typeof client.signIn.email === "function",
+      "signIn.email",
+    ],
+    [
+      !!options.registration,
+      typeof client.signUp?.email === "function",
+      "signUp.email",
+    ],
+    [
+      options.providers.length > 0,
+      typeof client.signIn.social === "function",
+      "signIn.social",
+    ],
+    [
+      !!options.recovery,
+      typeof client.requestPasswordReset === "function" &&
+        typeof client.resetPassword === "function",
+      "password recovery methods",
+    ],
+    [
+      !!options.verification,
+      typeof client.sendVerificationEmail === "function",
+      "sendVerificationEmail",
+    ],
+  ]);
   async function getSession(): Promise<AuthResult<AuthSession | null>> {
     const response = await (options.readSession
       ? options.readSession()
@@ -129,7 +166,7 @@ export function createBetterAuthAdapter(
       if (error) return error;
       const result = await getSession();
       if (!result.ok) return result;
-      return result.value?.user.emailVerified
+      return result.value
         ? success({ kind: "authenticated", session: result.value })
         : success({ kind: "verification-required", delivery: "link" });
     },

@@ -4,6 +4,15 @@ export interface ServiceResponse {
   data?: unknown;
   error?: unknown;
 }
+export function validateAdapterPort(
+  service: string,
+  requirements: readonly (readonly [boolean, boolean, string])[],
+): void {
+  for (const [enabled, supported, feature] of requirements) {
+    if (enabled && !supported)
+      throw new Error(`${service} adapter requires ${feature}`);
+  }
+}
 export function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }

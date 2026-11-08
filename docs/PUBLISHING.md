@@ -10,7 +10,7 @@ Package name：`@ntustray/web-authentication-component`。Repo：[ntustRay/web-a
 4. `bun run verify`。
 5. `npm pack --ignore-scripts --dry-run`。檢查只包含公開 source、dist、declarations 與文件。
 6. `npm publish --access public`。prepack 會執行 build；本機首次發布不要求 GitHub provenance。
-7. `npm view @ntustray/web-authentication-component@0.1.0 version`，確認真實版本可讀後，更新 README 的發布狀態。
+7. `npm view @ntustray/web-authentication-component@0.2.0 version`，確認真實版本可讀後，更新 README 的發布狀態。
 
 不要讓使用端依賴未發布的 version。發布前可安裝 CI artifact 或本機 `npm pack` 的 tarball。
 

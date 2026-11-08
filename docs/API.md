@@ -22,10 +22,12 @@ interface AuthConfig {
   passwordPolicy?: Partial<PasswordPolicy>;
   requireVerifiedEmail?: boolean; // default true
   cooldownSeconds?: number; // default 60，僅 UX
-  timeoutMs?: number; // default 30000
+  timeoutMs?: number; // default 30000；整數 100–2147483647
   onEvent?: (event: AuthEvent) => void;
 }
 ```
+
+`cooldownSeconds` 必須是 0–2147483 的整數，避免 JavaScript timer overflow。Controller 會複製並凍結 methods、provider allowlist、capabilities 與 password policy；建立後請透過新 controller 更換設定。各內建 adapter 也會先驗證已啟用的 SDK methods，缺少功能時在建立階段失敗。
 
 Controller 在 client boundary 建立一次；不要每次 render 重建。SSR 時每個 request／client tree 使用自己的 controller，不可將可變 session controller 放進跨 request 的 server singleton。
 
@@ -55,7 +57,8 @@ await auth.resetPassword({ email, password, code, token }, confirmation);
 await auth.resendVerification(email);
 await auth.verifyEmail({ email, code });
 await auth.signOut();
-await auth.refresh();
+await auth.refresh(); // 使用者明確重試；允許重新顯示 server 已驗證的 session
+await auth.refresh({ background: true }); // focus／visibility／背景事件；保留登出失敗的隱藏規則
 await auth.cancelRedirect(); // popup 被關閉／redirect 沒發生
 auth.clearFeedback();
 unsubscribe();
@@ -72,14 +75,21 @@ stop();
 | `redirecting`           | OAuth／hosted flow 已開始；可取消後重新查詢    |
 | `complete`              | 驗證／密碼重設／登出完成；不是登入成功的同義詞 |
 
-`getSnapshot()` 是 immutable 的頂層快照；讀取沒有變更時保持相同 reference。`getServerSnapshot()` 固定為 checking／null，供 SSR hydration 使用。snapshot 是 UI 資料，不是 authorization token。
+`getSnapshot()` 的 session、user、operation、error 皆為複製後凍結的唯讀值；讀取沒有變更時保持相同 reference。Custom adapter 回傳的額外 SDK 欄位不會進入 result 或 snapshot。`getServerSnapshot()` 固定為 checking／null，供 SSR hydration 使用。snapshot 是 UI 資料，不是 authorization token。
 
 ```ts
 interface AuthSnapshot {
   status: "checking" | "anonymous" | "authenticated" | "unavailable";
   session: AuthSession | null;
   operation: {
-    phase: "idle" | "pending" | "redirecting" | "success" | "error";
+    id: number; // 每次操作／輸入錯誤的識別碼；idle 為 0
+    phase:
+      | "idle"
+      | "pending"
+      | "settling"
+      | "redirecting"
+      | "success"
+      | "error";
     action: AuthAction | null;
     outcome: AuthOutcome["kind"] | null;
     error: { code: AuthErrorCode; retryAfterSeconds: number | null } | null;
@@ -89,6 +99,12 @@ interface AuthSnapshot {
 ```
 
 `AuthSession` 只包含 `user: { id, email, name, emailVerified }` 與 `expiresAt`（epoch milliseconds 或 null）。沒有 access／refresh／provider token。`onEvent` 只包含 `type`、`action`、`errorCode`，不帶輸入、email 或 user ID。
+
+`settling` 表示呼叫端已收到 timeout 或 lifecycle cancellation，但 SDK request 仍未結束。這時禁止新 mutation；`signOut()` 會排在原 request 後執行。即使最後一個 consumer unmount，已明確要求的登出仍會完成 SDK 呼叫；原 caller 只會收到 cancelled，舊 callback 不會改動新 UI。SDK 永不回覆時 controller 會維持鎖定，不能把 timeout 當成 request 已取消。
+
+登出失敗／逾時先隱藏該帳號。背景 refresh 驗證到同一帳號時維持 unavailable；不同帳號可顯示，null 轉 anonymous。若登出當下不知道 user ID，背景讀到任何帳號皆保持隱藏。明確 `refresh()`、新的登入成功或 SDK 登出最終成功可解除。React focus／visibility 與 SDK 通知使用 background 模式。這不是 server session 撤銷。
+
+Session `expiresAt` 到期時會先清除 UI，再向 server 驗證；focus／visibility 會補做背景檢查。瀏覽器可能暫停背景 timer，這些 UI 措施不取代 server expiry／authorization。
 
 ## PasswordPolicy
 
@@ -124,9 +140,11 @@ const adapter: AuthAdapter = {
 };
 ```
 
-Adapter 必須處理真實協定，不可只回傳成功。透過 `success(value)`、`failure(code, retryAfterSeconds)` 建立 result；不得把 raw provider message 放進公開錯誤。Throw 會被 controller 捕捉並轉成已知錯誤碼。
+Adapter 必須處理真實協定，不可只回傳成功。透過 `success(value)`、`failure(code, retryAfterSeconds)` 建立 result；不得把 raw provider message 放進公開錯誤。Throw 會被 controller 捕捉並轉成已知錯誤碼。Controller 還會重建 allowlisted session／outcome／error，剝除額外欄位並拒絕格式錯誤的值；這無法證明自訂 adapter 確實詢問 server，該責任仍在 adapter 作者。
 
 `subscribe(listener)` 只發出「身份可能變更」的通知，controller 會先清除舊 UI session，再於 下一個 task 重新向 server 驗證。不要在 Supabase `onAuthStateChange` callback 裡 await 其他 Auth SDK calls。
+
+`requireVerifiedEmail: false` 允許 server 已確認、但 email 未驗證的帳號；為 true 時，signup 的未驗證 session 會轉 verification-required，登入則拒絕。沒有 session 的 signup 不可報 authenticated。
 
 `resetPassword` 回傳 complete 前應結束本機 recovery session。需要撤銷其他裝置／token 時，在 backend 實作；本機登出不等於立即撤銷已簽發的 JWT。
 
@@ -143,7 +161,7 @@ Adapter 必須處理真實協定，不可只回傳成功。透過 `success(value
 | `AuthField`           | standard input props + `label`, `error`, `hint`                  |
 | `PasswordField`       | AuthField props + `messages`；visibility / Caps Lock             |
 | `AuthButton`          | standard button props + `pending`, `loadingIcon`                 |
-| `AuthFeedback`        | `tone`, `focus`, `children`                                      |
+| `AuthFeedback`        | `tone`, `focus`, `focusKey`, `children`                          |
 | `SignOutButton`       | standard button props；綁定共用 signOut                          |
 | `LoadingIcon`         | `className`                                                      |
 
@@ -160,7 +178,9 @@ Adapter 必須處理真實協定，不可只回傳成功。透過 `success(value
 | `resetToken`             | host 已驗證 callback 的 Better Auth link token；不進 snapshot         |
 | `slots`                  | `header`, `footer`, `loadingIcon`, `providerIcon(id)`, `field(props)` |
 
-View：`sign-in`、`sign-up`、`forgot-password`、`reset-password`、`verify-email`、`resend-verification`。切頁會清除 password／confirmation／OTP。驗證碼接受 4–12 位數字，真實長度與有效性仍由 provider 驗證；Neon 使用 6 位碼。
+`focusKey` 可傳 operation.id，讓新的錯誤重新 focus；AuthPanel 只會由提交該操作的 panel 取得焦點。`PasswordField` 保留 host id；`SignOutButton` 先執行 host onClick，preventDefault 可攔截登出。
+
+View：`sign-in`、`sign-up`、`forgot-password`、`reset-password`、`verify-email`、`resend-verification`。切頁、controller 或 resetToken 改變會清除 password、confirmation、OTP，並使舊表單 callback 失效。更換 controller 同時清除 email。成功重寄 code 會清空舊 OTP，失敗保留輸入；code resend 會導入 verify-email 表單。停用 verification 的 signup 只顯示寄送提示，不導入不支援的畫面。驗證碼接受 4–12 位數字，真實長度與有效性仍由 provider 驗證；Neon 使用 6 位碼。
 
 `slots.field` 收到標準 input props、label／error／hint、`secret`、messages。必須保留 input 的 onChange、value、name、autocomplete、required、readOnly 與錯誤關聯，或直接組合內建 primitives。
 

@@ -28,7 +28,9 @@ export function resolvePasswordPolicy(
   const policy = {
     ...defaultPasswordPolicy,
     ...overrides,
-    blocklist: [...(overrides.blocklist ?? defaultPasswordPolicy.blocklist)],
+    blocklist: Object.freeze([
+      ...(overrides.blocklist ?? defaultPasswordPolicy.blocklist),
+    ]),
   };
   if (
     !Number.isInteger(policy.minLength) ||
@@ -43,7 +45,7 @@ export function resolvePasswordPolicy(
     (!Number.isInteger(policy.maxUtf8Bytes) || policy.maxUtf8Bytes < 1)
   )
     throw new Error("Invalid password byte limit");
-  return policy;
+  return Object.freeze(policy);
 }
 export function assessPassword(
   password: string,

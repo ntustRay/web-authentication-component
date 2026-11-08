@@ -43,6 +43,9 @@ function better(
       social: async () => ({ data: { url: "https://github.com/login/oauth" } }),
     },
     signUp: { email: async () => ({}) },
+    requestPasswordReset: async () => ({}),
+    resetPassword: async () => ({}),
+    sendVerificationEmail: async () => ({}),
     ...overrides,
   };
 }
@@ -63,6 +66,9 @@ function supabase(
     signOut: async () => ({}),
     signInWithPassword: async () => ({}),
     signUp: async () => ({ data: { session: null } }),
+    resetPasswordForEmail: async () => ({}),
+    updateUser: async () => ({}),
+    resend: async () => ({}),
     signInWithOAuth: async () => ({
       data: { url: "https://github.com/login/oauth" },
     }),
@@ -173,7 +179,7 @@ describe("Better Auth, Neon and hosted adapters", () => {
   it("uses the configured provider and fixed callback URLs", async () => {
     const social = vi.fn(async () => ({}));
     const auth = createBetterAuthAdapter(
-      better({ signIn: { social } }),
+      better({ signIn: { ...better().signIn, social } }),
       options,
     );
     await auth.signInWithProvider?.("github");

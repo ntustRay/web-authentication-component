@@ -9,7 +9,7 @@ import {
 } from "react";
 import { assessPassword, isEmail, normalizeEmail } from "../password.js";
 import type { AuthOutcome, AuthResult } from "../types.js";
-import { useAuth } from "./context.js";
+import { useAuth, useAuthController } from "./context.js";
 import { type AuthMessages, en, formatMessage, zhTW } from "./messages.js";
 import {
   AuthButton,
@@ -58,7 +58,10 @@ function useSeconds(deadline: number) {
       setSeconds(Math.max(0, Math.ceil((deadline - Date.now()) / 1000)));
     tick();
     if (deadline <= Date.now()) return;
-    const timer = setInterval(tick, 1000);
+    const timer = setInterval(() => {
+      tick();
+      if (deadline <= Date.now()) clearInterval(timer);
+    }, 1000);
     return () => clearInterval(timer);
   }, [deadline]);
   return seconds;
@@ -78,16 +81,65 @@ export function AuthPanel({
   resetToken = "",
 }: AuthPanelProps) {
   const auth = useAuth();
+  const controller = useAuthController();
   const titleId = useId();
-  const [localView, setLocalView] = useState<AuthView>(initialView);
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const view = controlled ?? localView;
+  const emptyFlow = { controller, view: initialView, email: "", message: "" };
+  const [flow, setFlow] = useState(emptyFlow);
+  const activeFlow = flow.controller === controller ? flow : emptyFlow;
+  const { email, message } = activeFlow;
+  const view = controlled ?? activeFlow.view;
+  const scope = useRef({ controller, view, resetToken, version: 0 });
+  const mounted = useRef(false);
+  const ownedOperation = useRef(0);
+  const [pendingProvider, setPendingProvider] = useState<string | null>(null);
+  const [codeRevision, setCodeRevision] = useState(0);
+  if (
+    scope.current.controller !== controller ||
+    scope.current.view !== view ||
+    scope.current.resetToken !== resetToken
+  ) {
+    scope.current = {
+      controller,
+      view,
+      resetToken,
+      version: scope.current.version + 1,
+    };
+    ownedOperation.current = 0;
+  }
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+  useEffect(() => {
+    setFlow((current) =>
+      current.controller === controller
+        ? current
+        : { controller, view: initialView, email: "", message: "" },
+    );
+  }, [controller, initialView]);
+  function updateFlow(patch: {
+    view?: AuthView;
+    email?: string;
+    message?: string;
+  }) {
+    setFlow((current) => ({
+      ...(current.controller === controller ? current : emptyFlow),
+      ...patch,
+    }));
+  }
+  function setEmail(value: string) {
+    updateFlow({ email: value });
+  }
+  function setMessage(value: string) {
+    updateFlow({ message: value });
+  }
   const messages = { ...(locale === "en" ? en : zhTW), ...overrides };
   function change(next: AuthView, keepMessage = false) {
     auth.clearFeedback();
     if (!keepMessage) setMessage("");
-    setLocalView(next);
+    updateFlow({ view: next });
     onViewChange?.(next);
   }
   const titles: Record<AuthView, string> = {
@@ -107,15 +159,17 @@ export function AuthPanel({
       (view === "verify-email" || view === "resend-verification"));
   const busy =
     auth.state.operation.phase === "pending" ||
+    auth.state.operation.phase === "settling" ||
     auth.state.operation.phase === "redirecting";
-  const pending = auth.state.operation.phase === "pending";
+  const pending =
+    auth.state.operation.phase === "pending" ||
+    auth.state.operation.phase === "settling";
   const seconds = useSeconds(auth.state.cooldownUntil);
   const completedIdentity = useRef<string | null>(null);
   useEffect(() => {
     const identity = auth.state.session?.user.id ?? null;
     if (completedIdentity.current !== identity) {
-      setMessage("");
-      setEmail("");
+      setFlow((current) => ({ ...current, email: "", message: "" }));
     }
     completedIdentity.current = identity;
   }, [auth.state.session?.user.id]);
@@ -131,13 +185,18 @@ export function AuthPanel({
     }
     if (result.value.kind === "verification-required") {
       setMessage(messages.verificationSent);
-      change("verify-email", true);
+      change(auth.methods.verification ? "verify-email" : "sign-in", true);
     } else if (result.value.kind === "sent") {
       setMessage(
         view === "forgot-password" ? messages.sent : messages.verificationSent,
       );
       if (view === "forgot-password" && auth.capabilities.recovery === "code")
         change("reset-password", true);
+      if (
+        view === "resend-verification" &&
+        auth.capabilities.verification === "code"
+      )
+        change("verify-email", true);
     } else if (result.value.kind === "complete") {
       setMessage(
         view === "reset-password"
@@ -146,6 +205,32 @@ export function AuthPanel({
       );
       change("sign-in", true);
     }
+  }
+  async function perform(
+    work: () => Promise<AuthResult<AuthOutcome>>,
+    address: string | null,
+    provider: string | null = null,
+  ): Promise<AuthResult<AuthOutcome> | null> {
+    const currentScope = scope.current;
+    if (
+      !mounted.current ||
+      currentScope.controller !== controller ||
+      currentScope.view !== view
+    )
+      return null;
+    setMessage("");
+    setPendingProvider(provider);
+    const previousId = controller.getSnapshot().operation.id;
+    const pendingResult = work();
+    const operationId = controller.getSnapshot().operation.id;
+    const action = controller.getSnapshot().operation.action;
+    if (operationId !== previousId) ownedOperation.current = operationId;
+    const result = await pendingResult;
+    if (!mounted.current || scope.current !== currentScope) return null;
+    if (result.ok && action === "resend" && result.value.kind === "sent")
+      setCodeRevision((current) => current + 1);
+    if (address !== null) completed(result, address);
+    return result;
   }
   return (
     <section
@@ -172,7 +257,14 @@ export function AuthPanel({
             </AuthFeedback>
           )}
           {auth.state.operation.error && (
-            <AuthFeedback tone="error" focus>
+            <AuthFeedback
+              tone="error"
+              focus={
+                ownedOperation.current > 0 &&
+                ownedOperation.current === auth.state.operation.id
+              }
+              focusKey={auth.state.operation.id}
+            >
               {messages.errors[auth.state.operation.error.code]}
             </AuthFeedback>
           )}
@@ -204,11 +296,17 @@ export function AuthPanel({
                       className="mra-button mra-secondary"
                       disabled={disabled || busy}
                       pending={
-                        pending && auth.state.operation.action === "provider"
+                        pending &&
+                        auth.state.operation.action === "provider" &&
+                        pendingProvider === provider.id
                       }
                       loadingIcon={slots.loadingIcon}
                       onClick={() => {
-                        void auth.signInWithProvider(provider.id);
+                        void perform(
+                          () => auth.signInWithProvider(provider.id),
+                          null,
+                          provider.id,
+                        );
                       }}
                     >
                       {slots.providerIcon?.(provider.id)}
@@ -226,17 +324,21 @@ export function AuthPanel({
                 )}
               {(view !== "sign-in" || auth.methods.password) && (
                 <PanelForm
-                  key={view}
+                  key={`${view}-${scope.current.version}`}
                   view={view}
                   messages={messages}
                   slots={slots}
                   initialEmail={email}
                   onEmailChange={setEmail}
                   disabled={disabled || busy}
-                  pending={pending}
+                  pending={
+                    pending && auth.state.operation.action !== "provider"
+                  }
+                  settling={auth.state.operation.phase === "settling"}
+                  codeRevision={codeRevision}
                   seconds={seconds}
                   resetToken={resetToken}
-                  onComplete={completed}
+                  perform={perform}
                 />
               )}
               {view === "verify-email" &&
@@ -247,9 +349,7 @@ export function AuthPanel({
                       disabled || busy || seconds > 0 || !isEmail(email)
                     }
                     onClick={() => {
-                      void auth
-                        .resendVerification(email)
-                        .then((result) => completed(result, email));
+                      void perform(() => auth.resendVerification(email), email);
                     }}
                   >
                     {seconds > 0
@@ -274,6 +374,21 @@ export function AuthPanel({
               </button>
             </div>
           )}
+          {auth.state.operation.phase === "settling" && (
+            <div className="mra-stack">
+              <p className="mra-hint">{messages.settling}</p>
+              <button
+                type="button"
+                className="mra-link"
+                disabled={auth.state.operation.action === "sign-out"}
+                onClick={() => {
+                  void perform(() => auth.signOut(), null);
+                }}
+              >
+                {messages.signOut}
+              </button>
+            </div>
+          )}
           <nav className="mra-links" aria-label={messages.other}>
             {view === "sign-in" ? (
               <>
@@ -281,7 +396,7 @@ export function AuthPanel({
                   <button
                     type="button"
                     className="mra-link"
-                    disabled={busy}
+                    disabled={disabled || busy}
                     onClick={() => change("sign-up")}
                   >
                     {messages.signUp}
@@ -291,7 +406,7 @@ export function AuthPanel({
                   <button
                     type="button"
                     className="mra-link"
-                    disabled={busy}
+                    disabled={disabled || busy}
                     onClick={() => change("forgot-password")}
                   >
                     {messages.forgot}
@@ -301,7 +416,7 @@ export function AuthPanel({
                   <button
                     type="button"
                     className="mra-link"
-                    disabled={busy}
+                    disabled={disabled || busy}
                     onClick={() => change("resend-verification")}
                   >
                     {messages.resend}
@@ -312,7 +427,7 @@ export function AuthPanel({
               <button
                 type="button"
                 className="mra-link"
-                disabled={busy}
+                disabled={disabled || busy}
                 onClick={() => change("sign-in")}
               >
                 {messages.back}
@@ -333,9 +448,11 @@ function PanelForm({
   onEmailChange,
   disabled,
   pending,
+  settling,
+  codeRevision,
   seconds,
   resetToken,
-  onComplete,
+  perform,
 }: {
   view: AuthView;
   messages: AuthMessages;
@@ -344,9 +461,14 @@ function PanelForm({
   onEmailChange: (email: string) => void;
   disabled: boolean;
   pending: boolean;
+  settling: boolean;
+  codeRevision: number;
   seconds: number;
   resetToken: string;
-  onComplete: (result: AuthResult<AuthOutcome>, email: string) => void;
+  perform: (
+    work: () => Promise<AuthResult<AuthOutcome>>,
+    email: string,
+  ) => Promise<AuthResult<AuthOutcome> | null>;
 }) {
   const auth = useAuth();
   const policyId = useId();
@@ -354,9 +476,23 @@ function PanelForm({
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
   const [name, setName] = useState("");
-  const [code, setCode] = useState("");
+  const [codeEntry, setCodeEntry] = useState({
+    revision: codeRevision,
+    value: "",
+  });
+  const code = codeEntry.revision === codeRevision ? codeEntry.value : "";
+  function setCode(value: string) {
+    setCodeEntry({ revision: codeRevision, value });
+  }
   const [submitted, setSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const mounted = useRef(false);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const newPassword = view === "sign-up" || view === "reset-password";
   const hasPassword = view === "sign-in" || newPassword;
   const codeFlow =
@@ -402,26 +538,28 @@ function PanelForm({
       });
       return;
     }
-    let result: AuthResult<AuthOutcome>;
-    if (view === "sign-in") result = await auth.signIn({ email, password });
+    let work: () => Promise<AuthResult<AuthOutcome>>;
+    if (view === "sign-in") work = () => auth.signIn({ email, password });
     else if (view === "sign-up")
-      result = await auth.signUp({ email, password, name }, confirmation);
+      work = () => auth.signUp({ email, password, name }, confirmation);
     else if (view === "forgot-password")
-      result = await auth.requestPasswordReset(email);
+      work = () => auth.requestPasswordReset(email);
     else if (view === "reset-password")
-      result = await auth.resetPassword(
-        { email, password, code, token: resetToken },
-        confirmation,
-      );
+      work = () =>
+        auth.resetPassword(
+          { email, password, code, token: resetToken },
+          confirmation,
+        );
     else if (view === "verify-email" && !linkVerification)
-      result = await auth.verifyEmail({ email, code });
-    else result = await auth.resendVerification(email);
+      work = () => auth.verifyEmail({ email, code });
+    else work = () => auth.resendVerification(email);
+    const result = await perform(work, normalizeEmail(email));
+    if (!mounted.current || result === null) return;
     if (result.ok) {
       setPassword("");
       setConfirmation("");
       setCode("");
     }
-    onComplete(result, normalizeEmail(email));
   }
   const labels: Record<AuthView, string> = {
     "sign-in": messages.signIn,
@@ -575,7 +713,9 @@ function PanelForm({
         loadingIcon={slots.loadingIcon}
       >
         {pending
-          ? messages.waiting
+          ? settling
+            ? messages.settling
+            : messages.waiting
           : mailAction && seconds > 0
             ? formatMessage(messages.cooldown, { seconds })
             : labels[view]}
