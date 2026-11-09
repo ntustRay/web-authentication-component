@@ -12,22 +12,22 @@ flowchart TD
   n8["errors.ts"]
   n9["index.ts"]
   n10["password.ts"]
-  n20["types.ts"]
+  n21["types.ts"]
   n5 --> n8
-  n5 --> n20
-  n6 --> n20
+  n5 --> n21
+  n6 --> n21
   n7 --> n5
   n7 --> n6
   n7 --> n8
   n7 --> n10
-  n7 --> n20
-  n8 --> n20
+  n7 --> n21
+  n8 --> n21
   n9 --> n6
   n9 --> n7
   n9 --> n8
   n9 --> n10
-  n9 --> n20
-  n10 --> n20
+  n9 --> n21
+  n10 --> n21
 ```
 
 | Module | 跨層依賴 |
@@ -46,24 +46,31 @@ flowchart TD
 flowchart TD
   n11["react/context.tsx"]
   n12["react/index.ts"]
-  n13["react/messages.ts"]
-  n14["react/panel.tsx"]
-  n15["react/primitives.tsx"]
+  n13["react/locale.tsx"]
+  n14["react/messages.ts"]
+  n15["react/panel.tsx"]
+  n16["react/primitives.tsx"]
+  n11 --> n13
   n12 --> n11
   n12 --> n13
   n12 --> n14
   n12 --> n15
-  n14 --> n11
-  n14 --> n13
-  n14 --> n15
+  n12 --> n16
+  n13 --> n14
   n15 --> n11
   n15 --> n13
+  n15 --> n14
+  n15 --> n16
+  n16 --> n11
+  n16 --> n13
+  n16 --> n14
 ```
 
 | Module | 跨層依賴 |
 | --- | --- |
 | `src/react/context.tsx` | `src/controller.ts` |
 | `src/react/index.ts` | — |
+| `src/react/locale.tsx` | — |
 | `src/react/messages.ts` | `src/types.ts` |
 | `src/react/panel.tsx` | `src/password.ts`, `src/types.ts` |
 | `src/react/primitives.tsx` | — |
@@ -89,20 +96,20 @@ flowchart TD
 | `src/adapters/better-auth.ts` | `src/errors.ts`, `src/types.ts` |
 | `src/adapters/hosted.ts` | `src/errors.ts`, `src/types.ts` |
 | `src/adapters/neon.ts` | `src/errors.ts`, `src/types.ts` |
-| `src/adapters/shared.ts` | `src/errors.ts`, `src/types.ts` |
+| `src/adapters/shared.ts` | `src/errors.ts`, `src/password.ts`, `src/types.ts` |
 | `src/adapters/supabase.ts` | `src/errors.ts`, `src/types.ts` |
 
 ## server
 
 ```mermaid
 flowchart TD
-  n16["server/guards.ts"]
-  n17["server/index.ts"]
-  n18["server/password.ts"]
-  n19["server/recovery.ts"]
-  n17 --> n16
-  n17 --> n18
-  n17 --> n19
+  n17["server/guards.ts"]
+  n18["server/index.ts"]
+  n19["server/password.ts"]
+  n20["server/recovery.ts"]
+  n18 --> n17
+  n18 --> n19
+  n18 --> n20
 ```
 
 | Module | 跨層依賴 |
@@ -116,24 +123,25 @@ flowchart TD
 
 | Symbol | Source |
 | --- | --- |
-| `BetterAuthAdapterOptions` | [src/adapters/better-auth.ts:54](../src/adapters/better-auth.ts#L54) |
-| `BetterAuthClientPort` | [src/adapters/better-auth.ts:17](../src/adapters/better-auth.ts#L17) |
-| `createBetterAuthAdapter` | [src/adapters/better-auth.ts:67](../src/adapters/better-auth.ts#L67) |
+| `BetterAuthAdapterOptions` | [src/adapters/better-auth.ts:55](../src/adapters/better-auth.ts#L55) |
+| `BetterAuthClientPort` | [src/adapters/better-auth.ts:18](../src/adapters/better-auth.ts#L18) |
+| `createBetterAuthAdapter` | [src/adapters/better-auth.ts:68](../src/adapters/better-auth.ts#L68) |
 | `createClerkAdapter` | [src/adapters/hosted.ts:44](../src/adapters/hosted.ts#L44) |
 | `createHostedAdapter` | [src/adapters/hosted.ts:11](../src/adapters/hosted.ts#L11) |
 | `HostedAuthPort` | [src/adapters/hosted.ts:4](../src/adapters/hosted.ts#L4) |
-| `createNeonAdapter` | [src/adapters/neon.ts:22](../src/adapters/neon.ts#L22) |
-| `NeonOtpPort` | [src/adapters/neon.ts:16](../src/adapters/neon.ts#L16) |
-| `emptySession` | [src/adapters/shared.ts:58](../src/adapters/shared.ts#L58) |
-| `errorCode` | [src/adapters/shared.ts:26](../src/adapters/shared.ts#L26) |
-| `isRecord` | [src/adapters/shared.ts:16](../src/adapters/shared.ts#L16) |
-| `serviceError` | [src/adapters/shared.ts:19](../src/adapters/shared.ts#L19) |
-| `ServiceResponse` | [src/adapters/shared.ts:3](../src/adapters/shared.ts#L3) |
-| `sessionFromUser` | [src/adapters/shared.ts:31](../src/adapters/shared.ts#L31) |
-| `validateAdapterPort` | [src/adapters/shared.ts:7](../src/adapters/shared.ts#L7) |
-| `createSupabaseAdapter` | [src/adapters/supabase.ts:58](../src/adapters/supabase.ts#L58) |
-| `SupabaseAdapterOptions` | [src/adapters/supabase.ts:48](../src/adapters/supabase.ts#L48) |
-| `SupabaseAuthPort` | [src/adapters/supabase.ts:18](../src/adapters/supabase.ts#L18) |
+| `createNeonAdapter` | [src/adapters/neon.ts:23](../src/adapters/neon.ts#L23) |
+| `NeonOtpPort` | [src/adapters/neon.ts:17](../src/adapters/neon.ts#L17) |
+| `emptySession` | [src/adapters/shared.ts:65](../src/adapters/shared.ts#L65) |
+| `errorCode` | [src/adapters/shared.ts:27](../src/adapters/shared.ts#L27) |
+| `isRecord` | [src/adapters/shared.ts:17](../src/adapters/shared.ts#L17) |
+| `matchesEmail` | [src/adapters/shared.ts:32](../src/adapters/shared.ts#L32) |
+| `serviceError` | [src/adapters/shared.ts:20](../src/adapters/shared.ts#L20) |
+| `ServiceResponse` | [src/adapters/shared.ts:4](../src/adapters/shared.ts#L4) |
+| `sessionFromUser` | [src/adapters/shared.ts:38](../src/adapters/shared.ts#L38) |
+| `validateAdapterPort` | [src/adapters/shared.ts:8](../src/adapters/shared.ts#L8) |
+| `createSupabaseAdapter` | [src/adapters/supabase.ts:59](../src/adapters/supabase.ts#L59) |
+| `SupabaseAdapterOptions` | [src/adapters/supabase.ts:49](../src/adapters/supabase.ts#L49) |
+| `SupabaseAuthPort` | [src/adapters/supabase.ts:19](../src/adapters/supabase.ts#L19) |
 | `publicError` | [src/boundary.ts:30](../src/boundary.ts#L30) |
 | `publicFailure` | [src/boundary.ts:73](../src/boundary.ts#L73) |
 | `publicOutcome` | [src/boundary.ts:86](../src/boundary.ts#L86) |
@@ -144,43 +152,49 @@ flowchart TD
 | `passwordOnly` | [src/config.ts:10](../src/config.ts#L10) |
 | `safeRedirectPath` | [src/config.ts:71](../src/config.ts#L71) |
 | `validateConfig` | [src/config.ts:17](../src/config.ts#L17) |
-| `AuthController` | [src/controller.ts:744](../src/controller.ts#L744) |
+| `AuthController` | [src/controller.ts:740](../src/controller.ts#L740) |
 | `createAuthController` | [src/controller.ts:56](../src/controller.ts#L56) |
 | `AuthFailure` | [src/errors.ts:11](../src/errors.ts#L11) |
 | `capture` | [src/errors.ts:64](../src/errors.ts#L64) |
 | `failure` | [src/errors.ts:5](../src/errors.ts#L5) |
 | `normalizeError` | [src/errors.ts:21](../src/errors.ts#L21) |
 | `success` | [src/errors.ts:2](../src/errors.ts#L2) |
-| `assessPassword` | [src/password.ts:50](../src/password.ts#L50) |
+| `assessPassword` | [src/password.ts:56](../src/password.ts#L56) |
 | `defaultPasswordPolicy` | [src/password.ts:7](../src/password.ts#L7) |
-| `isEmail` | [src/password.ts:81](../src/password.ts#L81) |
-| `normalizeEmail` | [src/password.ts:78](../src/password.ts#L78) |
-| `resolvePasswordPolicy` | [src/password.ts:25](../src/password.ts#L25) |
-| `AuthProvider` | [src/react/context.tsx:12](../src/react/context.tsx#L12) |
-| `useAuth` | [src/react/context.tsx:43](../src/react/context.tsx#L43) |
-| `useAuthController` | [src/react/context.tsx:37](../src/react/context.tsx#L37) |
+| `isEmail` | [src/password.ts:89](../src/password.ts#L89) |
+| `normalizeEmail` | [src/password.ts:86](../src/password.ts#L86) |
+| `resolvePasswordPolicy` | [src/password.ts:31](../src/password.ts#L31) |
+| `AuthProvider` | [src/react/context.tsx:13](../src/react/context.tsx#L13) |
+| `useAuth` | [src/react/context.tsx:49](../src/react/context.tsx#L49) |
+| `useAuthController` | [src/react/context.tsx:43](../src/react/context.tsx#L43) |
+| `AuthLocale` | [src/react/locale.tsx:16](../src/react/locale.tsx#L16) |
+| `AuthLocaleOptions` | [src/react/locale.tsx:11](../src/react/locale.tsx#L11) |
+| `AuthLocaleProvider` | [src/react/locale.tsx:52](../src/react/locale.tsx#L52) |
+| `useAuthLocale` | [src/react/locale.tsx:48](../src/react/locale.tsx#L48) |
+| `AuthMessageOverrides` | [src/react/messages.ts:274](../src/react/messages.ts#L274) |
 | `AuthMessages` | [src/react/messages.ts:2](../src/react/messages.ts#L2) |
 | `en` | [src/react/messages.ts:118](../src/react/messages.ts#L118) |
 | `formatMessage` | [src/react/messages.ts:189](../src/react/messages.ts#L189) |
+| `ja` | [src/react/messages.ts:198](../src/react/messages.ts#L198) |
 | `zhTW` | [src/react/messages.ts:49](../src/react/messages.ts#L49) |
-| `AuthPanel` | [src/react/panel.tsx:69](../src/react/panel.tsx#L69) |
-| `AuthPanelProps` | [src/react/panel.tsx:39](../src/react/panel.tsx#L39) |
-| `AuthSlots` | [src/react/panel.tsx:30](../src/react/panel.tsx#L30) |
-| `AuthView` | [src/react/panel.tsx:23](../src/react/panel.tsx#L23) |
-| `AuthButton` | [src/react/primitives.tsx:16](../src/react/primitives.tsx#L16) |
-| `AuthFeedback` | [src/react/primitives.tsx:150](../src/react/primitives.tsx#L150) |
-| `AuthField` | [src/react/primitives.tsx:42](../src/react/primitives.tsx#L42) |
-| `AuthFieldProps` | [src/react/primitives.tsx:37](../src/react/primitives.tsx#L37) |
-| `AuthGate` | [src/react/primitives.tsx:258](../src/react/primitives.tsx#L258) |
-| `AuthStatus` | [src/react/primitives.tsx:198](../src/react/primitives.tsx#L198) |
-| `LoadingIcon` | [src/react/primitives.tsx:13](../src/react/primitives.tsx#L13) |
-| `PasswordField` | [src/react/primitives.tsx:74](../src/react/primitives.tsx#L74) |
-| `SignOutButton` | [src/react/primitives.tsx:177](../src/react/primitives.tsx#L177) |
+| `AuthPanel` | [src/react/panel.tsx:72](../src/react/panel.tsx#L72) |
+| `AuthPanelProps` | [src/react/panel.tsx:44](../src/react/panel.tsx#L44) |
+| `AuthSlots` | [src/react/panel.tsx:35](../src/react/panel.tsx#L35) |
+| `AuthView` | [src/react/panel.tsx:28](../src/react/panel.tsx#L28) |
+| `AuthButton` | [src/react/primitives.tsx:17](../src/react/primitives.tsx#L17) |
+| `AuthFeedback` | [src/react/primitives.tsx:153](../src/react/primitives.tsx#L153) |
+| `AuthField` | [src/react/primitives.tsx:43](../src/react/primitives.tsx#L43) |
+| `AuthFieldProps` | [src/react/primitives.tsx:38](../src/react/primitives.tsx#L38) |
+| `AuthGate` | [src/react/primitives.tsx:265](../src/react/primitives.tsx#L265) |
+| `AuthStatus` | [src/react/primitives.tsx:203](../src/react/primitives.tsx#L203) |
+| `LoadingIcon` | [src/react/primitives.tsx:14](../src/react/primitives.tsx#L14) |
+| `PasswordField` | [src/react/primitives.tsx:75](../src/react/primitives.tsx#L75) |
+| `SignOutButton` | [src/react/primitives.tsx:180](../src/react/primitives.tsx#L180) |
 | `assertAllowedMethod` | [src/server/guards.ts:17](../src/server/guards.ts#L17) |
 | `assertTrustedOrigin` | [src/server/guards.ts:4](../src/server/guards.ts#L4) |
-| `enforceRateLimit` | [src/server/guards.ts:40](../src/server/guards.ts#L40) |
-| `RateLimiter` | [src/server/guards.ts:32](../src/server/guards.ts#L32) |
-| `RateLimitFailure` | [src/server/guards.ts:52](../src/server/guards.ts#L52) |
+| `enforceRateLimit` | [src/server/guards.ts:53](../src/server/guards.ts#L53) |
+| `RateLimiter` | [src/server/guards.ts:45](../src/server/guards.ts#L45) |
+| `RateLimitFailure` | [src/server/guards.ts:65](../src/server/guards.ts#L65) |
 | `hashPassword` | [src/server/password.ts:37](../src/server/password.ts#L37) |
 | `ServerPasswordOptions` | [src/server/password.ts:15](../src/server/password.ts#L15) |
 | `validateNewPassword` | [src/server/password.ts:20](../src/server/password.ts#L20) |

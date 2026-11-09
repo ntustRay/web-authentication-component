@@ -194,3 +194,86 @@ export function formatMessage(
     String(values[key] ?? match),
   );
 }
+
+export const ja: AuthMessages = {
+  signIn: "ログイン",
+  signUp: "アカウントを作成",
+  signOut: "ログアウト",
+  forgot: "パスワードを忘れた場合",
+  reset: "新しいパスワードを設定",
+  verify: "メールアドレスを確認",
+  resend: "確認メールを再送",
+  email: "メールアドレス",
+  password: "パスワード",
+  confirmation: "パスワードを再入力",
+  name: "表示名（任意）",
+  code: "確認コード",
+  showPassword: "パスワードを表示",
+  hidePassword: "パスワードを隠す",
+  capsLock: "Caps Lock がオンになっています。",
+  waiting: "処理中…",
+  settling: "前のリクエストが完了するまでお待ちください。",
+  checking: "ログイン状態を確認中…",
+  signedIn: "ログイン中",
+  signedOut: "ログアウト中",
+  sent: "登録済みのメールアドレスには、再設定用のリンクまたはコードが届きます。受信トレイと迷惑メールフォルダをご確認ください。",
+  verificationSent:
+    "メールアドレスの確認が必要な場合は、確認メールが届きます。最新のメールにあるリンクまたはコードを使用してください。",
+  passwordUpdated: "パスワードを更新しました。もう一度ログインしてください。",
+  verified: "メールアドレスを確認しました。ログインしてください。",
+  redirected: "ログインページを開いています…",
+  redirectHelp:
+    "ログインページが開かなかった場合や閉じてしまった場合は、ログイン状態を再確認してください。",
+  cancelRedirect: "ログイン状態を再確認",
+  back: "ログインに戻る",
+  other: "その他のログイン方法",
+  unavailable: "ログイン状態を確認できませんでした。もう一度確認してください。",
+  retry: "再確認",
+  mismatch: "パスワードが一致しません。",
+  invalidEmail: "有効なメールアドレスを入力してください。",
+  policyTitle: "新しいパスワードの条件",
+  passwordLength: "{min} 文字以上",
+  passwordMax: "{max} 文字以下",
+  byteLimit: "UTF-8 で {bytes} バイト以下",
+  cooldown: "{seconds} 秒後に再送できます",
+  provider: "{provider} でログイン",
+  separator: "またはメールアドレスを使用",
+  notice: "お知らせ",
+  success: "完了",
+  error: "処理できませんでした",
+  errors: {
+    "invalid-input": "入力内容を確認してください。",
+    "invalid-credentials": "メールアドレスまたはパスワードが正しくありません。",
+    "verification-required":
+      "メールアドレスを確認してからログインしてください。",
+    "rate-limited":
+      "試行回数が多すぎます。しばらくしてからもう一度お試しください。",
+    unavailable:
+      "現在ログインサービスに接続できません。しばらくしてからもう一度お試しください。",
+    unsupported: "このログイン方法は利用できません。",
+    expired:
+      "コードまたはリンクの有効期限が切れています。再度リクエストしてください。",
+    "weak-password":
+      "パスワードが条件を満たしていません。下の条件をご確認ください。",
+    cancelled: "操作をキャンセルしました。もう一度お試しいただけます。",
+    timeout: "応答がタイムアウトしました。ログイン状態を確認してください。",
+    unknown: "処理できませんでした。しばらくしてからもう一度お試しください。",
+  },
+  issues: {
+    "too-short": "パスワードが短すぎます",
+    "too-long": "パスワードが長すぎます",
+    "too-many-bytes": "UTF-8 のバイト数が上限を超えています",
+    uppercase: "大文字を含めてください",
+    lowercase: "小文字を含めてください",
+    number: "数字を含めてください",
+    symbol: "記号を含めてください",
+    blocked: "よく使われるパスワードや禁止されたパスワードは使用できません",
+  },
+};
+
+export type AuthMessageOverrides = Partial<
+  Omit<AuthMessages, "errors" | "issues">
+> & {
+  errors?: Partial<AuthMessages["errors"]>;
+  issues?: Partial<AuthMessages["issues"]>;
+};

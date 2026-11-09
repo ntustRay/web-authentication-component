@@ -1,7 +1,7 @@
 {
   "name": "@ntustray/web-authentication-component",
-  "version": "0.2.0",
-  "description": "Composable authentication flows, React UI and provider adapters for MingRay's web projects.",
+  "version": "0.3.0",
+  "description": "Configurable authentication flows, multilingual React components and identity provider adapters.",
   "type": "module",
   "license": "MIT",
   "author": "MingRay Hsu",

@@ -32,7 +32,7 @@ Supabase adapter 使用 getUser() 向 Auth server 驗證當前身份，不信任
 
 ## 新密碼政策
 
-預設 15–128 Unicode code points，允許空白與 Unicode，不強迫混合字元；不 trim、truncate 或自行改變 normalization。若 backend 使用 NFC，必須在註冊與驗證兩邊一致處理，不能只改 client。
+預設 8–128 Unicode code points，允許空白與 Unicode，不強迫混合字元；不 trim、truncate 或自行改變 normalization。若 backend 使用 NFC，必須在註冊與驗證兩邊一致處理，不能只改 client。
 
 預設 blocklist 很小，只是離線 starter list，不是完整的 breached password protection。正式服務需啟用 provider 的 leaked-password protection，或在 server 的 `isCompromised` port 查本機 corpus／可信任的 breach service。Package 不會自動傳送密碼到外部服務。
 
@@ -93,3 +93,5 @@ returning user_id;
 請不要在 public issue 貼上 token、密碼、user data 或可用的 secret。使用 GitHub private vulnerability reporting（若維護者已啟用），或先透過不含漏洞細節的 issue 請求私人聯絡管道。
 
 參考：[NIST SP 800-63B-4](https://pages.nist.gov/800-63-4/sp800-63b.html)、[OWASP Authentication](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)、[OWASP Password Storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)、[OWASP Forgot Password](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)。
+
+For password-only services that follow NIST SP 800-63B-4, set the minimum to 15 in both the controller and the identity server.

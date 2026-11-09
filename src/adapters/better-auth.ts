@@ -8,6 +8,7 @@ import type {
 import {
   errorCode,
   isRecord,
+  matchesEmail,
   type ServiceResponse,
   serviceError,
   sessionFromUser,
@@ -117,12 +118,15 @@ export function createBetterAuthAdapter(
       sessionFromUser(data?.user, "better-auth", session?.expiresAt),
     );
   }
-  async function authenticated(): Promise<AuthResult<AuthOutcome>> {
+  async function authenticated(
+    email: string,
+  ): Promise<AuthResult<AuthOutcome>> {
     const result = await getSession();
     if (!result.ok) return result;
-    return result.value
+    if (!result.value) return failure("invalid-credentials");
+    return matchesEmail(result.value, email)
       ? success({ kind: "authenticated", session: result.value })
-      : failure("invalid-credentials");
+      : failure("cancelled");
   }
   return {
     id: "better-auth",
@@ -145,7 +149,10 @@ export function createBetterAuthAdapter(
     async signIn(input) {
       if (!options.password || !client.signIn.email)
         return failure("unsupported");
-      return serviceError(await client.signIn.email(input)) ?? authenticated();
+      return (
+        serviceError(await client.signIn.email(input)) ??
+        authenticated(input.email)
+      );
     },
     async signUp(input) {
       if (!options.registration || !client.signUp)
@@ -166,7 +173,7 @@ export function createBetterAuthAdapter(
       if (error) return error;
       const result = await getSession();
       if (!result.ok) return result;
-      return result.value
+      return result.value && matchesEmail(result.value, input.email)
         ? success({ kind: "authenticated", session: result.value })
         : success({ kind: "verification-required", delivery: "link" });
     },

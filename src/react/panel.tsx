@@ -10,7 +10,12 @@ import {
 import { assessPassword, isEmail, normalizeEmail } from "../password.js";
 import type { AuthOutcome, AuthResult } from "../types.js";
 import { useAuth, useAuthController } from "./context.js";
-import { type AuthMessages, en, formatMessage, zhTW } from "./messages.js";
+import {
+  type AuthLocaleOptions,
+  AuthLocaleProvider,
+  useAuthLocale,
+} from "./locale.js";
+import { type AuthMessages, formatMessage } from "./messages.js";
 import {
   AuthButton,
   AuthFeedback,
@@ -36,12 +41,10 @@ export interface AuthSlots {
     props: AuthFieldProps & { secret: boolean; messages: AuthMessages },
   ) => ReactNode;
 }
-export interface AuthPanelProps {
+export interface AuthPanelProps extends AuthLocaleOptions {
   initialView?: AuthView;
   view?: AuthView;
   onViewChange?: (view: AuthView) => void;
-  locale?: "zh-TW" | "en";
-  messages?: Partial<AuthMessages>;
   slots?: AuthSlots;
   className?: string;
   theme?: "light" | "dark" | "auto";
@@ -66,12 +69,24 @@ function useSeconds(deadline: number) {
   }, [deadline]);
   return seconds;
 }
-export function AuthPanel({
+export function AuthPanel({ locale, messages, ...props }: AuthPanelProps) {
+  return (
+    <AuthLocaleProvider locale={locale} messages={messages}>
+      <LocalizedPanel {...props} />
+    </AuthLocaleProvider>
+  );
+}
+type FlowMessage =
+  | ""
+  | "verificationSent"
+  | "sent"
+  | "passwordUpdated"
+  | "verified";
+
+function LocalizedPanel({
   initialView = "sign-in",
   view: controlled,
   onViewChange,
-  locale = "zh-TW",
-  messages: overrides,
   slots = {},
   className = "",
   theme = "auto",
@@ -79,11 +94,17 @@ export function AuthPanel({
   disabled = false,
   notice,
   resetToken = "",
-}: AuthPanelProps) {
+}: Omit<AuthPanelProps, keyof AuthLocaleOptions>) {
   const auth = useAuth();
+  const { locale, messages } = useAuthLocale();
   const controller = useAuthController();
   const titleId = useId();
-  const emptyFlow = { controller, view: initialView, email: "", message: "" };
+  const emptyFlow: {
+    controller: typeof controller;
+    view: AuthView;
+    email: string;
+    message: FlowMessage;
+  } = { controller, view: initialView, email: "", message: "" };
   const [flow, setFlow] = useState(emptyFlow);
   const activeFlow = flow.controller === controller ? flow : emptyFlow;
   const { email, message } = activeFlow;
@@ -122,7 +143,7 @@ export function AuthPanel({
   function updateFlow(patch: {
     view?: AuthView;
     email?: string;
-    message?: string;
+    message?: FlowMessage;
   }) {
     setFlow((current) => ({
       ...(current.controller === controller ? current : emptyFlow),
@@ -132,10 +153,9 @@ export function AuthPanel({
   function setEmail(value: string) {
     updateFlow({ email: value });
   }
-  function setMessage(value: string) {
+  function setMessage(value: FlowMessage) {
     updateFlow({ message: value });
   }
-  const messages = { ...(locale === "en" ? en : zhTW), ...overrides };
   function change(next: AuthView, keepMessage = false) {
     auth.clearFeedback();
     if (!keepMessage) setMessage("");
@@ -184,12 +204,10 @@ export function AuthPanel({
       return;
     }
     if (result.value.kind === "verification-required") {
-      setMessage(messages.verificationSent);
+      setMessage("verificationSent");
       change(auth.methods.verification ? "verify-email" : "sign-in", true);
     } else if (result.value.kind === "sent") {
-      setMessage(
-        view === "forgot-password" ? messages.sent : messages.verificationSent,
-      );
+      setMessage(view === "forgot-password" ? "sent" : "verificationSent");
       if (view === "forgot-password" && auth.capabilities.recovery === "code")
         change("reset-password", true);
       if (
@@ -198,11 +216,7 @@ export function AuthPanel({
       )
         change("verify-email", true);
     } else if (result.value.kind === "complete") {
-      setMessage(
-        view === "reset-password"
-          ? messages.passwordUpdated
-          : messages.verified,
-      );
+      setMessage(view === "reset-password" ? "passwordUpdated" : "verified");
       change("sign-in", true);
     }
   }
@@ -234,6 +248,7 @@ export function AuthPanel({
   }
   return (
     <section
+      lang={locale}
       className={`${unstyled ? "" : "mra-root"} ${className}`}
       data-theme={theme}
       aria-labelledby={titleId}
@@ -253,7 +268,7 @@ export function AuthPanel({
           )}
           {message && (
             <AuthFeedback tone="success" focus>
-              {message}
+              {messages[message]}
             </AuthFeedback>
           )}
           {auth.state.operation.error && (
@@ -471,6 +486,7 @@ function PanelForm({
   ) => Promise<AuthResult<AuthOutcome> | null>;
 }) {
   const auth = useAuth();
+  const { locale } = useAuthLocale();
   const policyId = useId();
   const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState("");
@@ -508,7 +524,9 @@ function PanelForm({
       : null;
   const passwordError =
     submitted && newPassword && !assessment.valid
-      ? assessment.issues.map((issue) => messages.issues[issue]).join("；")
+      ? new Intl.ListFormat(locale).format(
+          assessment.issues.map((issue) => messages.issues[issue]),
+        )
       : null;
   const confirmationError =
     submitted && newPassword && password !== confirmation

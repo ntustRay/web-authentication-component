@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- New passwords default to 8–128 Unicode code points. Applications can set a higher minimum on the client and identity server.
+- Share English, Traditional Chinese, Japanese or custom translations across forms, account status and accessible labels. Switching languages updates existing feedback.
+- Fixed email sign-in account mismatch, interrupted registration feedback, deeply encoded redirects and invalid server method keys. The shared GitHub preset now freezes each provider.
+- Added an English npm README and a Traditional Chinese guide.
+
 ## 0.2.0 — 2026-11-09
 
 2026-11-08 完成多輪 review，2026-11-09 首次正式發布 npm；latest 為 0.2.0。發布與 registry 驗證見 [PUBLISHING.md](docs/PUBLISHING.md)。

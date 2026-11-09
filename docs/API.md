@@ -110,7 +110,7 @@ Session `expiresAt` 到期時會先清除 UI，再向 server 驗證；focus／vi
 
 | 欄位                                    | 預設                                            |
 | --------------------------------------- | ----------------------------------------------- |
-| `minLength` / `maxLength`               | 15 / 128 Unicode code points                    |
+| `minLength` / `maxLength`               | 8 / 128 Unicode code points                     |
 | `maxUtf8Bytes`                          | null；byte-limited backend 可設定 72 等實際上限 |
 | `requireUppercase` / `requireLowercase` | false / false                                   |
 | `requireNumber` / `requireSymbol`       | false / false                                   |
@@ -150,27 +150,27 @@ Adapter 必須處理真實協定，不可只回傳成功。透過 `success(value
 
 ## React
 
-| Component / hook      | 主要 props / 回傳                                                |
-| --------------------- | ---------------------------------------------------------------- |
-| `AuthProvider`        | `controller`, `children`；自動 start／unsubscribe／focus refresh |
-| `useAuth()`           | controller methods + `state`                                     |
-| `useAuthController()` | 只取 controller，不訂閱 snapshot                                 |
-| `AuthPanel`           | 下表                                                             |
-| `AuthStatus`          | `messages`, `className`, signed-out `children`                   |
-| `AuthGate`            | `children`, `fallback`, `loading`；僅 UI gate                    |
-| `AuthField`           | standard input props + `label`, `error`, `hint`                  |
-| `PasswordField`       | AuthField props + `messages`；visibility / Caps Lock             |
-| `AuthButton`          | standard button props + `pending`, `loadingIcon`                 |
-| `AuthFeedback`        | `tone`, `focus`, `focusKey`, `children`                          |
-| `SignOutButton`       | standard button props；綁定共用 signOut                          |
-| `LoadingIcon`         | `className`                                                      |
+| Component / hook      | 主要 props / 回傳                                                                      |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| `AuthProvider`        | `controller`, `children`, `locale`, `messages`；自動 start／unsubscribe／focus refresh |
+| `useAuth()`           | controller methods + `state`                                                           |
+| `useAuthController()` | 只取 controller，不訂閱 snapshot                                                       |
+| `AuthPanel`           | 下表                                                                                   |
+| `AuthStatus`          | `messages`, `className`, signed-out `children`                                         |
+| `AuthGate`            | `children`, `fallback`, `loading`；僅 UI gate                                          |
+| `AuthField`           | standard input props + `label`, `error`, `hint`                                        |
+| `PasswordField`       | AuthField props + `messages`；visibility / Caps Lock                                   |
+| `AuthButton`          | standard button props + `pending`, `loadingIcon`                                       |
+| `AuthFeedback`        | `tone`, `focus`, `focusKey`, `children`                                                |
+| `SignOutButton`       | standard button props；綁定共用 signOut                                                |
+| `LoadingIcon`         | `className`                                                                            |
 
 | AuthPanel prop           | 預設／用途                                                            |
 | ------------------------ | --------------------------------------------------------------------- |
 | `initialView`            | `sign-in`；uncontrolled 起始頁                                        |
 | `view` / `onViewChange`  | controlled view；可接 router                                          |
-| `locale`                 | `zh-TW`；另有 `en`                                                    |
-| `messages`               | shallow overrides；覆蓋 errors／issues 時提供完整 map                 |
+| `locale`                 | `zh-TW`；另有 `en`、`ja`                                              |
+| `messages`               | 部分覆寫；errors／issues 會逐項合併                                   |
 | `theme`                  | `auto`、`light`、`dark`                                               |
 | `className` / `unstyled` | 自訂 root／停用預設 root class                                        |
 | `disabled`               | 服務未設定時停用表單與 provider                                       |
@@ -192,3 +192,5 @@ View：`sign-in`、`sign-up`、`forgot-password`、`reset-password`、`verify-em
 | `--auth-radius`, `--auth-duration`                | 圓角與 transition 時間 |
 
 覆蓋方式：`.my-product-auth { --auth-accent: #222; --auth-radius: 2px; }`。預設 CSS 放在 `@layer mr-auth`；app 的未分層樣式可覆蓋它。減少動態效果偏好會停止 spinner 旋轉，但保留等待文字。
+
+AuthLocaleProvider 可在任何子樹指定語系；useAuthLocale() 提供已解析的語言與字典。未支援的語言以英文補足，省略語言會繼承上層設定。切換語言保留表單輸入。

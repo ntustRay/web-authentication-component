@@ -2,6 +2,21 @@ import { describe, expect, it } from "vitest";
 import { assessPassword, resolvePasswordPolicy } from "../src/password.js";
 
 describe("password policy", () => {
+  it("accepts 8 through 128 code points by default", () => {
+    const character = "\u{1F984}";
+    for (const length of [8, 128])
+      expect(assessPassword(character.repeat(length)).valid).toBe(true);
+    expect(assessPassword(character.repeat(7)).issues).toContain("too-short");
+    expect(assessPassword(character.repeat(129)).issues).toContain("too-long");
+    expect(assessPassword("12345678").issues).toContain("blocked");
+    expect(assessPassword("pAsSwOrD").issues).toContain("blocked");
+    expect(
+      assessPassword(
+        character.repeat(8),
+        resolvePasswordPolicy({ minLength: 15 }),
+      ).issues,
+    ).toContain("too-short");
+  });
   it("supports passphrases without arbitrary character mixtures", () =>
     expect(assessPassword("quiet ocean lantern orbit").valid).toBe(true));
   it("counts code points and supports byte-limited backends", () => {

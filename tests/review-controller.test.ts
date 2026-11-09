@@ -11,6 +11,41 @@ import type {
 import { adapter, deferred, password, session } from "./helpers.js";
 
 describe("review regressions: real SDK ordering", () => {
+  it("preserves signup verification feedback after the SDK broadcasts its new unverified session", async () => {
+    let signal = () => {};
+    let active: AuthSession | null = null;
+    const auth = createAuthController({
+      methods: passwordOnly,
+      adapter: adapter({
+        subscribe(listener) {
+          signal = listener;
+          return () => {};
+        },
+        getSession: async () => success(active),
+        signUp: async () => {
+          active = {
+            ...session,
+            user: { ...session.user, emailVerified: false },
+          };
+          signal();
+          return success({ kind: "authenticated", session: active });
+        },
+      }),
+    });
+    const stop = auth.start();
+    await auth.refresh();
+    try {
+      expect(
+        await auth.signUp(
+          { email: "ray@example.com", name: "", password },
+          password,
+        ),
+      ).toEqual(success({ kind: "verification-required", delivery: "code" }));
+      expect(auth.getSnapshot().session).toBeNull();
+    } finally {
+      stop();
+    }
+  });
   it("protects the current account after sequential failed sign-outs of different identities", async () => {
     let server = session;
     const auth = createAuthController({

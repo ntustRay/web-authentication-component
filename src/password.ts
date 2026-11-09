@@ -5,7 +5,7 @@ import type {
 } from "./types.js";
 /** Small offline starter list, NOT a complete breached-password database. Supply a server check. */
 export const defaultPasswordPolicy: Readonly<PasswordPolicy> = Object.freeze({
-  minLength: 15,
+  minLength: 8,
   maxLength: 128,
   maxUtf8Bytes: null,
   requireUppercase: false,
@@ -14,6 +14,12 @@ export const defaultPasswordPolicy: Readonly<PasswordPolicy> = Object.freeze({
   requireSymbol: false,
   blocklist: Object.freeze([
     "password",
+    "12345678",
+    "123456789",
+    "1234567890",
+    "qwertyuiop",
+    "qwerty123",
+    "letmein123",
     "password123",
     "password123456789",
     "123456789012345",
@@ -52,7 +58,12 @@ export function assessPassword(
   policy: PasswordPolicy = defaultPasswordPolicy,
 ): PasswordAssessment {
   const issues: PasswordIssue[] = [];
-  const length = [...password].length;
+  // A code point occupies at most two UTF-16 code units. Reject oversized
+  // inputs without allocating a code-point array for an entire request body.
+  const length =
+    password.length > policy.maxLength * 2
+      ? password.length
+      : Array.from(password).length;
   if (length < policy.minLength) issues.push("too-short");
   if (length > policy.maxLength) issues.push("too-long");
   if (
@@ -67,11 +78,8 @@ export function assessPassword(
   if (policy.requireNumber && !/\p{N}/u.test(password)) issues.push("number");
   if (policy.requireSymbol && !/[^\p{L}\p{N}\s]/u.test(password))
     issues.push("symbol");
-  if (
-    policy.blocklist.some(
-      (entry) => entry.toLowerCase() === password.toLowerCase(),
-    )
-  )
+  const folded = password.toLowerCase();
+  if (policy.blocklist.some((entry) => entry.toLowerCase() === folded))
     issues.push("blocked");
   return { valid: issues.length === 0, issues };
 }

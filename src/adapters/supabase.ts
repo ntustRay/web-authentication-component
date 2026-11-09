@@ -8,6 +8,7 @@ import type {
 import {
   errorCode,
   isRecord,
+  matchesEmail,
   type ServiceResponse,
   serviceError,
   sessionFromUser,
@@ -103,12 +104,15 @@ export function createSupabaseAdapter<P extends string>(
     const data = isRecord(response.data) ? response.data : null;
     return success(sessionFromUser(data?.user, "supabase"));
   }
-  async function authenticated(): Promise<AuthResult<AuthOutcome>> {
+  async function authenticated(
+    email: string,
+  ): Promise<AuthResult<AuthOutcome>> {
     const result = await getSession();
     if (!result.ok) return result;
-    return result.value
+    if (!result.value) return failure("invalid-credentials");
+    return matchesEmail(result.value, email)
       ? success({ kind: "authenticated", session: result.value })
-      : failure("invalid-credentials");
+      : failure("cancelled");
   }
   return {
     id: "supabase",
@@ -132,7 +136,7 @@ export function createSupabaseAdapter<P extends string>(
       if (!options.password || !auth.signInWithPassword)
         return failure("unsupported");
       const response = await auth.signInWithPassword(input);
-      return serviceError(response) ?? authenticated();
+      return serviceError(response) ?? authenticated(input.email);
     },
     async signUp(input) {
       if (!options.registration || !auth.signUp) return failure("unsupported");
@@ -149,7 +153,7 @@ export function createSupabaseAdapter<P extends string>(
       const error = serviceError(response);
       if (error) return error;
       return isRecord(response.data) && response.data.session
-        ? authenticated()
+        ? authenticated(input.email)
         : success({ kind: "verification-required", delivery: "link" });
     },
     async signInWithProvider(provider) {

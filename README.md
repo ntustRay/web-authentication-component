@@ -1,52 +1,22 @@
 # Web Authentication Component
 
-把各專案的登入 UI、狀態流程與 provider 接法集中到同一個 package。既有會員資料庫、user ID 與身分服務保留在原專案。
+English · [繁體中文](https://github.com/ntustRay/web-authentication-component/blob/main/docs/README.zh-TW.md)
 
-Package：`@ntustray/web-authentication-component`，版本 `0.2.0`。發布設定見 [PUBLISHING.md](docs/PUBLISHING.md)。
+Add GitHub sign-in, email and password registration, or both to a React app. The panel, navigation bar and custom controls share one session. Your application keeps its identity provider, database, user IDs and authorization rules.
 
-0.2.0 已正式發布到 [npm](https://www.npmjs.com/package/@ntustray/web-authentication-component)，並驗證公開 registry 安裝、core／adapters／server 與 React 18／19 SSR。
-
-| 登入組合                     | 設定                                   |
-| ---------------------------- | -------------------------------------- |
-| 只能 GitHub                  | `methods: githubOnly`                  |
-| 只能 Email / password        | `methods: passwordOnly`                |
-| Email + GitHub / Google      | `passwordOnly` 加上 `providers`        |
-| 自訂 OAuth / SSO / hosted UI | `AuthAdapter` 或 `createHostedAdapter` |
-
-支援 Supabase、Better Auth、Neon Managed Auth，另提供 Clerk hosted/modal bridge。React UI 可整組使用、替換欄位與 icon，或只使用 headless controller。
-
-## 本機試用
-
-1. `bun install --frozen-lockfile`
-2. `bun run dev`
-3. 開啟 terminal 顯示的 localhost URL。
-
-Playground 可切換登入方式、Light / Dark、密碼字元規則、等待時間及成功／錯誤／429／斷線。它只使用記憶體模擬資料，不會寄信或建立真實會員。驗證碼是 `123456`。
-
-![Auth playground 桌機預覽](docs/images/playground-desktop.png)
-
-[手機深色註冊畫面](docs/images/playground-mobile.png)
-
-## 安裝
-
-安裝指定版本：
+## Install
 
 ```sh
-bun add @ntustray/web-authentication-component@0.2.0
+npm install @ntustray/web-authentication-component
+# or
+bun add @ntustray/web-authentication-component
 ```
 
-本機開發時可在此 repo 建立 tarball，再於另一個專案安裝：
+ES modules, Node.js 22 or later. The UI supports React 18.3.1 and React 19. The core controller and server helpers can be used without React. Import the stylesheet once if you want the included theme.
 
-```sh
-bun run build
-npm pack --ignore-scripts
-# 在使用端執行；請換成實際 tarball 路徑
-bun add ./ntustray-web-authentication-component-0.2.0.tgz
-```
+## Quick start with GitHub and Better Auth
 
-ESM package；Node >=22；React UI 支援 React 18.3 / 19。只使用 core 或 server helpers 不需要安裝 React。CSS 需明確 import，不會自動污染全站樣式。
-
-## GitHub-only：Better Auth
+Configure GitHub as a provider in your Better Auth server and disable email/password there for GitHub-only access. The example uses the client from your application's `./auth-client` module.
 
 ```tsx
 "use client";
@@ -77,8 +47,9 @@ export function Login() {
       }),
     }),
   );
+
   return (
-    <AuthProvider controller={controller}>
+    <AuthProvider controller={controller} locale="en">
       <AuthStatus />
       <AuthPanel />
     </AuthProvider>
@@ -86,9 +57,20 @@ export function Login() {
 }
 ```
 
-`AuthProvider` 應放在共用 client layout，讓 navbar 與登入頁讀到同一個 controller。Next.js Server Component 不可把 controller 物件跨 RSC boundary 傳給 client；在 client boundary 建立它。GitHub-only 的 server 必須同時關閉 Email/password，並只設定 GitHub provider。
+To share sign-in state across routes, put the provider in a shared client layout. Create the controller inside the client boundary when using React Server Components.
 
-## Email / password：Supabase
+## Choose sign-in methods
+
+| What the user can do                                        | Controller configuration                                                                     |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Sign in with GitHub                                         | `methods: githubOnly`                                                                        |
+| Register, verify an email, sign in and recover a password   | `methods: passwordOnly`                                                                      |
+| Sign in with a password or a social provider                | `methods: { ...passwordOnly, providers: [{ id: "github", label: "GitHub" }] }`               |
+| Open a hosted sign-in modal or use another identity service | Use `createHostedAdapter` or implement `AuthAdapter` with the methods your service supports. |
+
+Enable the same methods in the identity service and adapter. The controller rejects configurations the adapter cannot implement. Adapters are included for Supabase, Better Auth, Neon Managed Auth and hosted interfaces. [Integration examples](https://github.com/ntustRay/web-authentication-component/tree/main/examples/projects)
+
+For email/password with Supabase, pass your browser client's `auth` object and callback URLs from trusted app configuration.
 
 ```ts
 import {
@@ -97,15 +79,14 @@ import {
 } from "@ntustray/web-authentication-component";
 import { createSupabaseAdapter } from "@ntustray/web-authentication-component/adapters/supabase";
 
-// supabase 為既有 @supabase/ssr browser client；siteOrigin 為可信任的 app 設定。
 const controller = createAuthController({
   methods: passwordOnly,
   adapter: createSupabaseAdapter(supabase.auth, {
     providers: [],
     password: true,
     registration: true,
-    recovery: true,
     verification: true,
+    recovery: true,
     callbackUrl: new URL("/auth/callback", siteOrigin).href,
     recoveryUrl: new URL(
       "/auth/callback?next=/auth/update-password",
@@ -115,69 +96,47 @@ const controller = createAuthController({
 });
 ```
 
-保留原專案的 PKCE callback、cookie proxy／middleware 與 server `getUser()` 驗證。`AuthPanel initialView="reset-password"` 應由已驗證的 recovery callback 導向；不可單憑 query parameter 當作驗證成功。
+Keep your PKCE callback and server session checks. Open `<AuthPanel initialView="reset-password" />` after the server validates the recovery callback.
 
-## 混合／自訂登入
+## Languages
 
-```ts
-const methods = {
-  ...passwordOnly,
-  providers: [
-    { id: "github", label: "GitHub" },
-    { id: "google", label: "Google" },
-  ],
-};
-// adapter.capabilities.providers 與真實 backend 必須也啟用這些 provider。
+Set `locale` on `AuthProvider` to translate the whole sign-in flow, including status text, field validation, pending states and accessibility labels. The built-in catalogs are English (`en`), Traditional Chinese (`zh-TW`) and Japanese (`ja`). Omitting the locale preserves the Traditional Chinese default. Set it from your app's current language to switch at runtime.
+
+```tsx
+<AuthProvider
+  controller={controller}
+  locale="en"
+  messages={{ errors: { unavailable: "Sign-in is temporarily unavailable." } }}
+>
+  <AuthStatus />
+  <AuthPanel />
+</AuthProvider>;
 ```
 
-自訂 provider ID 不限制品牌；由 adapter 實作 `signInWithProvider(id)`。不支援的 method 會在 config 建立時被拒絕，controller 也會拒絕直接呼叫停用的操作。
+For another language, pass its language tag and your translations in `messages`. Missing entries for an unsupported language fall back to English. Keep placeholders such as `{min}`, `{seconds}` and `{provider}` in translated strings. Use `AuthLocaleProvider` to scope language settings to part of a page and `useAuthLocale()` to read them in your own components. The host controls provider names, custom notices and emails sent by the identity service.
 
-## 密碼與防呆
+## Passwords and sessions
 
-- 新密碼預設 15–128 個 Unicode code points，允許空白與 password manager 貼上。
-- 可設定大小寫、數字、符號、UTF-8 byte limit、blocklist；預設不強迫字元混合。
-- 註冊／重設檢查確認密碼；舊會員登入不套用新的複雜度要求，也不 trim 密碼。
-- loading icon、重複送出防護、錯誤 focus、Caps Lock、寄信倒數、逾時與 OAuth popup 取消後恢復。
-- 登入成功同步共用會員狀態；登出與帳號變更會使舊的非同步結果失效。
-- 逾時後保留 SDK 操作鎖；登出會排隊完成。登出失敗後，背景 refresh 不會重新顯示舊帳號。
-- controller／view／reset token 改變時清除表單秘密資料；重寄成功清空舊 OTP。
-- snapshot 深層唯讀；custom adapter 的額外欄位與 raw errors 會在邊界清除。事件不保存密碼、OTP、reset token 或 access token。
+New passwords accept **8–128 Unicode code points** by default. Spaces, pasted passwords and password managers are supported. Registration and reset check the confirmation field. Existing sign-ins retain the password exactly as entered. To require a different minimum, pass `passwordPolicy: { minLength: 15 }` to `createAuthController`. Optional rules cover uppercase, lowercase, numbers, symbols, a blocklist and a UTF-8 byte limit.
 
-前端檢查無法取代 server。Server helpers 提供 password policy、scrypt、origin／method guards、分散式 rate limiter port、單次使用 recovery token store port；它們必須被 app 的 server handler 實際接上。完整責任界線見 [SECURITY.md](SECURITY.md)。
+Enforce the same policy at the identity service or in your own server handler. The `/server` entry offers scrypt password hashing, origin and method checks, and interfaces for rate limiting and single-use recovery tokens. The host supplies the backing stores and verifies session ownership on every protected request. [Security responsibilities](https://github.com/ntustRay/web-authentication-component/blob/main/SECURITY.md)
 
-## 外觀與介面
+## Customize the interface
+
+Use the included light, dark or automatic theme, override CSS variables, or render your own controls with `useAuth()`. The panel includes loading indicators, feedback, focus management, resend cooldowns and reduced-motion support. Replace the header, footer, field renderer, provider icon or loading icon through `slots`.
 
 ```tsx
 <AuthPanel
   theme="dark"
-  locale="zh-TW"
-  className="my-product-auth"
-  slots={{
-    header: <Logo />,
-    footer: <Terms />,
-    providerIcon: renderProviderIcon,
-  }}
+  className="product-auth"
+  slots={{ header: <Logo />, footer: <Terms /> }}
 />;
 ```
 
-可用 CSS variables 覆蓋顏色、圓角、動畫時間；`slots.field` 替換輸入欄位；不載入 CSS 並使用 `unstyled` 可自行排版。`useAuth()`、`AuthField`、`PasswordField`、`AuthButton`、`AuthFeedback`、`AuthStatus`、`AuthGate`、`SignOutButton` 可分開組裝。支援 `prefers-reduced-motion`。完整 props 見 [API.md](docs/API.md)。
+## Playground and development
 
-## 文件與驗證
+From a repository checkout, run `bun install --frozen-lockfile` and `bun run dev`. The playground uses in-memory accounts and the demo verification code `123456`. You can simulate delays, rate limits and failed requests. [Desktop preview](https://github.com/ntustRay/web-authentication-component/blob/main/docs/images/playground-desktop.png) · [Mobile preview](https://github.com/ntustRay/web-authentication-component/blob/main/docs/images/playground-mobile.png)
 
-- [專案接法與遷移狀態](docs/MIGRATION.md)
-- [多輪 review 與回歸修正](docs/REVIEW.md)
-- [Public API](docs/API.md)
-- [架構與 session 流程](docs/ARCHITECTURE.md)
-- [Code graph](docs/CODE_GRAPH.md)／[JSON graph](docs/code-graph.json)
-- [AI 修改指南](AGENTS.md)／[llms.txt](llms.txt)
-- [npm 發布](docs/PUBLISHING.md)
+After changing source files, run `bun run format`, `bun run graph`, then `bun run verify`. Verification covers TypeScript, behavior tests, SDK interfaces, entry-point imports and the production playground build. Live OAuth, email delivery and app-specific authorization require testing against the host service.
 
-```sh
-bun run format
-bun run graph
-bun run verify
-```
-
-測試涵蓋 controller 競態、真實 SDK type compatibility、React 表單互動、server hash／recovery／origin boundaries。線上 OAuth、SMTP 寄送與各專案資料授權需在各自的 staging 驗證；package 測試不會改動線上帳號。
-
-安全規則參考 [NIST SP 800-63B-4](https://pages.nist.gov/800-63-4/sp800-63b.html) 與 [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)。
+[Public API](https://github.com/ntustRay/web-authentication-component/blob/main/docs/API.md) · [Architecture](https://github.com/ntustRay/web-authentication-component/blob/main/docs/ARCHITECTURE.md) · [Code graph](https://github.com/ntustRay/web-authentication-component/blob/main/docs/CODE_GRAPH.md) · [Machine-readable graph](https://github.com/ntustRay/web-authentication-component/blob/main/docs/code-graph.json) · [Agent editing guide](https://github.com/ntustRay/web-authentication-component/blob/main/AGENTS.md) · [Project migration notes](https://github.com/ntustRay/web-authentication-component/blob/main/docs/MIGRATION.md)

@@ -5,7 +5,7 @@ export const githubOnly: AuthMethods = Object.freeze({
   registration: false,
   recovery: false,
   verification: false,
-  providers: Object.freeze([{ id: "github", label: "GitHub" }]),
+  providers: Object.freeze([Object.freeze({ id: "github", label: "GitHub" })]),
 });
 export const passwordOnly: AuthMethods = Object.freeze({
   password: true,
@@ -73,12 +73,14 @@ export function safeRedirectPath(
   fallback = "/",
 ): string {
   function safe(candidate: string): boolean {
+    if (!candidate.startsWith("/")) return false;
     let decoded = candidate;
     try {
       for (let i = 0; i < 3; i++) {
         const next = decodeURIComponent(decoded);
         if (next === decoded) break;
         decoded = next;
+        if (i === 2 && /%[\da-f]{2}/i.test(decoded)) return false;
       }
     } catch {
       return false;

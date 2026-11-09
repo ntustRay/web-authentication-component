@@ -11,170 +11,170 @@
       "exported": true
     },
     {
-      "id": "src/adapters/better-auth.ts#authenticated:120",
+      "id": "src/adapters/better-auth.ts#authenticated:121",
       "name": "authenticated",
       "file": "src/adapters/better-auth.ts",
-      "line": 120,
+      "line": 121,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#BetterAuthAdapterOptions:54",
+      "id": "src/adapters/better-auth.ts#BetterAuthAdapterOptions:55",
       "name": "BetterAuthAdapterOptions",
       "file": "src/adapters/better-auth.ts",
-      "line": 54,
+      "line": 55,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/adapters/better-auth.ts#BetterAuthClientPort:17",
+      "id": "src/adapters/better-auth.ts#BetterAuthClientPort:18",
       "name": "BetterAuthClientPort",
       "file": "src/adapters/better-auth.ts",
-      "line": 17,
+      "line": 18,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/adapters/better-auth.ts#createBetterAuthAdapter:67",
+      "id": "src/adapters/better-auth.ts#createBetterAuthAdapter:68",
       "name": "createBetterAuthAdapter",
       "file": "src/adapters/better-auth.ts",
-      "line": 67,
+      "line": 68,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/better-auth.ts#email:23",
+      "id": "src/adapters/better-auth.ts#email:24",
       "name": "email",
       "file": "src/adapters/better-auth.ts",
-      "line": 23,
+      "line": 24,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#email:34",
+      "id": "src/adapters/better-auth.ts#email:35",
       "name": "email",
       "file": "src/adapters/better-auth.ts",
-      "line": 34,
+      "line": 35,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#getSession:107",
+      "id": "src/adapters/better-auth.ts#getSession:108",
       "name": "getSession",
       "file": "src/adapters/better-auth.ts",
-      "line": 107,
+      "line": 108,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#getSession:18",
+      "id": "src/adapters/better-auth.ts#getSession:19",
       "name": "getSession",
       "file": "src/adapters/better-auth.ts",
-      "line": 18,
+      "line": 19,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#requestPasswordReset:186",
+      "id": "src/adapters/better-auth.ts#requestPasswordReset:193",
       "name": "requestPasswordReset",
       "file": "src/adapters/better-auth.ts",
-      "line": 186,
+      "line": 193,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#requestPasswordReset:41",
+      "id": "src/adapters/better-auth.ts#requestPasswordReset:42",
       "name": "requestPasswordReset",
       "file": "src/adapters/better-auth.ts",
-      "line": 41,
+      "line": 42,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#resendVerification:214",
+      "id": "src/adapters/better-auth.ts#resendVerification:221",
       "name": "resendVerification",
       "file": "src/adapters/better-auth.ts",
-      "line": 214,
+      "line": 221,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#resetPassword:199",
+      "id": "src/adapters/better-auth.ts#resetPassword:206",
       "name": "resetPassword",
       "file": "src/adapters/better-auth.ts",
-      "line": 199,
+      "line": 206,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#resetPassword:45",
+      "id": "src/adapters/better-auth.ts#resetPassword:46",
       "name": "resetPassword",
       "file": "src/adapters/better-auth.ts",
-      "line": 45,
+      "line": 46,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#sendVerificationEmail:49",
+      "id": "src/adapters/better-auth.ts#sendVerificationEmail:50",
       "name": "sendVerificationEmail",
       "file": "src/adapters/better-auth.ts",
-      "line": 49,
+      "line": 50,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#signIn:145",
+      "id": "src/adapters/better-auth.ts#signIn:149",
       "name": "signIn",
       "file": "src/adapters/better-auth.ts",
-      "line": 145,
+      "line": 149,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#signInWithProvider:173",
+      "id": "src/adapters/better-auth.ts#signInWithProvider:180",
       "name": "signInWithProvider",
       "file": "src/adapters/better-auth.ts",
-      "line": 173,
+      "line": 180,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#signOut:140",
+      "id": "src/adapters/better-auth.ts#signOut:144",
       "name": "signOut",
       "file": "src/adapters/better-auth.ts",
-      "line": 140,
+      "line": 144,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#signOut:21",
+      "id": "src/adapters/better-auth.ts#signOut:22",
       "name": "signOut",
       "file": "src/adapters/better-auth.ts",
-      "line": 21,
+      "line": 22,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#signUp:150",
+      "id": "src/adapters/better-auth.ts#signUp:157",
       "name": "signUp",
       "file": "src/adapters/better-auth.ts",
-      "line": 150,
+      "line": 157,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#social:27",
+      "id": "src/adapters/better-auth.ts#social:28",
       "name": "social",
       "file": "src/adapters/better-auth.ts",
-      "line": 27,
+      "line": 28,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/better-auth.ts#subscribe:137",
+      "id": "src/adapters/better-auth.ts#subscribe:141",
       "name": "subscribe",
       "file": "src/adapters/better-auth.ts",
-      "line": 137,
+      "line": 141,
       "kind": "function",
       "exported": false
     },
@@ -267,66 +267,66 @@
       "exported": true
     },
     {
-      "id": "src/adapters/neon.ts#$fetch:17",
+      "id": "src/adapters/neon.ts#$fetch:18",
       "name": "$fetch",
       "file": "src/adapters/neon.ts",
-      "line": 17,
+      "line": 18,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/neon.ts#createNeonAdapter:22",
+      "id": "src/adapters/neon.ts#createNeonAdapter:23",
       "name": "createNeonAdapter",
       "file": "src/adapters/neon.ts",
-      "line": 22,
+      "line": 23,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/neon.ts#NeonOtpPort:16",
+      "id": "src/adapters/neon.ts#NeonOtpPort:17",
       "name": "NeonOtpPort",
       "file": "src/adapters/neon.ts",
-      "line": 16,
+      "line": 17,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/adapters/neon.ts#requestPasswordReset:55",
+      "id": "src/adapters/neon.ts#requestPasswordReset:56",
       "name": "requestPasswordReset",
       "file": "src/adapters/neon.ts",
-      "line": 55,
+      "line": 56,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/neon.ts#resendVerification:77",
+      "id": "src/adapters/neon.ts#resendVerification:78",
       "name": "resendVerification",
       "file": "src/adapters/neon.ts",
-      "line": 77,
+      "line": 78,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/neon.ts#resetPassword:67",
+      "id": "src/adapters/neon.ts#resetPassword:68",
       "name": "resetPassword",
       "file": "src/adapters/neon.ts",
-      "line": 67,
+      "line": 68,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/neon.ts#signUp:48",
+      "id": "src/adapters/neon.ts#signUp:49",
       "name": "signUp",
       "file": "src/adapters/neon.ts",
-      "line": 48,
+      "line": 49,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/neon.ts#verifyEmail:89",
+      "id": "src/adapters/neon.ts#verifyEmail:90",
       "name": "verifyEmail",
       "file": "src/adapters/neon.ts",
-      "line": 89,
+      "line": 90,
       "kind": "function",
       "exported": false
     },
@@ -339,58 +339,66 @@
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#emptySession:58",
+      "id": "src/adapters/shared.ts#emptySession:65",
       "name": "emptySession",
       "file": "src/adapters/shared.ts",
-      "line": 58,
+      "line": 65,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#errorCode:26",
+      "id": "src/adapters/shared.ts#errorCode:27",
       "name": "errorCode",
       "file": "src/adapters/shared.ts",
-      "line": 26,
+      "line": 27,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#isRecord:16",
+      "id": "src/adapters/shared.ts#isRecord:17",
       "name": "isRecord",
       "file": "src/adapters/shared.ts",
-      "line": 16,
+      "line": 17,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#serviceError:19",
+      "id": "src/adapters/shared.ts#matchesEmail:32",
+      "name": "matchesEmail",
+      "file": "src/adapters/shared.ts",
+      "line": 32,
+      "kind": "function",
+      "exported": true
+    },
+    {
+      "id": "src/adapters/shared.ts#serviceError:20",
       "name": "serviceError",
       "file": "src/adapters/shared.ts",
-      "line": 19,
+      "line": 20,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#ServiceResponse:3",
+      "id": "src/adapters/shared.ts#ServiceResponse:4",
       "name": "ServiceResponse",
       "file": "src/adapters/shared.ts",
-      "line": 3,
+      "line": 4,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#sessionFromUser:31",
+      "id": "src/adapters/shared.ts#sessionFromUser:38",
       "name": "sessionFromUser",
       "file": "src/adapters/shared.ts",
-      "line": 31,
+      "line": 38,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/shared.ts#validateAdapterPort:7",
+      "id": "src/adapters/shared.ts#validateAdapterPort:8",
       "name": "validateAdapterPort",
       "file": "src/adapters/shared.ts",
-      "line": 7,
+      "line": 8,
       "kind": "function",
       "exported": true
     },
@@ -403,186 +411,186 @@
       "exported": true
     },
     {
-      "id": "src/adapters/supabase.ts#authenticated:106",
+      "id": "src/adapters/supabase.ts#authenticated:107",
       "name": "authenticated",
       "file": "src/adapters/supabase.ts",
-      "line": 106,
+      "line": 107,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/supabase.ts#createSupabaseAdapter:58",
+      "id": "src/adapters/supabase.ts#createSupabaseAdapter:59",
       "name": "createSupabaseAdapter",
       "file": "src/adapters/supabase.ts",
-      "line": 58,
+      "line": 59,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/adapters/supabase.ts#getSession:88",
+      "id": "src/adapters/supabase.ts#getSession:89",
       "name": "getSession",
       "file": "src/adapters/supabase.ts",
-      "line": 88,
+      "line": 89,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/supabase.ts#getUser:19",
+      "id": "src/adapters/supabase.ts#getUser:20",
       "name": "getUser",
-      "file": "src/adapters/supabase.ts",
-      "line": 19,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#onAuthStateChange:21",
-      "name": "onAuthStateChange",
-      "file": "src/adapters/supabase.ts",
-      "line": 21,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#requestPasswordReset:168",
-      "name": "requestPasswordReset",
-      "file": "src/adapters/supabase.ts",
-      "line": 168,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#resend:42",
-      "name": "resend",
-      "file": "src/adapters/supabase.ts",
-      "line": 42,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#resendVerification:192",
-      "name": "resendVerification",
-      "file": "src/adapters/supabase.ts",
-      "line": 192,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#resetPassword:180",
-      "name": "resetPassword",
-      "file": "src/adapters/supabase.ts",
-      "line": 180,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#resetPasswordForEmail:37",
-      "name": "resetPasswordForEmail",
-      "file": "src/adapters/supabase.ts",
-      "line": 37,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signIn:131",
-      "name": "signIn",
-      "file": "src/adapters/supabase.ts",
-      "line": 131,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signInWithOAuth:33",
-      "name": "signInWithOAuth",
-      "file": "src/adapters/supabase.ts",
-      "line": 33,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signInWithPassword:24",
-      "name": "signInWithPassword",
-      "file": "src/adapters/supabase.ts",
-      "line": 24,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signInWithProvider:155",
-      "name": "signInWithProvider",
-      "file": "src/adapters/supabase.ts",
-      "line": 155,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signOut:127",
-      "name": "signOut",
-      "file": "src/adapters/supabase.ts",
-      "line": 127,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signOut:20",
-      "name": "signOut",
       "file": "src/adapters/supabase.ts",
       "line": 20,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/supabase.ts#signUp:137",
-      "name": "signUp",
-      "file": "src/adapters/supabase.ts",
-      "line": 137,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#signUp:28",
-      "name": "signUp",
-      "file": "src/adapters/supabase.ts",
-      "line": 28,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#subscribe:123",
-      "name": "subscribe",
-      "file": "src/adapters/supabase.ts",
-      "line": 123,
-      "kind": "function",
-      "exported": false
-    },
-    {
-      "id": "src/adapters/supabase.ts#SupabaseAdapterOptions:48",
-      "name": "SupabaseAdapterOptions",
-      "file": "src/adapters/supabase.ts",
-      "line": 48,
-      "kind": "interface",
-      "exported": true
-    },
-    {
-      "id": "src/adapters/supabase.ts#SupabaseAuthPort:18",
-      "name": "SupabaseAuthPort",
-      "file": "src/adapters/supabase.ts",
-      "line": 18,
-      "kind": "interface",
-      "exported": true
-    },
-    {
-      "id": "src/adapters/supabase.ts#unsubscribe:22",
-      "name": "unsubscribe",
+      "id": "src/adapters/supabase.ts#onAuthStateChange:22",
+      "name": "onAuthStateChange",
       "file": "src/adapters/supabase.ts",
       "line": 22,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/adapters/supabase.ts#updateUser:41",
+      "id": "src/adapters/supabase.ts#requestPasswordReset:172",
+      "name": "requestPasswordReset",
+      "file": "src/adapters/supabase.ts",
+      "line": 172,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#resend:43",
+      "name": "resend",
+      "file": "src/adapters/supabase.ts",
+      "line": 43,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#resendVerification:196",
+      "name": "resendVerification",
+      "file": "src/adapters/supabase.ts",
+      "line": 196,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#resetPassword:184",
+      "name": "resetPassword",
+      "file": "src/adapters/supabase.ts",
+      "line": 184,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#resetPasswordForEmail:38",
+      "name": "resetPasswordForEmail",
+      "file": "src/adapters/supabase.ts",
+      "line": 38,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signIn:135",
+      "name": "signIn",
+      "file": "src/adapters/supabase.ts",
+      "line": 135,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signInWithOAuth:34",
+      "name": "signInWithOAuth",
+      "file": "src/adapters/supabase.ts",
+      "line": 34,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signInWithPassword:25",
+      "name": "signInWithPassword",
+      "file": "src/adapters/supabase.ts",
+      "line": 25,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signInWithProvider:159",
+      "name": "signInWithProvider",
+      "file": "src/adapters/supabase.ts",
+      "line": 159,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signOut:131",
+      "name": "signOut",
+      "file": "src/adapters/supabase.ts",
+      "line": 131,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signOut:21",
+      "name": "signOut",
+      "file": "src/adapters/supabase.ts",
+      "line": 21,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signUp:141",
+      "name": "signUp",
+      "file": "src/adapters/supabase.ts",
+      "line": 141,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#signUp:29",
+      "name": "signUp",
+      "file": "src/adapters/supabase.ts",
+      "line": 29,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#subscribe:127",
+      "name": "subscribe",
+      "file": "src/adapters/supabase.ts",
+      "line": 127,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#SupabaseAdapterOptions:49",
+      "name": "SupabaseAdapterOptions",
+      "file": "src/adapters/supabase.ts",
+      "line": 49,
+      "kind": "interface",
+      "exported": true
+    },
+    {
+      "id": "src/adapters/supabase.ts#SupabaseAuthPort:19",
+      "name": "SupabaseAuthPort",
+      "file": "src/adapters/supabase.ts",
+      "line": 19,
+      "kind": "interface",
+      "exported": true
+    },
+    {
+      "id": "src/adapters/supabase.ts#unsubscribe:23",
+      "name": "unsubscribe",
+      "file": "src/adapters/supabase.ts",
+      "line": 23,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/adapters/supabase.ts#updateUser:42",
       "name": "updateUser",
       "file": "src/adapters/supabase.ts",
-      "line": 41,
+      "line": 42,
       "kind": "function",
       "exported": false
     },
@@ -731,10 +739,10 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#AuthController:744",
+      "id": "src/controller.ts#AuthController:740",
       "name": "AuthController",
       "file": "src/controller.ts",
-      "line": 744,
+      "line": 740,
       "kind": "type",
       "exported": true
     },
@@ -747,18 +755,18 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#cancelRedirect:735",
+      "id": "src/controller.ts#cancelRedirect:731",
       "name": "cancelRedirect",
       "file": "src/controller.ts",
-      "line": 735,
+      "line": 731,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#clearFeedback:731",
+      "id": "src/controller.ts#clearFeedback:727",
       "name": "clearFeedback",
       "file": "src/controller.ts",
-      "line": 731,
+      "line": 727,
       "kind": "function",
       "exported": false
     },
@@ -787,26 +795,26 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#execute:543",
+      "id": "src/controller.ts#execute:539",
       "name": "execute",
       "file": "src/controller.ts",
-      "line": 543,
+      "line": 539,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#finishState:394",
+      "id": "src/controller.ts#finishState:390",
       "name": "finishState",
       "file": "src/controller.ts",
-      "line": 394,
+      "line": 390,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#invalid:597",
+      "id": "src/controller.ts#invalid:593",
       "name": "invalid",
       "file": "src/controller.ts",
-      "line": 597,
+      "line": 593,
       "kind": "function",
       "exported": false
     },
@@ -819,10 +827,10 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#operate:454",
+      "id": "src/controller.ts#operate:450",
       "name": "operate",
       "file": "src/controller.ts",
-      "line": 454,
+      "line": 450,
       "kind": "function",
       "exported": false
     },
@@ -867,42 +875,42 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#release:501",
+      "id": "src/controller.ts#release:497",
       "name": "release",
       "file": "src/controller.ts",
-      "line": 501,
+      "line": 497,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#requestPasswordReset:662",
+      "id": "src/controller.ts#requestPasswordReset:658",
       "name": "requestPasswordReset",
       "file": "src/controller.ts",
-      "line": 662,
+      "line": 658,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#resendVerification:692",
+      "id": "src/controller.ts#resendVerification:688",
       "name": "resendVerification",
       "file": "src/controller.ts",
-      "line": 692,
+      "line": 688,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#resetPassword:670",
+      "id": "src/controller.ts#resetPassword:666",
       "name": "resetPassword",
       "file": "src/controller.ts",
-      "line": 670,
+      "line": 666,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#resolve:481",
+      "id": "src/controller.ts#resolve:477",
       "name": "resolve",
       "file": "src/controller.ts",
-      "line": 481,
+      "line": 477,
       "kind": "function",
       "exported": false
     },
@@ -939,26 +947,26 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#signIn:617",
+      "id": "src/controller.ts#signIn:613",
       "name": "signIn",
       "file": "src/controller.ts",
-      "line": 617,
+      "line": 613,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#signInWithProvider:653",
+      "id": "src/controller.ts#signInWithProvider:649",
       "name": "signInWithProvider",
       "file": "src/controller.ts",
-      "line": 653,
+      "line": 649,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#signUp:632",
+      "id": "src/controller.ts#signUp:628",
       "name": "signUp",
       "file": "src/controller.ts",
-      "line": 632,
+      "line": 628,
       "kind": "function",
       "exported": false
     },
@@ -971,18 +979,18 @@
       "exported": false
     },
     {
-      "id": "src/controller.ts#subscribe:715",
+      "id": "src/controller.ts#subscribe:711",
       "name": "subscribe",
       "file": "src/controller.ts",
-      "line": 715,
+      "line": 711,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/controller.ts#verifyEmail:700",
+      "id": "src/controller.ts#verifyEmail:696",
       "name": "verifyEmail",
       "file": "src/controller.ts",
-      "line": 700,
+      "line": 696,
       "kind": "function",
       "exported": false
     },
@@ -1059,10 +1067,10 @@
       "exported": true
     },
     {
-      "id": "src/password.ts#assessPassword:50",
+      "id": "src/password.ts#assessPassword:56",
       "name": "assessPassword",
       "file": "src/password.ts",
-      "line": 50,
+      "line": 56,
       "kind": "function",
       "exported": true
     },
@@ -1075,26 +1083,26 @@
       "exported": true
     },
     {
-      "id": "src/password.ts#isEmail:81",
+      "id": "src/password.ts#isEmail:89",
       "name": "isEmail",
       "file": "src/password.ts",
-      "line": 81,
+      "line": 89,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/password.ts#normalizeEmail:78",
+      "id": "src/password.ts#normalizeEmail:86",
       "name": "normalizeEmail",
       "file": "src/password.ts",
-      "line": 78,
+      "line": 86,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/password.ts#resolvePasswordPolicy:25",
+      "id": "src/password.ts#resolvePasswordPolicy:31",
       "name": "resolvePasswordPolicy",
       "file": "src/password.ts",
-      "line": 25,
+      "line": 31,
       "kind": "function",
       "exported": true
     },
@@ -1107,42 +1115,42 @@
       "exported": true
     },
     {
-      "id": "src/react/context.tsx#AuthProvider:12",
+      "id": "src/react/context.tsx#AuthProvider:13",
       "name": "AuthProvider",
       "file": "src/react/context.tsx",
-      "line": 12,
+      "line": 13,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/context.tsx#refresh:21",
+      "id": "src/react/context.tsx#refresh:23",
       "name": "refresh",
       "file": "src/react/context.tsx",
-      "line": 21,
+      "line": 23,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/context.tsx#useAuth:43",
+      "id": "src/react/context.tsx#useAuth:49",
       "name": "useAuth",
+      "file": "src/react/context.tsx",
+      "line": 49,
+      "kind": "function",
+      "exported": true
+    },
+    {
+      "id": "src/react/context.tsx#useAuthController:43",
+      "name": "useAuthController",
       "file": "src/react/context.tsx",
       "line": 43,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/context.tsx#useAuthController:37",
-      "name": "useAuthController",
-      "file": "src/react/context.tsx",
-      "line": 37,
-      "kind": "function",
-      "exported": true
-    },
-    {
-      "id": "src/react/context.tsx#visible:25",
+      "id": "src/react/context.tsx#visible:27",
       "name": "visible",
       "file": "src/react/context.tsx",
-      "line": 25,
+      "line": 27,
       "kind": "function",
       "exported": false
     },
@@ -1155,11 +1163,75 @@
       "exported": true
     },
     {
+      "id": "src/react/locale.tsx",
+      "kind": "module",
+      "name": "src/react/locale.tsx",
+      "file": "src/react/locale.tsx",
+      "line": 1,
+      "exported": true
+    },
+    {
+      "id": "src/react/locale.tsx#AuthLocale:16",
+      "name": "AuthLocale",
+      "file": "src/react/locale.tsx",
+      "line": 16,
+      "kind": "interface",
+      "exported": true
+    },
+    {
+      "id": "src/react/locale.tsx#AuthLocaleOptions:11",
+      "name": "AuthLocaleOptions",
+      "file": "src/react/locale.tsx",
+      "line": 11,
+      "kind": "interface",
+      "exported": true
+    },
+    {
+      "id": "src/react/locale.tsx#AuthLocaleProvider:52",
+      "name": "AuthLocaleProvider",
+      "file": "src/react/locale.tsx",
+      "line": 52,
+      "kind": "function",
+      "exported": true
+    },
+    {
+      "id": "src/react/locale.tsx#canonicalize:26",
+      "name": "canonicalize",
+      "file": "src/react/locale.tsx",
+      "line": 26,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/react/locale.tsx#selectCatalog:34",
+      "name": "selectCatalog",
+      "file": "src/react/locale.tsx",
+      "line": 34,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/react/locale.tsx#useAuthLocale:48",
+      "name": "useAuthLocale",
+      "file": "src/react/locale.tsx",
+      "line": 48,
+      "kind": "function",
+      "exported": true
+    },
+    {
       "id": "src/react/messages.ts",
       "kind": "module",
       "name": "src/react/messages.ts",
       "file": "src/react/messages.ts",
       "line": 1,
+      "exported": true
+    },
+    {
+      "id": "src/react/messages.ts#AuthMessageOverrides:274",
+      "name": "AuthMessageOverrides",
+      "file": "src/react/messages.ts",
+      "line": 274,
+      "kind": "type",
       "exported": true
     },
     {
@@ -1187,6 +1259,14 @@
       "exported": true
     },
     {
+      "id": "src/react/messages.ts#ja:198",
+      "name": "ja",
+      "file": "src/react/messages.ts",
+      "line": 198,
+      "kind": "constant",
+      "exported": true
+    },
+    {
       "id": "src/react/messages.ts#zhTW:49",
       "name": "zhTW",
       "file": "src/react/messages.ts",
@@ -1203,130 +1283,146 @@
       "exported": true
     },
     {
-      "id": "src/react/panel.tsx#AuthPanel:69",
+      "id": "src/react/panel.tsx#AuthPanel:72",
       "name": "AuthPanel",
       "file": "src/react/panel.tsx",
-      "line": 69,
+      "line": 72,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/panel.tsx#AuthPanelProps:39",
+      "id": "src/react/panel.tsx#AuthPanelProps:44",
       "name": "AuthPanelProps",
       "file": "src/react/panel.tsx",
-      "line": 39,
+      "line": 44,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/react/panel.tsx#AuthSlots:30",
+      "id": "src/react/panel.tsx#AuthSlots:35",
       "name": "AuthSlots",
       "file": "src/react/panel.tsx",
-      "line": 30,
+      "line": 35,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/react/panel.tsx#AuthView:23",
+      "id": "src/react/panel.tsx#AuthView:28",
       "name": "AuthView",
       "file": "src/react/panel.tsx",
-      "line": 23,
+      "line": 28,
       "kind": "type",
       "exported": true
     },
     {
-      "id": "src/react/panel.tsx#change:139",
+      "id": "src/react/panel.tsx#change:159",
       "name": "change",
       "file": "src/react/panel.tsx",
-      "line": 139,
+      "line": 159,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#completed:176",
+      "id": "src/react/panel.tsx#completed:196",
       "name": "completed",
       "file": "src/react/panel.tsx",
-      "line": 176,
+      "line": 196,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#PanelForm:443",
+      "id": "src/react/panel.tsx#FlowMessage:79",
+      "name": "FlowMessage",
+      "file": "src/react/panel.tsx",
+      "line": 79,
+      "kind": "type",
+      "exported": false
+    },
+    {
+      "id": "src/react/panel.tsx#LocalizedPanel:86",
+      "name": "LocalizedPanel",
+      "file": "src/react/panel.tsx",
+      "line": 86,
+      "kind": "function",
+      "exported": false
+    },
+    {
+      "id": "src/react/panel.tsx#PanelForm:458",
       "name": "PanelForm",
       "file": "src/react/panel.tsx",
-      "line": 443,
+      "line": 458,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#perform:209",
+      "id": "src/react/panel.tsx#perform:223",
       "name": "perform",
       "file": "src/react/panel.tsx",
-      "line": 209,
+      "line": 223,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#render:517",
+      "id": "src/react/panel.tsx#render:535",
       "name": "render",
       "file": "src/react/panel.tsx",
-      "line": 517,
+      "line": 535,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#setCode:484",
+      "id": "src/react/panel.tsx#setCode:500",
       "name": "setCode",
       "file": "src/react/panel.tsx",
-      "line": 484,
+      "line": 500,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#setEmail:132",
+      "id": "src/react/panel.tsx#setEmail:153",
       "name": "setEmail",
       "file": "src/react/panel.tsx",
-      "line": 132,
+      "line": 153,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#setMessage:135",
+      "id": "src/react/panel.tsx#setMessage:156",
       "name": "setMessage",
       "file": "src/react/panel.tsx",
-      "line": 135,
+      "line": 156,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#submit:526",
+      "id": "src/react/panel.tsx#submit:544",
       "name": "submit",
       "file": "src/react/panel.tsx",
-      "line": 526,
+      "line": 544,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#tick:57",
+      "id": "src/react/panel.tsx#tick:60",
       "name": "tick",
       "file": "src/react/panel.tsx",
-      "line": 57,
+      "line": 60,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#updateFlow:122",
+      "id": "src/react/panel.tsx#updateFlow:143",
       "name": "updateFlow",
       "file": "src/react/panel.tsx",
-      "line": 122,
+      "line": 143,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/react/panel.tsx#useSeconds:54",
+      "id": "src/react/panel.tsx#useSeconds:57",
       "name": "useSeconds",
       "file": "src/react/panel.tsx",
-      "line": 54,
+      "line": 57,
       "kind": "function",
       "exported": false
     },
@@ -1339,74 +1435,74 @@
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#AuthButton:16",
+      "id": "src/react/primitives.tsx#AuthButton:17",
       "name": "AuthButton",
       "file": "src/react/primitives.tsx",
-      "line": 16,
+      "line": 17,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#AuthFeedback:150",
+      "id": "src/react/primitives.tsx#AuthFeedback:153",
       "name": "AuthFeedback",
       "file": "src/react/primitives.tsx",
-      "line": 150,
+      "line": 153,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#AuthField:42",
+      "id": "src/react/primitives.tsx#AuthField:43",
       "name": "AuthField",
       "file": "src/react/primitives.tsx",
-      "line": 42,
+      "line": 43,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#AuthFieldProps:37",
+      "id": "src/react/primitives.tsx#AuthFieldProps:38",
       "name": "AuthFieldProps",
       "file": "src/react/primitives.tsx",
-      "line": 37,
+      "line": 38,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#AuthGate:258",
+      "id": "src/react/primitives.tsx#AuthGate:265",
       "name": "AuthGate",
       "file": "src/react/primitives.tsx",
-      "line": 258,
+      "line": 265,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#AuthStatus:198",
+      "id": "src/react/primitives.tsx#AuthStatus:203",
       "name": "AuthStatus",
       "file": "src/react/primitives.tsx",
-      "line": 198,
+      "line": 203,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#LoadingIcon:13",
+      "id": "src/react/primitives.tsx#LoadingIcon:14",
       "name": "LoadingIcon",
       "file": "src/react/primitives.tsx",
-      "line": 13,
+      "line": 14,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#PasswordField:74",
+      "id": "src/react/primitives.tsx#PasswordField:75",
       "name": "PasswordField",
       "file": "src/react/primitives.tsx",
-      "line": 74,
+      "line": 75,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/react/primitives.tsx#SignOutButton:177",
+      "id": "src/react/primitives.tsx#SignOutButton:180",
       "name": "SignOutButton",
       "file": "src/react/primitives.tsx",
-      "line": 177,
+      "line": 180,
       "kind": "function",
       "exported": true
     },
@@ -1435,34 +1531,34 @@
       "exported": true
     },
     {
-      "id": "src/server/guards.ts#consume:34",
+      "id": "src/server/guards.ts#consume:47",
       "name": "consume",
       "file": "src/server/guards.ts",
-      "line": 34,
+      "line": 47,
       "kind": "function",
       "exported": false
     },
     {
-      "id": "src/server/guards.ts#enforceRateLimit:40",
+      "id": "src/server/guards.ts#enforceRateLimit:53",
       "name": "enforceRateLimit",
       "file": "src/server/guards.ts",
-      "line": 40,
+      "line": 53,
       "kind": "function",
       "exported": true
     },
     {
-      "id": "src/server/guards.ts#RateLimiter:32",
+      "id": "src/server/guards.ts#RateLimiter:45",
       "name": "RateLimiter",
       "file": "src/server/guards.ts",
-      "line": 32,
+      "line": 45,
       "kind": "interface",
       "exported": true
     },
     {
-      "id": "src/server/guards.ts#RateLimitFailure:52",
+      "id": "src/server/guards.ts#RateLimitFailure:65",
       "name": "RateLimitFailure",
       "file": "src/server/guards.ts",
-      "line": 52,
+      "line": 65,
       "kind": "class",
       "exported": true
     },
@@ -1870,107 +1966,107 @@
   "edges": [
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#authenticated:120",
+      "to": "src/adapters/better-auth.ts#authenticated:121",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#BetterAuthAdapterOptions:54",
+      "to": "src/adapters/better-auth.ts#BetterAuthAdapterOptions:55",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#BetterAuthClientPort:17",
+      "to": "src/adapters/better-auth.ts#BetterAuthClientPort:18",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#createBetterAuthAdapter:67",
+      "to": "src/adapters/better-auth.ts#createBetterAuthAdapter:68",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#email:23",
+      "to": "src/adapters/better-auth.ts#email:24",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#email:34",
+      "to": "src/adapters/better-auth.ts#email:35",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#getSession:107",
+      "to": "src/adapters/better-auth.ts#getSession:108",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#getSession:18",
+      "to": "src/adapters/better-auth.ts#getSession:19",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#requestPasswordReset:186",
+      "to": "src/adapters/better-auth.ts#requestPasswordReset:193",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#requestPasswordReset:41",
+      "to": "src/adapters/better-auth.ts#requestPasswordReset:42",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#resendVerification:214",
+      "to": "src/adapters/better-auth.ts#resendVerification:221",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#resetPassword:199",
+      "to": "src/adapters/better-auth.ts#resetPassword:206",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#resetPassword:45",
+      "to": "src/adapters/better-auth.ts#resetPassword:46",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#sendVerificationEmail:49",
+      "to": "src/adapters/better-auth.ts#sendVerificationEmail:50",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#signIn:145",
+      "to": "src/adapters/better-auth.ts#signIn:149",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#signInWithProvider:173",
+      "to": "src/adapters/better-auth.ts#signInWithProvider:180",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#signOut:140",
+      "to": "src/adapters/better-auth.ts#signOut:144",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#signOut:21",
+      "to": "src/adapters/better-auth.ts#signOut:22",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#signUp:150",
+      "to": "src/adapters/better-auth.ts#signUp:157",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#social:27",
+      "to": "src/adapters/better-auth.ts#social:28",
       "kind": "declares"
     },
     {
       "from": "src/adapters/better-auth.ts",
-      "to": "src/adapters/better-auth.ts#subscribe:137",
+      "to": "src/adapters/better-auth.ts#subscribe:141",
       "kind": "declares"
     },
     {
@@ -1989,207 +2085,217 @@
       "kind": "imports"
     },
     {
-      "from": "src/adapters/better-auth.ts#authenticated:120",
-      "to": "src/adapters/better-auth.ts#getSession:107",
+      "from": "src/adapters/better-auth.ts#authenticated:121",
+      "to": "src/adapters/better-auth.ts#getSession:108",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#authenticated:120",
+      "from": "src/adapters/better-auth.ts#authenticated:121",
+      "to": "src/adapters/shared.ts#matchesEmail:32",
+      "kind": "calls"
+    },
+    {
+      "from": "src/adapters/better-auth.ts#authenticated:121",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#authenticated:120",
+      "from": "src/adapters/better-auth.ts#authenticated:121",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#createBetterAuthAdapter:67",
-      "to": "src/adapters/shared.ts#validateAdapterPort:7",
+      "from": "src/adapters/better-auth.ts#createBetterAuthAdapter:68",
+      "to": "src/adapters/shared.ts#validateAdapterPort:8",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#getSession:107",
-      "to": "src/adapters/better-auth.ts#getSession:18",
+      "from": "src/adapters/better-auth.ts#getSession:108",
+      "to": "src/adapters/better-auth.ts#getSession:19",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#getSession:107",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "from": "src/adapters/better-auth.ts#getSession:108",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#getSession:107",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#getSession:108",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#getSession:107",
-      "to": "src/adapters/shared.ts#sessionFromUser:31",
+      "from": "src/adapters/better-auth.ts#getSession:108",
+      "to": "src/adapters/shared.ts#sessionFromUser:38",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#getSession:107",
+      "from": "src/adapters/better-auth.ts#getSession:108",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#requestPasswordReset:186",
-      "to": "src/adapters/better-auth.ts#requestPasswordReset:41",
+      "from": "src/adapters/better-auth.ts#requestPasswordReset:193",
+      "to": "src/adapters/better-auth.ts#requestPasswordReset:42",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#requestPasswordReset:186",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/better-auth.ts#requestPasswordReset:193",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#requestPasswordReset:186",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#requestPasswordReset:193",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#requestPasswordReset:186",
+      "from": "src/adapters/better-auth.ts#requestPasswordReset:193",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#requestPasswordReset:186",
+      "from": "src/adapters/better-auth.ts#requestPasswordReset:193",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resendVerification:214",
-      "to": "src/adapters/better-auth.ts#sendVerificationEmail:49",
+      "from": "src/adapters/better-auth.ts#resendVerification:221",
+      "to": "src/adapters/better-auth.ts#sendVerificationEmail:50",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resendVerification:214",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/better-auth.ts#resendVerification:221",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resendVerification:214",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#resendVerification:221",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resendVerification:214",
+      "from": "src/adapters/better-auth.ts#resendVerification:221",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resendVerification:214",
+      "from": "src/adapters/better-auth.ts#resendVerification:221",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resetPassword:199",
-      "to": "src/adapters/better-auth.ts#resetPassword:45",
+      "from": "src/adapters/better-auth.ts#resetPassword:206",
+      "to": "src/adapters/better-auth.ts#resetPassword:46",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resetPassword:199",
-      "to": "src/adapters/better-auth.ts#signOut:21",
+      "from": "src/adapters/better-auth.ts#resetPassword:206",
+      "to": "src/adapters/better-auth.ts#signOut:22",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resetPassword:199",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#resetPassword:206",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resetPassword:199",
+      "from": "src/adapters/better-auth.ts#resetPassword:206",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#resetPassword:199",
+      "from": "src/adapters/better-auth.ts#resetPassword:206",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signIn:145",
-      "to": "src/adapters/better-auth.ts#authenticated:120",
+      "from": "src/adapters/better-auth.ts#signIn:149",
+      "to": "src/adapters/better-auth.ts#authenticated:121",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signIn:145",
-      "to": "src/adapters/better-auth.ts#email:23",
+      "from": "src/adapters/better-auth.ts#signIn:149",
+      "to": "src/adapters/better-auth.ts#email:24",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signIn:145",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#signIn:149",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signIn:145",
+      "from": "src/adapters/better-auth.ts#signIn:149",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signInWithProvider:173",
-      "to": "src/adapters/better-auth.ts#social:27",
+      "from": "src/adapters/better-auth.ts#signInWithProvider:180",
+      "to": "src/adapters/better-auth.ts#social:28",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signInWithProvider:173",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#signInWithProvider:180",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signInWithProvider:173",
+      "from": "src/adapters/better-auth.ts#signInWithProvider:180",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signInWithProvider:173",
+      "from": "src/adapters/better-auth.ts#signInWithProvider:180",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signOut:140",
-      "to": "src/adapters/better-auth.ts#signOut:21",
+      "from": "src/adapters/better-auth.ts#signOut:144",
+      "to": "src/adapters/better-auth.ts#signOut:22",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signOut:140",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#signOut:144",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signOut:140",
+      "from": "src/adapters/better-auth.ts#signOut:144",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signUp:150",
-      "to": "src/adapters/better-auth.ts#email:34",
+      "from": "src/adapters/better-auth.ts#signUp:157",
+      "to": "src/adapters/better-auth.ts#email:35",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signUp:150",
-      "to": "src/adapters/better-auth.ts#getSession:107",
+      "from": "src/adapters/better-auth.ts#signUp:157",
+      "to": "src/adapters/better-auth.ts#getSession:108",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signUp:150",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/better-auth.ts#signUp:157",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signUp:150",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/better-auth.ts#signUp:157",
+      "to": "src/adapters/shared.ts#matchesEmail:32",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signUp:150",
+      "from": "src/adapters/better-auth.ts#signUp:157",
+      "to": "src/adapters/shared.ts#serviceError:20",
+      "kind": "calls"
+    },
+    {
+      "from": "src/adapters/better-auth.ts#signUp:157",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/better-auth.ts#signUp:150",
+      "from": "src/adapters/better-auth.ts#signUp:157",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
@@ -2270,7 +2376,7 @@
     },
     {
       "from": "src/adapters/hosted.ts#createHostedAdapter:11",
-      "to": "src/adapters/shared.ts#validateAdapterPort:7",
+      "to": "src/adapters/shared.ts#validateAdapterPort:8",
       "kind": "calls"
     },
     {
@@ -2305,42 +2411,42 @@
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#$fetch:17",
+      "to": "src/adapters/neon.ts#$fetch:18",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#createNeonAdapter:22",
+      "to": "src/adapters/neon.ts#createNeonAdapter:23",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#NeonOtpPort:16",
+      "to": "src/adapters/neon.ts#NeonOtpPort:17",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#requestPasswordReset:55",
+      "to": "src/adapters/neon.ts#requestPasswordReset:56",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#resendVerification:77",
+      "to": "src/adapters/neon.ts#resendVerification:78",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#resetPassword:67",
+      "to": "src/adapters/neon.ts#resetPassword:68",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#signUp:48",
+      "to": "src/adapters/neon.ts#signUp:49",
       "kind": "declares"
     },
     {
       "from": "src/adapters/neon.ts",
-      "to": "src/adapters/neon.ts#verifyEmail:89",
+      "to": "src/adapters/neon.ts#verifyEmail:90",
       "kind": "declares"
     },
     {
@@ -2359,158 +2465,168 @@
       "kind": "imports"
     },
     {
-      "from": "src/adapters/neon.ts#createNeonAdapter:22",
-      "to": "src/adapters/better-auth.ts#createBetterAuthAdapter:67",
+      "from": "src/adapters/neon.ts#createNeonAdapter:23",
+      "to": "src/adapters/better-auth.ts#createBetterAuthAdapter:68",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#createNeonAdapter:22",
-      "to": "src/adapters/shared.ts#validateAdapterPort:7",
+      "from": "src/adapters/neon.ts#createNeonAdapter:23",
+      "to": "src/adapters/shared.ts#validateAdapterPort:8",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#requestPasswordReset:55",
-      "to": "src/adapters/neon.ts#$fetch:17",
+      "from": "src/adapters/neon.ts#requestPasswordReset:56",
+      "to": "src/adapters/neon.ts#$fetch:18",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#requestPasswordReset:55",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/neon.ts#requestPasswordReset:56",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#requestPasswordReset:55",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/neon.ts#requestPasswordReset:56",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#requestPasswordReset:55",
+      "from": "src/adapters/neon.ts#requestPasswordReset:56",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#requestPasswordReset:55",
+      "from": "src/adapters/neon.ts#requestPasswordReset:56",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resendVerification:77",
-      "to": "src/adapters/neon.ts#$fetch:17",
+      "from": "src/adapters/neon.ts#resendVerification:78",
+      "to": "src/adapters/neon.ts#$fetch:18",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resendVerification:77",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/neon.ts#resendVerification:78",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resendVerification:77",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/neon.ts#resendVerification:78",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resendVerification:77",
+      "from": "src/adapters/neon.ts#resendVerification:78",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resendVerification:77",
+      "from": "src/adapters/neon.ts#resendVerification:78",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resetPassword:67",
-      "to": "src/adapters/neon.ts#$fetch:17",
+      "from": "src/adapters/neon.ts#resetPassword:68",
+      "to": "src/adapters/neon.ts#$fetch:18",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resetPassword:67",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/neon.ts#resetPassword:68",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resetPassword:67",
+      "from": "src/adapters/neon.ts#resetPassword:68",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#resetPassword:67",
+      "from": "src/adapters/neon.ts#resetPassword:68",
       "to": "src/types.ts#signOut:67",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#signUp:48",
+      "from": "src/adapters/neon.ts#signUp:49",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#signUp:48",
+      "from": "src/adapters/neon.ts#signUp:49",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#signUp:48",
+      "from": "src/adapters/neon.ts#signUp:49",
       "to": "src/types.ts#signUp:70",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#verifyEmail:89",
-      "to": "src/adapters/neon.ts#$fetch:17",
+      "from": "src/adapters/neon.ts#verifyEmail:90",
+      "to": "src/adapters/neon.ts#$fetch:18",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#verifyEmail:89",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/neon.ts#verifyEmail:90",
+      "to": "src/adapters/shared.ts#matchesEmail:32",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#verifyEmail:89",
+      "from": "src/adapters/neon.ts#verifyEmail:90",
+      "to": "src/adapters/shared.ts#serviceError:20",
+      "kind": "calls"
+    },
+    {
+      "from": "src/adapters/neon.ts#verifyEmail:90",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#verifyEmail:89",
+      "from": "src/adapters/neon.ts#verifyEmail:90",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/neon.ts#verifyEmail:89",
+      "from": "src/adapters/neon.ts#verifyEmail:90",
       "to": "src/types.ts#getSession:66",
       "kind": "calls"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#emptySession:58",
+      "to": "src/adapters/shared.ts#emptySession:65",
       "kind": "declares"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "declares"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "declares"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "to": "src/adapters/shared.ts#matchesEmail:32",
       "kind": "declares"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#ServiceResponse:3",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "declares"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#sessionFromUser:31",
+      "to": "src/adapters/shared.ts#ServiceResponse:4",
       "kind": "declares"
     },
     {
       "from": "src/adapters/shared.ts",
-      "to": "src/adapters/shared.ts#validateAdapterPort:7",
+      "to": "src/adapters/shared.ts#sessionFromUser:38",
+      "kind": "declares"
+    },
+    {
+      "from": "src/adapters/shared.ts",
+      "to": "src/adapters/shared.ts#validateAdapterPort:8",
       "kind": "declares"
     },
     {
@@ -2520,27 +2636,37 @@
     },
     {
       "from": "src/adapters/shared.ts",
+      "to": "src/password.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "src/adapters/shared.ts",
       "to": "src/types.ts",
       "kind": "imports"
     },
     {
-      "from": "src/adapters/shared.ts#emptySession:58",
+      "from": "src/adapters/shared.ts#emptySession:65",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/shared.ts#errorCode:26",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "from": "src/adapters/shared.ts#errorCode:27",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/shared.ts#matchesEmail:32",
+      "to": "src/password.ts#normalizeEmail:86",
+      "kind": "calls"
+    },
+    {
+      "from": "src/adapters/shared.ts#serviceError:20",
       "to": "src/errors.ts#normalizeError:21",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/shared.ts#sessionFromUser:31",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "from": "src/adapters/shared.ts#sessionFromUser:38",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "calls"
     },
     {
@@ -2550,117 +2676,117 @@
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#authenticated:106",
+      "to": "src/adapters/supabase.ts#authenticated:107",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#createSupabaseAdapter:58",
+      "to": "src/adapters/supabase.ts#createSupabaseAdapter:59",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#getSession:88",
+      "to": "src/adapters/supabase.ts#getSession:89",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#getUser:19",
+      "to": "src/adapters/supabase.ts#getUser:20",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#onAuthStateChange:21",
+      "to": "src/adapters/supabase.ts#onAuthStateChange:22",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#requestPasswordReset:168",
+      "to": "src/adapters/supabase.ts#requestPasswordReset:172",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#resend:42",
+      "to": "src/adapters/supabase.ts#resend:43",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#resendVerification:192",
+      "to": "src/adapters/supabase.ts#resendVerification:196",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#resetPassword:180",
+      "to": "src/adapters/supabase.ts#resetPassword:184",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#resetPasswordForEmail:37",
+      "to": "src/adapters/supabase.ts#resetPasswordForEmail:38",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signIn:131",
+      "to": "src/adapters/supabase.ts#signIn:135",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signInWithOAuth:33",
+      "to": "src/adapters/supabase.ts#signInWithOAuth:34",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signInWithPassword:24",
+      "to": "src/adapters/supabase.ts#signInWithPassword:25",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signInWithProvider:155",
+      "to": "src/adapters/supabase.ts#signInWithProvider:159",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signOut:127",
+      "to": "src/adapters/supabase.ts#signOut:131",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signOut:20",
+      "to": "src/adapters/supabase.ts#signOut:21",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signUp:137",
+      "to": "src/adapters/supabase.ts#signUp:141",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#signUp:28",
+      "to": "src/adapters/supabase.ts#signUp:29",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#subscribe:123",
+      "to": "src/adapters/supabase.ts#subscribe:127",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#SupabaseAdapterOptions:48",
+      "to": "src/adapters/supabase.ts#SupabaseAdapterOptions:49",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#SupabaseAuthPort:18",
+      "to": "src/adapters/supabase.ts#SupabaseAuthPort:19",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#unsubscribe:22",
+      "to": "src/adapters/supabase.ts#unsubscribe:23",
       "kind": "declares"
     },
     {
       "from": "src/adapters/supabase.ts",
-      "to": "src/adapters/supabase.ts#updateUser:41",
+      "to": "src/adapters/supabase.ts#updateUser:42",
       "kind": "declares"
     },
     {
@@ -2674,238 +2800,243 @@
       "kind": "imports"
     },
     {
-      "from": "src/adapters/supabase.ts#authenticated:106",
-      "to": "src/adapters/supabase.ts#getSession:88",
+      "from": "src/adapters/supabase.ts#authenticated:107",
+      "to": "src/adapters/shared.ts#matchesEmail:32",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#authenticated:106",
+      "from": "src/adapters/supabase.ts#authenticated:107",
+      "to": "src/adapters/supabase.ts#getSession:89",
+      "kind": "calls"
+    },
+    {
+      "from": "src/adapters/supabase.ts#authenticated:107",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#authenticated:106",
+      "from": "src/adapters/supabase.ts#authenticated:107",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#createSupabaseAdapter:58",
-      "to": "src/adapters/shared.ts#validateAdapterPort:7",
+      "from": "src/adapters/supabase.ts#createSupabaseAdapter:59",
+      "to": "src/adapters/shared.ts#validateAdapterPort:8",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#getSession:88",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/supabase.ts#getSession:89",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#getSession:88",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "from": "src/adapters/supabase.ts#getSession:89",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#getSession:88",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#getSession:89",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#getSession:88",
-      "to": "src/adapters/shared.ts#sessionFromUser:31",
+      "from": "src/adapters/supabase.ts#getSession:89",
+      "to": "src/adapters/shared.ts#sessionFromUser:38",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#getSession:88",
-      "to": "src/adapters/supabase.ts#getUser:19",
+      "from": "src/adapters/supabase.ts#getSession:89",
+      "to": "src/adapters/supabase.ts#getUser:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#getSession:88",
+      "from": "src/adapters/supabase.ts#getSession:89",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#requestPasswordReset:168",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/supabase.ts#requestPasswordReset:172",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#requestPasswordReset:168",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#requestPasswordReset:172",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#requestPasswordReset:168",
-      "to": "src/adapters/supabase.ts#resetPasswordForEmail:37",
+      "from": "src/adapters/supabase.ts#requestPasswordReset:172",
+      "to": "src/adapters/supabase.ts#resetPasswordForEmail:38",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#requestPasswordReset:168",
+      "from": "src/adapters/supabase.ts#requestPasswordReset:172",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#requestPasswordReset:168",
+      "from": "src/adapters/supabase.ts#requestPasswordReset:172",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resendVerification:192",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/supabase.ts#resendVerification:196",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resendVerification:192",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#resendVerification:196",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resendVerification:192",
-      "to": "src/adapters/supabase.ts#resend:42",
+      "from": "src/adapters/supabase.ts#resendVerification:196",
+      "to": "src/adapters/supabase.ts#resend:43",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resendVerification:192",
+      "from": "src/adapters/supabase.ts#resendVerification:196",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resendVerification:192",
+      "from": "src/adapters/supabase.ts#resendVerification:196",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resetPassword:180",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#resetPassword:184",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resetPassword:180",
-      "to": "src/adapters/supabase.ts#getSession:88",
+      "from": "src/adapters/supabase.ts#resetPassword:184",
+      "to": "src/adapters/supabase.ts#getSession:89",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resetPassword:180",
-      "to": "src/adapters/supabase.ts#signOut:20",
+      "from": "src/adapters/supabase.ts#resetPassword:184",
+      "to": "src/adapters/supabase.ts#signOut:21",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resetPassword:180",
-      "to": "src/adapters/supabase.ts#updateUser:41",
+      "from": "src/adapters/supabase.ts#resetPassword:184",
+      "to": "src/adapters/supabase.ts#updateUser:42",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resetPassword:180",
+      "from": "src/adapters/supabase.ts#resetPassword:184",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#resetPassword:180",
+      "from": "src/adapters/supabase.ts#resetPassword:184",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signIn:131",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#signIn:135",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signIn:131",
-      "to": "src/adapters/supabase.ts#authenticated:106",
+      "from": "src/adapters/supabase.ts#signIn:135",
+      "to": "src/adapters/supabase.ts#authenticated:107",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signIn:131",
-      "to": "src/adapters/supabase.ts#signInWithPassword:24",
+      "from": "src/adapters/supabase.ts#signIn:135",
+      "to": "src/adapters/supabase.ts#signInWithPassword:25",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signIn:131",
+      "from": "src/adapters/supabase.ts#signIn:135",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signInWithProvider:155",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "from": "src/adapters/supabase.ts#signInWithProvider:159",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signInWithProvider:155",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#signInWithProvider:159",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signInWithProvider:155",
-      "to": "src/adapters/supabase.ts#signInWithOAuth:33",
+      "from": "src/adapters/supabase.ts#signInWithProvider:159",
+      "to": "src/adapters/supabase.ts#signInWithOAuth:34",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signInWithProvider:155",
+      "from": "src/adapters/supabase.ts#signInWithProvider:159",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signInWithProvider:155",
+      "from": "src/adapters/supabase.ts#signInWithProvider:159",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signOut:127",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#signOut:131",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signOut:127",
-      "to": "src/adapters/supabase.ts#signOut:20",
+      "from": "src/adapters/supabase.ts#signOut:131",
+      "to": "src/adapters/supabase.ts#signOut:21",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signOut:127",
+      "from": "src/adapters/supabase.ts#signOut:131",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
-      "to": "src/adapters/shared.ts#errorCode:26",
+      "from": "src/adapters/supabase.ts#signUp:141",
+      "to": "src/adapters/shared.ts#errorCode:27",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
-      "to": "src/adapters/shared.ts#isRecord:16",
+      "from": "src/adapters/supabase.ts#signUp:141",
+      "to": "src/adapters/shared.ts#isRecord:17",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
-      "to": "src/adapters/shared.ts#serviceError:19",
+      "from": "src/adapters/supabase.ts#signUp:141",
+      "to": "src/adapters/shared.ts#serviceError:20",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
-      "to": "src/adapters/supabase.ts#authenticated:106",
+      "from": "src/adapters/supabase.ts#signUp:141",
+      "to": "src/adapters/supabase.ts#authenticated:107",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
-      "to": "src/adapters/supabase.ts#signUp:28",
+      "from": "src/adapters/supabase.ts#signUp:141",
+      "to": "src/adapters/supabase.ts#signUp:29",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
+      "from": "src/adapters/supabase.ts#signUp:141",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#signUp:137",
+      "from": "src/adapters/supabase.ts#signUp:141",
       "to": "src/errors.ts#success:2",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#subscribe:123",
-      "to": "src/adapters/supabase.ts#onAuthStateChange:21",
+      "from": "src/adapters/supabase.ts#subscribe:127",
+      "to": "src/adapters/supabase.ts#onAuthStateChange:22",
       "kind": "calls"
     },
     {
-      "from": "src/adapters/supabase.ts#subscribe:123",
-      "to": "src/adapters/supabase.ts#unsubscribe:22",
+      "from": "src/adapters/supabase.ts#subscribe:127",
+      "to": "src/adapters/supabase.ts#unsubscribe:23",
       "kind": "calls"
     },
     {
@@ -3095,7 +3226,7 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#AuthController:744",
+      "to": "src/controller.ts#AuthController:740",
       "kind": "declares"
     },
     {
@@ -3105,12 +3236,12 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#cancelRedirect:735",
+      "to": "src/controller.ts#cancelRedirect:731",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#clearFeedback:731",
+      "to": "src/controller.ts#clearFeedback:727",
       "kind": "declares"
     },
     {
@@ -3130,17 +3261,17 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#execute:543",
+      "to": "src/controller.ts#execute:539",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#finishState:394",
+      "to": "src/controller.ts#finishState:390",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#invalid:597",
+      "to": "src/controller.ts#invalid:593",
       "kind": "declares"
     },
     {
@@ -3150,7 +3281,7 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#operate:454",
+      "to": "src/controller.ts#operate:450",
       "kind": "declares"
     },
     {
@@ -3180,27 +3311,27 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#release:501",
+      "to": "src/controller.ts#release:497",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#requestPasswordReset:662",
+      "to": "src/controller.ts#requestPasswordReset:658",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#resendVerification:692",
+      "to": "src/controller.ts#resendVerification:688",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#resetPassword:670",
+      "to": "src/controller.ts#resetPassword:666",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#resolve:481",
+      "to": "src/controller.ts#resolve:477",
       "kind": "declares"
     },
     {
@@ -3225,17 +3356,17 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#signIn:617",
+      "to": "src/controller.ts#signIn:613",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#signInWithProvider:653",
+      "to": "src/controller.ts#signInWithProvider:649",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#signUp:632",
+      "to": "src/controller.ts#signUp:628",
       "kind": "declares"
     },
     {
@@ -3245,12 +3376,12 @@
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#subscribe:715",
+      "to": "src/controller.ts#subscribe:711",
       "kind": "declares"
     },
     {
       "from": "src/controller.ts",
-      "to": "src/controller.ts#verifyEmail:700",
+      "to": "src/controller.ts#verifyEmail:696",
       "kind": "declares"
     },
     {
@@ -3284,17 +3415,17 @@
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#cancelRedirect:735",
+      "from": "src/controller.ts#cancelRedirect:731",
       "to": "src/controller.ts#refresh:226",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#cancelRedirect:735",
+      "from": "src/controller.ts#cancelRedirect:731",
       "to": "src/controller.ts#set:129",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#clearFeedback:731",
+      "from": "src/controller.ts#clearFeedback:727",
       "to": "src/controller.ts#set:129",
       "kind": "calls"
     },
@@ -3305,12 +3436,12 @@
     },
     {
       "from": "src/controller.ts#createAuthController:56",
-      "to": "src/controller.ts#operate:454",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
       "from": "src/controller.ts#createAuthController:56",
-      "to": "src/password.ts#resolvePasswordPolicy:25",
+      "to": "src/password.ts#resolvePasswordPolicy:31",
       "kind": "calls"
     },
     {
@@ -3319,147 +3450,147 @@
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/boundary.ts#publicFailure:73",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/boundary.ts#publicOutcome:86",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#accepted:103",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#current:151",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
-      "to": "src/controller.ts#finishState:394",
+      "from": "src/controller.ts#execute:539",
+      "to": "src/controller.ts#finishState:390",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#operation:158",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#publish:268",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#reconcile:328",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
-      "to": "src/controller.ts#release:501",
+      "from": "src/controller.ts#execute:539",
+      "to": "src/controller.ts#release:497",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#scheduleRefresh:215",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/controller.ts#set:129",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/errors.ts#capture:64",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#execute:539",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#finishState:394",
+      "from": "src/controller.ts#finishState:390",
       "to": "src/controller.ts#applySession:166",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#finishState:394",
+      "from": "src/controller.ts#finishState:390",
       "to": "src/controller.ts#current:151",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#finishState:394",
+      "from": "src/controller.ts#finishState:390",
       "to": "src/controller.ts#operation:158",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#finishState:394",
+      "from": "src/controller.ts#finishState:390",
       "to": "src/controller.ts#set:129",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#invalid:593",
       "to": "src/boundary.ts#publicFailure:73",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#invalid:593",
       "to": "src/controller.ts#set:129",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#invalid:593",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/boundary.ts#publicFailure:73",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/controller.ts#current:151",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/controller.ts#emit:144",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
-      "to": "src/controller.ts#execute:543",
+      "from": "src/controller.ts#operate:450",
+      "to": "src/controller.ts#execute:539",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#operate:450",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/controller.ts#operation:158",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/controller.ts#publish:268",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/controller.ts#set:129",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#operate:450",
       "to": "src/errors.ts#failure:5",
       "kind": "calls"
     },
@@ -3539,68 +3670,68 @@
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#requestPasswordReset:662",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#requestPasswordReset:658",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#requestPasswordReset:662",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#requestPasswordReset:658",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#requestPasswordReset:662",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/controller.ts#requestPasswordReset:658",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#requestPasswordReset:662",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/controller.ts#requestPasswordReset:658",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resendVerification:692",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#resendVerification:688",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resendVerification:692",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#resendVerification:688",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resendVerification:692",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/controller.ts#resendVerification:688",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resendVerification:692",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/controller.ts#resendVerification:688",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resetPassword:670",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#resetPassword:666",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resetPassword:670",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#resetPassword:666",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resetPassword:670",
-      "to": "src/password.ts#assessPassword:50",
+      "from": "src/controller.ts#resetPassword:666",
+      "to": "src/password.ts#assessPassword:56",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resetPassword:670",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/controller.ts#resetPassword:666",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#resetPassword:670",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/controller.ts#resetPassword:666",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
@@ -3634,58 +3765,58 @@
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signIn:617",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#signIn:613",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signIn:617",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#signIn:613",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signIn:617",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/controller.ts#signIn:613",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signIn:617",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/controller.ts#signIn:613",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signInWithProvider:653",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#signInWithProvider:649",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signInWithProvider:653",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#signInWithProvider:649",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signUp:632",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#signUp:628",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signUp:632",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#signUp:628",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signUp:632",
-      "to": "src/password.ts#assessPassword:50",
+      "from": "src/controller.ts#signUp:628",
+      "to": "src/password.ts#assessPassword:56",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signUp:632",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/controller.ts#signUp:628",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#signUp:632",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/controller.ts#signUp:628",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
@@ -3729,23 +3860,23 @@
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#verifyEmail:700",
-      "to": "src/controller.ts#invalid:597",
+      "from": "src/controller.ts#verifyEmail:696",
+      "to": "src/controller.ts#invalid:593",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#verifyEmail:700",
-      "to": "src/controller.ts#operate:454",
+      "from": "src/controller.ts#verifyEmail:696",
+      "to": "src/controller.ts#operate:450",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#verifyEmail:700",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/controller.ts#verifyEmail:696",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/controller.ts#verifyEmail:700",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/controller.ts#verifyEmail:696",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
@@ -3820,7 +3951,7 @@
     },
     {
       "from": "src/password.ts",
-      "to": "src/password.ts#assessPassword:50",
+      "to": "src/password.ts#assessPassword:56",
       "kind": "declares"
     },
     {
@@ -3830,17 +3961,17 @@
     },
     {
       "from": "src/password.ts",
-      "to": "src/password.ts#isEmail:81",
+      "to": "src/password.ts#isEmail:89",
       "kind": "declares"
     },
     {
       "from": "src/password.ts",
-      "to": "src/password.ts#normalizeEmail:78",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "declares"
     },
     {
       "from": "src/password.ts",
-      "to": "src/password.ts#resolvePasswordPolicy:25",
+      "to": "src/password.ts#resolvePasswordPolicy:31",
       "kind": "declares"
     },
     {
@@ -3855,42 +3986,52 @@
     },
     {
       "from": "src/react/context.tsx",
-      "to": "src/react/context.tsx#AuthProvider:12",
+      "to": "src/react/context.tsx#AuthProvider:13",
       "kind": "declares"
     },
     {
       "from": "src/react/context.tsx",
-      "to": "src/react/context.tsx#refresh:21",
+      "to": "src/react/context.tsx#refresh:23",
       "kind": "declares"
     },
     {
       "from": "src/react/context.tsx",
-      "to": "src/react/context.tsx#useAuth:43",
+      "to": "src/react/context.tsx#useAuth:49",
       "kind": "declares"
     },
     {
       "from": "src/react/context.tsx",
-      "to": "src/react/context.tsx#useAuthController:37",
+      "to": "src/react/context.tsx#useAuthController:43",
       "kind": "declares"
     },
     {
       "from": "src/react/context.tsx",
-      "to": "src/react/context.tsx#visible:25",
+      "to": "src/react/context.tsx#visible:27",
       "kind": "declares"
     },
     {
-      "from": "src/react/context.tsx#useAuth:43",
-      "to": "src/react/context.tsx#useAuthController:37",
+      "from": "src/react/context.tsx",
+      "to": "src/react/locale.tsx",
+      "kind": "imports"
+    },
+    {
+      "from": "src/react/context.tsx#useAuth:49",
+      "to": "src/react/context.tsx#useAuthController:43",
       "kind": "calls"
     },
     {
-      "from": "src/react/context.tsx#visible:25",
-      "to": "src/react/context.tsx#refresh:21",
+      "from": "src/react/context.tsx#visible:27",
+      "to": "src/react/context.tsx#refresh:23",
       "kind": "calls"
     },
     {
       "from": "src/react/index.ts",
       "to": "src/react/context.tsx",
+      "kind": "reexports"
+    },
+    {
+      "from": "src/react/index.ts",
+      "to": "src/react/locale.tsx",
       "kind": "reexports"
     },
     {
@@ -3909,6 +4050,61 @@
       "kind": "reexports"
     },
     {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/locale.tsx#AuthLocale:16",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/locale.tsx#AuthLocaleOptions:11",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/locale.tsx#AuthLocaleProvider:52",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/locale.tsx#canonicalize:26",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/locale.tsx#selectCatalog:34",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/locale.tsx",
+      "to": "src/react/messages.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "src/react/locale.tsx#AuthLocaleProvider:52",
+      "to": "src/react/locale.tsx#canonicalize:26",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/locale.tsx#AuthLocaleProvider:52",
+      "to": "src/react/locale.tsx#selectCatalog:34",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/locale.tsx#AuthLocaleProvider:52",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/messages.ts",
+      "to": "src/react/messages.ts#AuthMessageOverrides:274",
+      "kind": "declares"
+    },
+    {
       "from": "src/react/messages.ts",
       "to": "src/react/messages.ts#AuthMessages:2",
       "kind": "declares"
@@ -3921,6 +4117,11 @@
     {
       "from": "src/react/messages.ts",
       "to": "src/react/messages.ts#formatMessage:189",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/messages.ts",
+      "to": "src/react/messages.ts#ja:198",
       "kind": "declares"
     },
     {
@@ -3945,87 +4146,102 @@
     },
     {
       "from": "src/react/panel.tsx",
+      "to": "src/react/locale.tsx",
+      "kind": "imports"
+    },
+    {
+      "from": "src/react/panel.tsx",
       "to": "src/react/messages.ts",
       "kind": "imports"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#AuthPanel:69",
+      "to": "src/react/panel.tsx#AuthPanel:72",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#AuthPanelProps:39",
+      "to": "src/react/panel.tsx#AuthPanelProps:44",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#AuthSlots:30",
+      "to": "src/react/panel.tsx#AuthSlots:35",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#AuthView:23",
+      "to": "src/react/panel.tsx#AuthView:28",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#change:139",
+      "to": "src/react/panel.tsx#change:159",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#completed:176",
+      "to": "src/react/panel.tsx#completed:196",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#PanelForm:443",
+      "to": "src/react/panel.tsx#FlowMessage:79",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#perform:209",
+      "to": "src/react/panel.tsx#LocalizedPanel:86",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#render:517",
+      "to": "src/react/panel.tsx#PanelForm:458",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#setCode:484",
+      "to": "src/react/panel.tsx#perform:223",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#setEmail:132",
+      "to": "src/react/panel.tsx#render:535",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#setMessage:135",
+      "to": "src/react/panel.tsx#setCode:500",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#submit:526",
+      "to": "src/react/panel.tsx#setEmail:153",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#tick:57",
+      "to": "src/react/panel.tsx#setMessage:156",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#updateFlow:122",
+      "to": "src/react/panel.tsx#submit:544",
       "kind": "declares"
     },
     {
       "from": "src/react/panel.tsx",
-      "to": "src/react/panel.tsx#useSeconds:54",
+      "to": "src/react/panel.tsx#tick:60",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/panel.tsx",
+      "to": "src/react/panel.tsx#updateFlow:143",
+      "kind": "declares"
+    },
+    {
+      "from": "src/react/panel.tsx",
+      "to": "src/react/panel.tsx#useSeconds:57",
       "kind": "declares"
     },
     {
@@ -4039,153 +4255,163 @@
       "kind": "imports"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/controller.ts#cancelRedirect:735",
+      "from": "src/react/panel.tsx#change:159",
+      "to": "src/controller.ts#clearFeedback:727",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/react/panel.tsx#change:159",
+      "to": "src/react/panel.tsx#setMessage:156",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/react/context.tsx#useAuth:43",
+      "from": "src/react/panel.tsx#change:159",
+      "to": "src/react/panel.tsx#updateFlow:143",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/react/context.tsx#useAuthController:37",
+      "from": "src/react/panel.tsx#completed:196",
+      "to": "src/react/panel.tsx#change:159",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
+      "from": "src/react/panel.tsx#completed:196",
+      "to": "src/react/panel.tsx#setEmail:153",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#completed:196",
+      "to": "src/react/panel.tsx#setMessage:156",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/controller.ts#cancelRedirect:731",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/password.ts#isEmail:89",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/react/context.tsx#useAuth:49",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/react/context.tsx#useAuthController:43",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
       "to": "src/react/messages.ts#formatMessage:189",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/react/panel.tsx#change:139",
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/react/panel.tsx#change:159",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/react/panel.tsx#perform:209",
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/react/panel.tsx#perform:223",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#AuthPanel:69",
-      "to": "src/react/panel.tsx#useSeconds:54",
+      "from": "src/react/panel.tsx#LocalizedPanel:86",
+      "to": "src/react/panel.tsx#useSeconds:57",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#change:139",
-      "to": "src/controller.ts#clearFeedback:731",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/password.ts#assessPassword:56",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#change:139",
-      "to": "src/react/panel.tsx#setMessage:135",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#change:139",
-      "to": "src/react/panel.tsx#updateFlow:122",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#completed:176",
-      "to": "src/react/panel.tsx#change:139",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/react/context.tsx#useAuth:49",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#completed:176",
-      "to": "src/react/panel.tsx#setEmail:132",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#completed:176",
-      "to": "src/react/panel.tsx#setMessage:135",
-      "kind": "calls"
-    },
-    {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/password.ts#assessPassword:50",
-      "kind": "calls"
-    },
-    {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/password.ts#isEmail:81",
-      "kind": "calls"
-    },
-    {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/password.ts#normalizeEmail:78",
-      "kind": "calls"
-    },
-    {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/react/context.tsx#useAuth:43",
-      "kind": "calls"
-    },
-    {
-      "from": "src/react/panel.tsx#PanelForm:443",
+      "from": "src/react/panel.tsx#PanelForm:458",
       "to": "src/react/messages.ts#formatMessage:189",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/react/panel.tsx#render:517",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/react/panel.tsx#render:535",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/react/panel.tsx#setCode:484",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/react/panel.tsx#setCode:500",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#PanelForm:443",
-      "to": "src/react/panel.tsx#submit:526",
+      "from": "src/react/panel.tsx#PanelForm:458",
+      "to": "src/react/panel.tsx#submit:544",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#perform:209",
-      "to": "src/react/panel.tsx#completed:176",
+      "from": "src/react/panel.tsx#perform:223",
+      "to": "src/react/panel.tsx#completed:196",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#perform:209",
-      "to": "src/react/panel.tsx#setMessage:135",
+      "from": "src/react/panel.tsx#perform:223",
+      "to": "src/react/panel.tsx#setMessage:156",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#setEmail:132",
-      "to": "src/react/panel.tsx#updateFlow:122",
+      "from": "src/react/panel.tsx#setEmail:153",
+      "to": "src/react/panel.tsx#updateFlow:143",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#setMessage:135",
-      "to": "src/react/panel.tsx#updateFlow:122",
+      "from": "src/react/panel.tsx#setMessage:156",
+      "to": "src/react/panel.tsx#updateFlow:143",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#submit:526",
-      "to": "src/password.ts#isEmail:81",
+      "from": "src/react/panel.tsx#submit:544",
+      "to": "src/password.ts#isEmail:89",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#submit:526",
-      "to": "src/password.ts#normalizeEmail:78",
+      "from": "src/react/panel.tsx#submit:544",
+      "to": "src/password.ts#normalizeEmail:86",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#submit:526",
-      "to": "src/react/panel.tsx#setCode:484",
+      "from": "src/react/panel.tsx#submit:544",
+      "to": "src/react/panel.tsx#setCode:500",
       "kind": "calls"
     },
     {
-      "from": "src/react/panel.tsx#useSeconds:54",
-      "to": "src/react/panel.tsx#tick:57",
+      "from": "src/react/panel.tsx#useSeconds:57",
+      "to": "src/react/panel.tsx#tick:60",
       "kind": "calls"
     },
     {
@@ -4195,67 +4421,87 @@
     },
     {
       "from": "src/react/primitives.tsx",
+      "to": "src/react/locale.tsx",
+      "kind": "imports"
+    },
+    {
+      "from": "src/react/primitives.tsx",
       "to": "src/react/messages.ts",
       "kind": "imports"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#AuthButton:16",
+      "to": "src/react/primitives.tsx#AuthButton:17",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#AuthFeedback:150",
+      "to": "src/react/primitives.tsx#AuthFeedback:153",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#AuthField:42",
+      "to": "src/react/primitives.tsx#AuthField:43",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#AuthFieldProps:37",
+      "to": "src/react/primitives.tsx#AuthFieldProps:38",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#AuthGate:258",
+      "to": "src/react/primitives.tsx#AuthGate:265",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#AuthStatus:198",
+      "to": "src/react/primitives.tsx#AuthStatus:203",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#LoadingIcon:13",
+      "to": "src/react/primitives.tsx#LoadingIcon:14",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#PasswordField:74",
+      "to": "src/react/primitives.tsx#PasswordField:75",
       "kind": "declares"
     },
     {
       "from": "src/react/primitives.tsx",
-      "to": "src/react/primitives.tsx#SignOutButton:177",
+      "to": "src/react/primitives.tsx#SignOutButton:180",
       "kind": "declares"
     },
     {
-      "from": "src/react/primitives.tsx#AuthGate:258",
-      "to": "src/react/context.tsx#useAuth:43",
+      "from": "src/react/primitives.tsx#AuthGate:265",
+      "to": "src/react/context.tsx#useAuth:49",
       "kind": "calls"
     },
     {
-      "from": "src/react/primitives.tsx#AuthStatus:198",
-      "to": "src/react/context.tsx#useAuth:43",
+      "from": "src/react/primitives.tsx#AuthStatus:203",
+      "to": "src/react/context.tsx#useAuth:49",
       "kind": "calls"
     },
     {
-      "from": "src/react/primitives.tsx#SignOutButton:177",
-      "to": "src/react/context.tsx#useAuth:43",
+      "from": "src/react/primitives.tsx#AuthStatus:203",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/primitives.tsx#PasswordField:75",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/primitives.tsx#SignOutButton:180",
+      "to": "src/react/context.tsx#useAuth:49",
+      "kind": "calls"
+    },
+    {
+      "from": "src/react/primitives.tsx#SignOutButton:180",
+      "to": "src/react/locale.tsx#useAuthLocale:48",
       "kind": "calls"
     },
     {
@@ -4275,22 +4521,22 @@
     },
     {
       "from": "src/server/guards.ts",
-      "to": "src/server/guards.ts#consume:34",
+      "to": "src/server/guards.ts#consume:47",
       "kind": "declares"
     },
     {
       "from": "src/server/guards.ts",
-      "to": "src/server/guards.ts#enforceRateLimit:40",
+      "to": "src/server/guards.ts#enforceRateLimit:53",
       "kind": "declares"
     },
     {
       "from": "src/server/guards.ts",
-      "to": "src/server/guards.ts#RateLimiter:32",
+      "to": "src/server/guards.ts#RateLimiter:45",
       "kind": "declares"
     },
     {
       "from": "src/server/guards.ts",
-      "to": "src/server/guards.ts#RateLimitFailure:52",
+      "to": "src/server/guards.ts#RateLimitFailure:65",
       "kind": "declares"
     },
     {
@@ -4299,12 +4545,12 @@
       "kind": "imports"
     },
     {
-      "from": "src/server/guards.ts#enforceRateLimit:40",
-      "to": "src/server/guards.ts#consume:34",
+      "from": "src/server/guards.ts#enforceRateLimit:53",
+      "to": "src/server/guards.ts#consume:47",
       "kind": "calls"
     },
     {
-      "from": "src/server/guards.ts#RateLimitFailure:52",
+      "from": "src/server/guards.ts#RateLimitFailure:65",
       "to": "src/errors.ts#AuthFailure:11",
       "kind": "calls"
     },
@@ -4375,12 +4621,12 @@
     },
     {
       "from": "src/server/password.ts#validateNewPassword:20",
-      "to": "src/password.ts#assessPassword:50",
+      "to": "src/password.ts#assessPassword:56",
       "kind": "calls"
     },
     {
       "from": "src/server/password.ts#validateNewPassword:20",
-      "to": "src/password.ts#resolvePasswordPolicy:25",
+      "to": "src/password.ts#resolvePasswordPolicy:31",
       "kind": "calls"
     },
     {

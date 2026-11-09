@@ -289,6 +289,8 @@ describe("safe messages and redirects", () => {
     "/\\evil.example",
     "/%2fevil.example",
     "/%252fevil.example",
+    "/%2525252fevil.example",
+    "%2Faccount",
     "/%09/evil.example",
   ])("rejects %s", (value) =>
     expect(safeRedirectPath(value, "/account")).toBe("/account"),
@@ -297,6 +299,9 @@ describe("safe messages and redirects", () => {
     expect(safeRedirectPath("/account?tab=profile#details")).toBe(
       "/account?tab=profile#details",
     ));
+  it("protects the shared GitHub preset across controller instances", () => {
+    expect(Object.isFrozen(githubOnly.providers[0])).toBe(true);
+  });
   it("redacts raw errors", () =>
     expect(
       normalizeError({ message: "email exists: ray@example.com" }),

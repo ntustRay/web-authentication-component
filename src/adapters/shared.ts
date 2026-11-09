@@ -1,4 +1,5 @@
 import { normalizeError, success } from "../errors.js";
+import { normalizeEmail } from "../password.js";
 import type { AuthResult, AuthSession } from "../types.js";
 export interface ServiceResponse {
   data?: unknown;
@@ -27,6 +28,12 @@ export function errorCode(response: ServiceResponse): string {
   return isRecord(response.error) && typeof response.error.code === "string"
     ? response.error.code.toLowerCase()
     : "";
+}
+export function matchesEmail(session: AuthSession, email: string): boolean {
+  return (
+    session.user.email !== null &&
+    normalizeEmail(session.user.email) === normalizeEmail(email)
+  );
 }
 export function sessionFromUser(
   value: unknown,

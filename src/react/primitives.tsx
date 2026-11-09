@@ -9,7 +9,8 @@ import {
   useState,
 } from "react";
 import { useAuth } from "./context.js";
-import { type AuthMessages, zhTW } from "./messages.js";
+import { useAuthLocale } from "./locale.js";
+import { type AuthMessages } from "./messages.js";
 export function LoadingIcon({ className = "" }: { className?: string }) {
   return <span className={`mra-spinner ${className}`} aria-hidden="true" />;
 }
@@ -75,9 +76,11 @@ export function PasswordField({
   label,
   error,
   hint,
-  messages = zhTW,
+  messages: supplied,
   ...input
 }: AuthFieldProps & { messages?: AuthMessages }) {
+  const localization = useAuthLocale();
+  const messages = supplied ?? localization.messages;
   const generated = useId();
   const id = input.id ?? generated;
   const [visible, setVisible] = useState(false);
@@ -91,7 +94,7 @@ export function PasswordField({
     .filter(Boolean)
     .join(" ");
   return (
-    <div className="mra-field">
+    <div className="mra-field" lang={input.lang ?? localization.locale}>
       <label htmlFor={id}>{label}</label>
       <div className="mra-password">
         <input
@@ -179,11 +182,13 @@ export function SignOutButton({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   const auth = useAuth();
+  const { locale, messages } = useAuthLocale();
   const pending =
     auth.state.operation.action === "sign-out" &&
     auth.state.operation.phase === "pending";
   return (
     <AuthButton
+      lang={locale}
       {...props}
       pending={pending}
       onClick={(event) => {
@@ -191,12 +196,12 @@ export function SignOutButton({
         if (!event.defaultPrevented) void auth.signOut();
       }}
     >
-      {children ?? zhTW.signOut}
+      {children ?? messages.signOut}
     </AuthButton>
   );
 }
 export function AuthStatus({
-  messages = zhTW,
+  messages: supplied,
   className = "",
   children,
 }: {
@@ -205,17 +210,19 @@ export function AuthStatus({
   children?: ReactNode;
 }) {
   const auth = useAuth();
+  const { locale, messages: inherited } = useAuthLocale();
+  const messages = supplied ?? inherited;
   const { state } = auth;
   if (state.status === "checking")
     return (
-      <div className={`mra-status ${className}`} role="status">
+      <div className={`mra-status ${className}`} lang={locale} role="status">
         <LoadingIcon />
         {messages.checking}
       </div>
     );
   if (state.status === "unavailable")
     return (
-      <div className={`mra-status ${className}`}>
+      <div className={`mra-status ${className}`} lang={locale}>
         <AuthFeedback tone="error">{messages.unavailable}</AuthFeedback>
         <button
           type="button"
@@ -229,7 +236,7 @@ export function AuthStatus({
       </div>
     );
   return (
-    <div className={`mra-status ${className}`} role="status">
+    <div className={`mra-status ${className}`} lang={locale} role="status">
       {state.session ? (
         <>
           <span>

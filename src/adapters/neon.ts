@@ -7,6 +7,7 @@ import {
 } from "./better-auth.js";
 import {
   errorCode,
+  matchesEmail,
   type ServiceResponse,
   serviceError,
   validateAdapterPort,
@@ -96,7 +97,8 @@ export function createNeonAdapter(
       if (error) return error;
       const session = await base.getSession();
       if (!session.ok) return session;
-      return session.value?.user.emailVerified
+      return session.value?.user.emailVerified &&
+        matchesEmail(session.value, input.email)
         ? success({ kind: "authenticated", session: session.value })
         : success({ kind: "complete" });
     },

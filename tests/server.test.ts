@@ -22,6 +22,22 @@ import {
 import { password } from "./helpers.js";
 
 describe("server protections", () => {
+  it("rejects runtime method names outside the declared server allowlist", () => {
+    for (const raw of [
+      '"constructor"',
+      '"toString"',
+      '"__proto__"',
+      '"providers"',
+      "null",
+      "42",
+      "{}",
+      '{"provider":null}',
+    ]) {
+      expect(() =>
+        assertAllowedMethod(JSON.parse(raw), githubOnly),
+      ).toThrowError(expect.objectContaining({ code: "unsupported" }));
+    }
+  });
   it("hashes with unique salts and verifies the entire password", async () => {
     const first = await hashPassword(password);
     const second = await hashPassword(password);

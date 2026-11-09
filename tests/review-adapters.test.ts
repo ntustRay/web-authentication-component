@@ -41,6 +41,61 @@ function native(): BetterAuthClientPort {
   };
 }
 describe("review regressions: advertised adapter capabilities", () => {
+  it("never attributes an unrelated active session to an email action", async () => {
+    const enabled = {
+      ...options,
+      registration: true,
+      password: true,
+      verification: true,
+    };
+    const other = { email: "other@example.com", password, name: "" };
+    const better = createBetterAuthAdapter(native(), enabled);
+    expect(await better.signUp?.(other)).toEqual(
+      success({ kind: "verification-required", delivery: "link" }),
+    );
+    expect(await better.signIn?.(other)).toEqual(failure("cancelled"));
+    const neon = createNeonAdapter(
+      native(),
+      { $fetch: async () => ({}) },
+      enabled,
+    );
+    expect(await neon.signUp?.(other)).toEqual(
+      success({ kind: "verification-required", delivery: "code" }),
+    );
+    const verified = native();
+    verified.getSession = async () => ({
+      data: {
+        session: { expiresAt: new Date(Date.now() + 60_000) },
+        user: { id: "old", email: "original@example.com", emailVerified: true },
+      },
+    });
+    expect(
+      await createNeonAdapter(
+        verified,
+        { $fetch: async () => ({}) },
+        enabled,
+      ).verifyEmail?.({ email: other.email, code: "123456" }),
+    ).toEqual(success({ kind: "complete" }));
+    const supabase = createSupabaseAdapter(
+      {
+        getUser: async () => ({
+          data: {
+            user: {
+              id: "old",
+              email: "original@example.com",
+              email_confirmed_at: "2026-11-01",
+            },
+          },
+        }),
+        signInWithPassword: async () => ({}),
+        signUp: async () => ({ data: { session: {} } }),
+        signOut: async () => ({}),
+      },
+      { ...options, registration: true, password: true },
+    );
+    expect(await supabase.signIn?.(other)).toEqual(failure("cancelled"));
+    expect(await supabase.signUp?.(other)).toEqual(failure("cancelled"));
+  });
   it("rejects enabled Better Auth features when the SDK port cannot implement them", () => {
     const port: BetterAuthClientPort = {
       getSession: async () => ({ data: null }),

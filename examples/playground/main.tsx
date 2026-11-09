@@ -46,6 +46,7 @@ function Inspector() {
 }
 function App() {
   const [preset, setPreset] = useState<Preset>("mixed");
+  const [locale, setLocale] = useState("zh-TW");
   const [strict, setStrict] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [simulation, setSimulation] = useState<Simulation>({
@@ -156,6 +157,17 @@ function App() {
             ))}
           </fieldset>
           <div className="control-options">
+            <label className="select-label">
+              登入介面語言
+              <select
+                value={locale}
+                onChange={(event) => setLocale(event.target.value)}
+              >
+                <option value="zh-TW">繁體中文</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+              </select>
+            </label>
             <label className="check-label">
               <input
                 type="checkbox"
@@ -219,7 +231,7 @@ function App() {
             <strong>123456</strong>。
           </p>
         </aside>
-        <AuthProvider controller={controller}>
+        <AuthProvider controller={controller} locale={locale}>
           <section className="preview" aria-label="登入介面預覽">
             <div className="preview-bar">
               <span>Live preview</span>

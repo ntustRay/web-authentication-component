@@ -7,12 +7,14 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { AuthController } from "../controller.js";
+import { type AuthLocaleOptions, AuthLocaleProvider } from "./locale.js";
 
 const Context = createContext<AuthController | null>(null);
 export function AuthProvider({
   controller,
   children,
-}: {
+  ...localization
+}: AuthLocaleOptions & {
   controller: AuthController;
   children: ReactNode;
 }) {
@@ -32,7 +34,11 @@ export function AuthProvider({
       stop();
     };
   }, [controller]);
-  return <Context.Provider value={controller}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={controller}>
+      <AuthLocaleProvider {...localization}>{children}</AuthLocaleProvider>
+    </Context.Provider>
+  );
 }
 export function useAuthController(): AuthController {
   const controller = useContext(Context);

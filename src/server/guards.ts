@@ -23,11 +23,24 @@ export function assertAllowedMethod(
     | { provider: string },
   methods: AuthMethods,
 ): void {
-  const allowed =
-    typeof method === "string"
-      ? methods[method]
-      : methods.providers.some((provider) => provider.id === method.provider);
-  if (!allowed) throw new AuthFailure("unsupported");
+  switch (method) {
+    case "password":
+    case "registration":
+    case "recovery":
+    case "verification":
+      if (methods[method] === true) return;
+      break;
+    default:
+      if (
+        typeof method === "object" &&
+        method !== null &&
+        Object.hasOwn(method, "provider") &&
+        typeof method.provider === "string" &&
+        methods.providers.some((provider) => provider.id === method.provider)
+      )
+        return;
+  }
+  throw new AuthFailure("unsupported");
 }
 export interface RateLimiter {
   /** Must atomically count attempts across instances (database/Redis/provider), not browser storage. */

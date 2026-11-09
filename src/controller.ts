@@ -352,11 +352,7 @@ export function createAuthController(input: AuthConfig) {
         );
       if (result.ok) {
         if (result.value.kind === "authenticated") {
-          if (
-            !actual ||
-            !accepted(actual) ||
-            actual.user.id !== result.value.session.user.id
-          )
+          if (!actual || actual.user.id !== result.value.session.user.id)
             return failure("cancelled");
           result = success({ kind: "authenticated", session: actual });
         } else if (
