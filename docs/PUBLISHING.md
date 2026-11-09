@@ -1,12 +1,14 @@
 # npm 發布
 
-Package：[ @ntustray/web-authentication-component ](https://www.npmjs.com/package/@ntustray/web-authentication-component)。Repo：[ntustRay/web-authentication-component](https://github.com/ntustRay/web-authentication-component)。
+Package：[@ntustray/web-authentication-component](https://www.npmjs.com/package/@ntustray/web-authentication-component)。Repo：[ntustRay/web-authentication-component](https://github.com/ntustRay/web-authentication-component)。
 
 ## 0.2.0 發布紀錄
 
-2026-11-09 已以 ntustray 完成 CLI 登入，使用 npm 11.15.0 上傳 staged version。npm 自動檢查已通過；目前等待維護者完成發布專用的 Security key／Passkey 驗證。
+2026-11-09 20:32（Asia/Taipei）已正式發布 0.2.0，registry 的 latest 指向 0.2.0。使用 npm 11.15.0 上傳 staged version，通過 npm 自動檢查後，由維護者完成 Security key／Passkey 驗證核准發布。
 
-已下載 npm 接收的實際 tarball，核對 SHA-1 為 d11153eb893f9ea36368f47c1ef399041a3f79ee，並在獨立 consumer 驗證 core／adapters／server、React 18.3.1 與 19.3.1 SSR。尚不能把上傳 staged version 當成正式發布成功；必須確認 registry 中的 0.2.0 與 latest。
+已確認公開 registry 的 0.2.0、latest、tarball SHA-1／SHA-512 integrity。SHA-1 為 d11153eb893f9ea36368f47c1ef399041a3f79ee，與原 stage 相同。全新 consumer 使用 registry version 0.2.0 安裝，core／adapters／server、CSS export、React 18.3.1 與 19.3.1 SSR 全部通過。
+
+0.2.0 tarball 保留打包時的發布前檢查文件；最新發布狀態以本 GitHub 紀錄與 npm registry 為準。
 
 ## 本機 staged publishing
 

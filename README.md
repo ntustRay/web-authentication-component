@@ -4,7 +4,7 @@
 
 Package：`@ntustray/web-authentication-component`，版本 `0.2.0`。發布設定見 [PUBLISHING.md](docs/PUBLISHING.md)。
 
-0.2.0 已上傳 npm Staged Packages 並通過自動檢查，正式上架仍待發布專用 2FA 核准。
+0.2.0 已正式發布到 [npm](https://www.npmjs.com/package/@ntustray/web-authentication-component)，並驗證公開 registry 安裝、core／adapters／server 與 React 18／19 SSR。
 
 | 登入組合                     | 設定                                   |
 | ---------------------------- | -------------------------------------- |
@@ -29,7 +29,7 @@ Playground 可切換登入方式、Light / Dark、密碼字元規則、等待時
 
 ## 安裝
 
-正式發布後安裝指定版本：
+安裝指定版本：
 
 ```sh
 bun add @ntustray/web-authentication-component@0.2.0

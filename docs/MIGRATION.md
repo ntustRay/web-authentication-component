@@ -1,6 +1,6 @@
 # 專案整合
 
-2026-11-08 盤點帳號下 repository 的 package dependencies 與 Auth entrypoints，找到以下五種使用情境。所有共用模式已放入此 package，並附上可編譯的接入 factory。**現有網站尚未切換依賴，也沒有搬動會員資料。** npm 首次發布與各站 staging 驗證完成後再切換。
+2026-11-08 盤點帳號下 repository 的 package dependencies 與 Auth entrypoints，找到以下五種使用情境。所有共用模式已放入此 package，並附上可編譯的接入 factory。**現有網站尚未切換依賴，也沒有搬動會員資料。** npm 0.2.0 已於 2026-11-09 正式發布；各站仍須完成 staging 驗證後再切換。
 
 | 專案／產品                         | 現有 identity／登入方式                                         | 共用接法                                    | 本 repo 範例                          |
 | ---------------------------------- | --------------------------------------------------------------- | ------------------------------------------- | ------------------------------------- |
@@ -14,7 +14,7 @@
 
 ## 共通接入步驟
 
-1. 安裝已發布的 package，或先在 staging 安裝本 repo 建出的 tarball。不要依賴尚不存在的 npm version。
+1. 以 bun add @ntustray/web-authentication-component@0.2.0 安裝已發布的固定版本。開發中的候選版本可先在 staging 安裝 tarball。
 2. 在 app 的 client provider 建立一次 controller，使用對應 factory。host 保留原 SDK client、cookie 設定與 trusted callback URL。
 3. 共用 layout 用同一個 `AuthProvider` 包住 navbar 和 page。navbar 改用 `AuthStatus` 或 `useAuth()`。
 4. 登入／註冊／忘記密碼頁改用 `AuthPanel`；保留原版型時以 primitives 或 headless hook 重組。既有路由可用 controlled `view` + `onViewChange`。

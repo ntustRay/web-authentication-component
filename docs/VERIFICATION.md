@@ -3,13 +3,14 @@
 ## 2026-11-09 發布檢查
 
 - CLI 已以 ntustray 授權，npm 11.15.0 staging 已上傳並通過自動檢查。
-- 正式發布仍待 Security key／Passkey 確認；registry 尚無 0.2.0。
+- 2026-11-09 20:32（Asia/Taipei）完成正式發布；公開 registry 的 0.2.0 與 latest 已確認。
 - 從 npm 下載的實際 tarball SHA-1：d11153eb893f9ea36368f47c1ef399041a3f79ee。
-- 該 tarball 的獨立安裝、無 React core／server／adapters、React 18.3.1／19.3.1 SSR 均通過。
+- 公開 tarball 的 SHA-1／SHA-512 integrity 與 stage 一致。
+- 全新 consumer 從公開 registry 指定 0.2.0 安裝；無 React 的 core／server／adapters、CSS export、React 18.3.1／19.3.1 SSR 均通過。
 
 ## 2026-11-08 實作基線
 
-日期：2026-11-08。Package version：0.2.0，尚未發布 npm。
+日期：2026-11-08。Package version：0.2.0；此為發布前的實作基線，正式發布結果見上方 2026-11-09 紀錄。
 
 | 項目                                 | 本機結果                                                                            |
 | ------------------------------------ | ----------------------------------------------------------------------------------- |
@@ -40,6 +41,6 @@ GitHub CI 另以 Ubuntu + Node 24 執行 React 18.3.1 / 19.3.1 matrix。結果�
 - 沒有寄送真實驗證信、建立真實會員或測試各站 production OAuth。
 - 沒有搬移帳號、修改線上資料庫／RLS／provider 配置。
 - 現有專案尚未安裝此 package 或切換 production auth。
-- npm authentication 回傳 401，因此沒有執行 publish；scope ownership 與 Trusted Publisher 需由維護者完成。
+- Trusted Publisher 尚未配置；本次首版透過本機 staging 與維護者 2FA 完成，不宣稱 GitHub provenance。
 
 這些不是 package unit tests 能代替的驗證，切換步驟見 [MIGRATION.md](MIGRATION.md)，發布步驟見 [PUBLISHING.md](PUBLISHING.md)。
