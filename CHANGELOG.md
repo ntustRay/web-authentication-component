@@ -2,7 +2,7 @@
 
 ## 0.2.0 — 2026-11-08
 
-多輪 review 修正，尚未發布 npm。
+多輪 review 修正。發布狀態見 [PUBLISHING.md](docs/PUBLISHING.md)。
 
 - SDK mutation queue 在 timeout／unmount 後保留鎖，明確 signOut 仍排隊完成。
 - 失敗／timeout 的登出身份保持隱藏，背景 revalidation 與明確 refresh() 分開。

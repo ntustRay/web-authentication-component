@@ -1,5 +1,14 @@
 # 驗證紀錄
 
+## 2026-11-09 發布檢查
+
+- CLI 已以 ntustray 授權，npm 11.15.0 staging 已上傳並通過自動檢查。
+- 正式發布仍待 Security key／Passkey 確認；registry 尚無 0.2.0。
+- 從 npm 下載的實際 tarball SHA-1：d11153eb893f9ea36368f47c1ef399041a3f79ee。
+- 該 tarball 的獨立安裝、無 React core／server／adapters、React 18.3.1／19.3.1 SSR 均通過。
+
+## 2026-11-08 實作基線
+
 日期：2026-11-08。Package version：0.2.0，尚未發布 npm。
 
 | 項目                                 | 本機結果                                                                            |

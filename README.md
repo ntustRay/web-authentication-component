@@ -2,7 +2,9 @@
 
 把各專案的登入 UI、狀態流程與 provider 接法集中到同一個 package。既有會員資料庫、user ID 與身分服務保留在原專案。
 
-Package：`@ntustray/web-authentication-component`。目前為 `0.2.0` 原始碼與可打包版本；**尚未發布到 npm**。首次發布設定見 [PUBLISHING.md](docs/PUBLISHING.md)。
+Package：`@ntustray/web-authentication-component`，版本 `0.2.0`。發布設定見 [PUBLISHING.md](docs/PUBLISHING.md)。
+
+0.2.0 已上傳 npm Staged Packages 並通過自動檢查，正式上架仍待發布專用 2FA 核准。
 
 | 登入組合                     | 設定                                   |
 | ---------------------------- | -------------------------------------- |
@@ -27,13 +29,13 @@ Playground 可切換登入方式、Light / Dark、密碼字元規則、等待時
 
 ## 安裝
 
-npm 發布後：
+正式發布後安裝指定版本：
 
 ```sh
-bun add @ntustray/web-authentication-component
+bun add @ntustray/web-authentication-component@0.2.0
 ```
 
-發布前可先在此 repo 建立 tarball，再於另一個專案安裝：
+本機開發時可在此 repo 建立 tarball，再於另一個專案安裝：
 
 ```sh
 bun run build
