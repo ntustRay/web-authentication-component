@@ -1,20 +1,20 @@
 # 專案整合
 
-2026-11-08 盤點帳號下 repository 的 package dependencies 與 Auth entrypoints，找到以下五種使用情境。所有共用模式已放入此 package，並附上可編譯的接入 factory。**現有網站尚未切換依賴，也沒有搬動會員資料。** npm 0.2.0 已於 2026-11-09 正式發布；各站仍須完成 staging 驗證後再切換。
+2026-11-10 已將目前五個具有會員登入的專案接上已發布的 @ntustray/web-authentication-component@0.3.0，並提交 dependency 與 lockfile。五個專案的 CI 已通過。整合沿用既有 identity service、user ID、callback 與 server authorization。實際使用者的 OAuth、SMTP 與寄信驗證尚待線上操作驗收。
 
 | 專案／產品                         | 現有 identity／登入方式                                         | 共用接法                                    | 本 repo 範例                          |
 | ---------------------------------- | --------------------------------------------------------------- | ------------------------------------------- | ------------------------------------- |
 | GitHub Kanban                      | Better Auth／GitHub only                                        | `createBetterAuthAdapter` + `githubOnly`    | `examples/projects/github-kanban.ts`  |
 | 工程師選股網                       | Supabase／Email-password／驗證連結                              | `createSupabaseAdapter` + `passwordOnly`    | `examples/projects/stock-platform.ts` |
-| Framecheck / Visual Regression Hub | Supabase／GitHub only                                           | `createSupabaseAdapter` + `githubOnly`      | `examples/projects/framecheck.ts`     |
+| Framecheck / Visual Regression Hub | Supabase／GitHub only                                           | `createHostedAdapter` + `githubOnly`        | `examples/projects/framecheck.ts`     |
 | Dev Map Lab                        | Neon Managed Auth／Email-password／OTP／已配置 social providers | `createNeonAdapter` + 既有 workspace bridge | `examples/projects/dev-map-lab.ts`    |
-| Home Way                           | Clerk modal／Clerk server authorization                         | `createClerkAdapter`，保留 Clerk modal      | `examples/projects/home-way.ts`       |
+| Home Way                           | Clerk modal／Clerk server authorization                         | `createHostedAdapter`，保留 Clerk modal     | `examples/projects/home-way.ts`       |
 
 其餘被盤點的作品目前沒有獨立會員登入實作；不為了統一而額外加入帳號系統。舊 tutorial 的 Auth route 是 placeholder，沒有可遷移的登入邏輯。只檢查有關結構與 dependencies，未複製環境檔、憑證、會員資料或 private app 的業務內容。
 
 ## 共通接入步驟
 
-1. 以 bun add @ntustray/web-authentication-component@0.2.0 安裝已發布的固定版本。開發中的候選版本可先在 staging 安裝 tarball。
+1. 以 bun add @ntustray/web-authentication-component@0.3.0 安裝已發布的固定版本。開發中的候選版本可先在 staging 安裝 tarball。
 2. 在 app 的 client provider 建立一次 controller，使用對應 factory。host 保留原 SDK client、cookie 設定與 trusted callback URL。
 3. 共用 layout 用同一個 `AuthProvider` 包住 navbar 和 page。navbar 改用 `AuthStatus` 或 `useAuth()`。
 4. 登入／註冊／忘記密碼頁改用 `AuthPanel`；保留原版型時以 primitives 或 headless hook 重組。既有路由可用 controlled `view` + `onViewChange`。
@@ -66,3 +66,15 @@ Neon 的 signup 必須確實啟用 Email verification／OTP。若後台允許未
 | Server / RLS           | 修改 browser state 無法取得別人的資料         |
 
 共用 code graph 與 SDK／unit tests 已在本 repo 提供。此表是各站正式切換的實際驗收條件，不代表本次已經執行線上測試。
+
+## 已提交的整合入口
+
+| Project       | Application entrypoints               | Integration                                                                                          |
+| ------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| GitHub Kanban | src/components/shared-auth.tsx        | Better Auth adapter, GitHub-only panel, account boundary                                             |
+| 工程師選股網  | src/components/auth/shared-auth.tsx   | Supabase adapter, shared forms/status, account and watchlist boundaries                              |
+| Framecheck    | components/auth-state.tsx             | Hosted bridge to the existing server OAuth route, verified Supabase session, private-page boundaries |
+| Dev Map Lab   | src/auth/shared.ts, src/auth/state.ts | Native Neon adapter and six-digit OTP, account-isolated workspace bridge                             |
+| Home Way      | components/shared-auth.tsx            | Hosted Clerk login/signup modals and server-verified account boundary                                |
+
+各 app 已在 AGENTS.md 指定共用套件。Dev Map Lab 保留原有的新密碼至少 12 字元及 72 UTF-8 bytes 上限；登入舊密碼仍保留原始內容。Clerk 的密碼及驗證規則由既有 Clerk 設定執行。
