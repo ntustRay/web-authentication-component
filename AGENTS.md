@@ -39,6 +39,12 @@ This repository is a reusable npm library. Read README.md, docs/API.md and docs/
 - Keep project examples generic. Never copy private app business code, credentials, environment files or real user data here.
 - No real email sends, account migration, provider changes, or production auth cutover just to run package tests.
 
+## Security checks
+
+- Use `security-best-practices` when available for changes to authentication, authorization, sessions, recovery, credential handling or workflow permissions. Follow the project boundaries in SECURITY.md.
+- Run `bun audit` against the committed lockfile and `bun run verify` before delivering changes.
+- Resolve failing CI and Security checks before merging, including Gitleaks findings and new CodeQL errors or high and critical security alerts.
+
 ## Delivery
 
 Keep docs/code-graph.json and docs/CODE_GRAPH.md generated from source. Do not hand-edit them. Do not commit dist/node_modules/secrets. npm publish requires a valid publishing identity and the documented initial setup. Report package delivery, live app migration and npm publication separately.

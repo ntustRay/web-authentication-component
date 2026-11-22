@@ -15,7 +15,7 @@ Package：[@ntustray/web-authentication-component](https://www.npmjs.com/package
 1. 確認 npm 帳號擁有 package scope。GitHub username 不會自動授予 npm scope。
 2. 使用 Node >=22.14.0 與 npm >=11.15.0。npm 12 需依該版本 engines 使用相容 Node；不要只根據主版本猜測。
 3. 執行 npm login，完成網頁登入與 CLI 授權。網頁 cookie 與 CLI token 是兩種授權；不要複製 cookie 或把 token／OTP 放進 repo。
-4. 執行 bun install --frozen-lockfile 與 bun run verify。
+4. 執行 `bun audit`、`bun install --frozen-lockfile` 與 `bun run verify`。
 5. 執行 npm pack --ignore-scripts --dry-run，檢查 source、dist、declarations 與公開文件；不得包含 secrets 或測試資料。
 6. 執行下列命令：
 
@@ -55,10 +55,10 @@ Package settings → Trusted Publisher 設定：
 
 此設定尚未由本次發布流程代為啟用。新增 trusted publisher 是授權新的 workflow；完成設定後才可使用既有 tag workflow。使用 GitHub-hosted runner、Node 24、相容 npm >=11.5.1 與 id-token: write，不需要長效 NPM_TOKEN。
 
-1. 修改 package.json version，同步 changelog、commit／push。
-2. 等待 React 18／19 matrix 通過。
-3. 建立與 version 一致的 vX.Y.Z tag 並 push。
-4. publish.yml 再跑 verify、檢查 tag 與 version、執行 npm publish --access public --provenance --ignore-scripts。
+1. 修改 package.json version，同步 changelog 並開 PR。
+2. 等待 React 18／19 matrix 和 Security 檢查通過，再合併到 `main`。
+3. 在已合併的 commit 建立與 version 一致的 vX.Y.Z tag 並 push。
+4. `publish.yml` 確認 tag 指向 `main` 的歷史，重跑 `bun audit` 和 `bun run verify`，再檢查 tag 與 version 並發布。
 5. 查驗 npm registry、tarball 與 provenance。首版經本機 staging 發布，不宣稱有 GitHub provenance。
 
 ## 相容性與採用
